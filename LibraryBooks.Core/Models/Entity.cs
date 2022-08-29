@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core.Models
 {
-    public abstract class Entity<TPrimaryKey>
+    public abstract class Entity<TPrimaryKey> // abstracting from the data type of the primary key
     {
         public TPrimaryKey Id { get; set; }
     }
 
-    public abstract class Entity : Entity<int>
+    public abstract class Entity : Entity<int> // most often the type ID is int and not to write <int>
     {
     }
 }

@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core
 {
-    public class LibraryBooksContext : DbContext
+    public class LibraryBooksContext : DbContext  // a class symbolizing the database
     {
+        // tables
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -17,6 +18,7 @@ namespace LibraryBooks.Core
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // database connection string
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=LibraryBooks;Trusted_Connection=True;");
         }
     }

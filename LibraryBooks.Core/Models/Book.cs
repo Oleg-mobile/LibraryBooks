@@ -12,7 +12,7 @@ namespace LibraryBooks.Core.Models
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User User { get; set; }     // navigation property for JOIN
 
         public int AuthorId { get; set; }
 
