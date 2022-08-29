@@ -26,19 +26,19 @@ namespace LibraryBooks.Forms
         /// Open child form
         /// </summary>
         /// <param name="childForm"></param>
-        private void OpenChildForm(Form childForm)
+        private void OpenChildForm(Form childForm)  // private - exists within the main form, Form - open any form (polymorphism)
         {
             if (activeForm != null)
                 activeForm.Close();
 
             activeForm = childForm;
-            activeForm.FormBorderStyle = FormBorderStyle.None;
-            activeForm.Dock = DockStyle.Fill;
-            activeForm.TopLevel = false;
+            activeForm.FormBorderStyle = FormBorderStyle.None; // disable window title
+            activeForm.Dock = DockStyle.Fill;                  // fill all the space
+            activeForm.TopLevel = false;                       // non-top-level form (child)
 
-            panelContent.Controls.Add(activeForm);
+            panelContent.Controls.Add(activeForm);             // add to the main form panel
 
-            activeForm.Show();
+            activeForm.Show(); 
         }
     }
 }
