@@ -40,19 +40,19 @@
             this.dataGridViewGenres.AllowUserToAddRows = false;
             this.dataGridViewGenres.AllowUserToDeleteRows = false;
             this.dataGridViewGenres.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewGenres.Location = new System.Drawing.Point(192, 36);
+            this.dataGridViewGenres.Location = new System.Drawing.Point(201, 32);
             this.dataGridViewGenres.Name = "dataGridViewGenres";
             this.dataGridViewGenres.ReadOnly = true;
             this.dataGridViewGenres.RowTemplate.Height = 25;
             this.dataGridViewGenres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewGenres.Size = new System.Drawing.Size(319, 324);
+            this.dataGridViewGenres.Size = new System.Drawing.Size(355, 378);
             this.dataGridViewGenres.TabIndex = 0;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(50, 36);
+            this.buttonAdd.Location = new System.Drawing.Point(32, 33);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(137, 23);
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -60,33 +60,33 @@
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(50, 83);
+            this.buttonDel.Location = new System.Drawing.Point(32, 72);
             this.buttonDel.Name = "buttonDel";
-            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.Size = new System.Drawing.Size(137, 23);
             this.buttonDel.TabIndex = 2;
             this.buttonDel.Text = "Удалить";
             this.buttonDel.UseVisualStyleBackColor = true;
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(50, 133);
+            this.buttonEdit.Location = new System.Drawing.Point(33, 111);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
+            this.buttonEdit.Size = new System.Drawing.Size(136, 23);
             this.buttonEdit.TabIndex = 3;
-            this.buttonEdit.Text = "Изменить";
+            this.buttonEdit.Text = "Редактировать";
             this.buttonEdit.UseVisualStyleBackColor = true;
             // 
             // FormGenres
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 450);
+            this.ClientSize = new System.Drawing.Size(592, 436);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridViewGenres);
             this.Name = "FormGenres";
-            this.Text = "FormGenres";
+            this.Text = "Жанры";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenres)).EndInit();
             this.ResumeLayout(false);
 

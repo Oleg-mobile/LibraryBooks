@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core
 {
+    /// <summary>
+    /// Database model
+    /// </summary>
     public class LibraryBooksContext : DbContext  // a class symbolizing the database
     {
         // tables

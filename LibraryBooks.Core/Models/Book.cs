@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core.Models
 {
+    /// <summary>
+    /// Book
+    /// </summary>
     public class Book : Entity
     {
         public int UserId { get; set; }

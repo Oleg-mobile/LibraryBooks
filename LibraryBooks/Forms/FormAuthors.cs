@@ -17,12 +17,13 @@ namespace LibraryBooks.Forms
 
         public FormAuthors()
         {
-            InitializeComponent();
+            InitializeComponent(); // initializing all components
 
             _context = new LibraryBooksContext();
-            _context.Authors.Load();
+            _context.Authors.Load(); // loading data from a table into a variable
 
             dataGridViewAuthors.DataSource = _context.Authors.Local.ToBindingList();
+            dataGridViewAuthors.Columns["Id"].DisplayIndex = 0;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -34,7 +35,6 @@ namespace LibraryBooks.Forms
             {
                 return;
             }
-
 
             var author = new Author();
             author.Name = authForm.textBoxName.Text;

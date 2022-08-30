@@ -6,6 +6,7 @@ namespace LibraryBooks.Core.Migrations
 {
     public partial class Initial : Migration
     {
+        // changes
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -105,6 +106,7 @@ namespace LibraryBooks.Core.Migrations
                 column: "UserId");
         }
 
+        // rollback
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

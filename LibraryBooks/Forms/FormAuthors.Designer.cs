@@ -40,17 +40,17 @@
             this.dataGridViewAuthors.AllowUserToAddRows = false;
             this.dataGridViewAuthors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewAuthors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAuthors.Location = new System.Drawing.Point(313, 38);
+            this.dataGridViewAuthors.Location = new System.Drawing.Point(201, 32);
             this.dataGridViewAuthors.Name = "dataGridViewAuthors";
             this.dataGridViewAuthors.RowTemplate.Height = 25;
             this.dataGridViewAuthors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAuthors.Size = new System.Drawing.Size(448, 378);
+            this.dataGridViewAuthors.Size = new System.Drawing.Size(355, 378);
             this.dataGridViewAuthors.TabIndex = 1;
             // 
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonAdd.Location = new System.Drawing.Point(73, 38);
+            this.buttonAdd.Location = new System.Drawing.Point(33, 32);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(137, 23);
             this.buttonAdd.TabIndex = 2;
@@ -60,7 +60,7 @@
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(73, 78);
+            this.buttonDel.Location = new System.Drawing.Point(33, 72);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(137, 23);
             this.buttonDel.TabIndex = 3;
@@ -70,7 +70,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(73, 117);
+            this.buttonEdit.Location = new System.Drawing.Point(33, 111);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(137, 23);
             this.buttonEdit.TabIndex = 4;
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(592, 436);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
