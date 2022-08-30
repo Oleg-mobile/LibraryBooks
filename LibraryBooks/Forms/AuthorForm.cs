@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryBooks.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace LibraryBooks.Forms
         public AuthorForm()
         {
             InitializeComponent();
+        }
+
+        public AuthorForm(Author author) : this()
+        {
+            textBoxName.Text = author.Name;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

@@ -25,22 +25,18 @@ namespace LibraryBooks.Forms
             dataGridViewAuthors.DataSource = _context.Authors.Local.ToBindingList();
         }
 
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            AuthorForm authForm = new AuthorForm();
+            var authForm = new AuthorForm();
             DialogResult result = authForm.ShowDialog();
-            
-            if (result == DialogResult.Cancel)
-                return;
 
-            Author author = new Author();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+
+            var author = new Author();
             author.Name = authForm.textBoxName.Text;
 
             _context.Authors.Add(author);
@@ -51,8 +47,28 @@ namespace LibraryBooks.Forms
         {
             for (int i = 0; i < dataGridViewAuthors.SelectedRows.Count; i++)
             {
-                Author author = (Author)dataGridViewAuthors.SelectedRows[i].DataBoundItem;
+                var author = (Author)dataGridViewAuthors.SelectedRows[i].DataBoundItem;
                 _context.Remove(author);
+                _context.SaveChanges();
+            }
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewAuthors.SelectedRows.Count > 0)
+            {
+                var author = (Author)dataGridViewAuthors.SelectedRows[0].DataBoundItem;
+                var authorForm = new AuthorForm(author);
+                DialogResult dialogResult = authorForm.ShowDialog();
+
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                author.Name = authorForm.textBoxName.Text;
+                _context.SaveChanges();
+                dataGridViewAuthors.Refresh();
             }
         }
     }

@@ -31,7 +31,7 @@
             this.dataGridViewAuthors = new System.Windows.Forms.DataGridView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuthors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,22 +68,22 @@
             this.buttonDel.UseVisualStyleBackColor = true;
             this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
-            // button3
+            // buttonEdit
             // 
-            this.button3.Location = new System.Drawing.Point(73, 117);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(137, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Редактировать";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonEdit.Location = new System.Drawing.Point(73, 117);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(137, 23);
+            this.buttonEdit.TabIndex = 4;
+            this.buttonEdit.Text = "Редактировать";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // FormAuthors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridViewAuthors);
@@ -99,6 +99,6 @@
         private System.Windows.Forms.DataGridView dataGridViewAuthors;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDel;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonEdit;
     }
 }
