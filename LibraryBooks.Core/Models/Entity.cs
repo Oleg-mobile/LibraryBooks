@@ -11,6 +11,7 @@ namespace LibraryBooks.Core.Models
         public TPrimaryKey Id { get; set; }
     }
 
+    // TODO: do something
     public abstract class Entity : Entity<int> // most often the type ID is int and not to write <int>
     {
     }
