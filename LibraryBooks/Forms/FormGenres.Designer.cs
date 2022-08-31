@@ -39,6 +39,7 @@
             // 
             this.dataGridViewGenres.AllowUserToAddRows = false;
             this.dataGridViewGenres.AllowUserToDeleteRows = false;
+            this.dataGridViewGenres.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewGenres.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewGenres.Location = new System.Drawing.Point(201, 32);
             this.dataGridViewGenres.Name = "dataGridViewGenres";

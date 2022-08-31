@@ -13,14 +13,14 @@ namespace LibraryBooks.Forms
 {
     public partial class FormAuthors : Form
     {
-        private readonly LibraryBooksContext _context;
+        private readonly LibraryBooksContext _context;  // Database model. Private - only in this class. Readonly - immutable database connection.
 
         public FormAuthors()
         {
             InitializeComponent(); // initializing all components
 
             _context = new LibraryBooksContext();
-            _context.Authors.Load(); // loading data from a table into a variable
+            _context.Authors.Load(); // loading data from a table into a variable (Entity Framework)
 
             dataGridViewAuthors.DataSource = _context.Authors.Local.ToBindingList();
             dataGridViewAuthors.Columns["Id"].DisplayIndex = 0;
@@ -28,7 +28,7 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var authForm = new AuthorForm();
+            var authForm = new AuthorForm();  // var - use when it is clear exactly what type of data
             DialogResult result = authForm.ShowDialog();
 
             if (result == DialogResult.Cancel)
