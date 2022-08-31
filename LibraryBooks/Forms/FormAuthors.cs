@@ -45,7 +45,9 @@ namespace LibraryBooks.Forms
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridViewAuthors.SelectedRows.Count; i++)
+            // TODO Исправить множественное удаление
+            int rowsToDel = dataGridViewAuthors.SelectedRows.Count;
+            for (int i = 0; i < rowsToDel; i++)
             {
                 var author = (Author)dataGridViewAuthors.SelectedRows[i].DataBoundItem;
                 _context.Remove(author);

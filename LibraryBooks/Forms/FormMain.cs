@@ -22,6 +22,16 @@ namespace LibraryBooks.Forms
             OpenChildForm(new FormAuthors());
         }
 
+        private void buttonGenres_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormGenres());
+        }
+
+        private void buttonUsers_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormUsers());
+        }
+
         /// <summary>
         /// Open child form
         /// </summary>

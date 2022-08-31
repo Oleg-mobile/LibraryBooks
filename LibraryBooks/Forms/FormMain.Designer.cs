@@ -55,7 +55,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(257, 630);
+            this.panel1.Size = new System.Drawing.Size(260, 611);
             this.panel1.TabIndex = 0;
             // 
             // buttonUsers
@@ -65,14 +65,15 @@
             this.buttonUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonUsers.Image = ((System.Drawing.Image)(resources.GetObject("buttonUsers.Image")));
             this.buttonUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonUsers.Location = new System.Drawing.Point(0, 423);
+            this.buttonUsers.Location = new System.Drawing.Point(0, 410);
             this.buttonUsers.Margin = new System.Windows.Forms.Padding(4);
             this.buttonUsers.Name = "buttonUsers";
             this.buttonUsers.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.buttonUsers.Size = new System.Drawing.Size(257, 69);
+            this.buttonUsers.Size = new System.Drawing.Size(260, 70);
             this.buttonUsers.TabIndex = 4;
             this.buttonUsers.Text = "Пользователи";
             this.buttonUsers.UseVisualStyleBackColor = true;
+            this.buttonUsers.Click += new System.EventHandler(this.buttonUsers_Click);
             // 
             // buttonGenres
             // 
@@ -81,14 +82,15 @@
             this.buttonGenres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonGenres.Image = ((System.Drawing.Image)(resources.GetObject("buttonGenres.Image")));
             this.buttonGenres.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonGenres.Location = new System.Drawing.Point(0, 354);
+            this.buttonGenres.Location = new System.Drawing.Point(0, 340);
             this.buttonGenres.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGenres.Name = "buttonGenres";
             this.buttonGenres.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.buttonGenres.Size = new System.Drawing.Size(257, 69);
+            this.buttonGenres.Size = new System.Drawing.Size(260, 70);
             this.buttonGenres.TabIndex = 3;
             this.buttonGenres.Text = "Жанры";
             this.buttonGenres.UseVisualStyleBackColor = true;
+            this.buttonGenres.Click += new System.EventHandler(this.buttonGenres_Click);
             // 
             // buttonAuthors
             // 
@@ -97,11 +99,11 @@
             this.buttonAuthors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAuthors.Image = ((System.Drawing.Image)(resources.GetObject("buttonAuthors.Image")));
             this.buttonAuthors.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAuthors.Location = new System.Drawing.Point(0, 285);
+            this.buttonAuthors.Location = new System.Drawing.Point(0, 270);
             this.buttonAuthors.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAuthors.Name = "buttonAuthors";
             this.buttonAuthors.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.buttonAuthors.Size = new System.Drawing.Size(257, 69);
+            this.buttonAuthors.Size = new System.Drawing.Size(260, 70);
             this.buttonAuthors.TabIndex = 2;
             this.buttonAuthors.Text = "Авторы";
             this.buttonAuthors.UseVisualStyleBackColor = true;
@@ -114,11 +116,11 @@
             this.buttonBooks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonBooks.Image = ((System.Drawing.Image)(resources.GetObject("buttonBooks.Image")));
             this.buttonBooks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonBooks.Location = new System.Drawing.Point(0, 216);
+            this.buttonBooks.Location = new System.Drawing.Point(0, 200);
             this.buttonBooks.Margin = new System.Windows.Forms.Padding(4);
             this.buttonBooks.Name = "buttonBooks";
             this.buttonBooks.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.buttonBooks.Size = new System.Drawing.Size(257, 69);
+            this.buttonBooks.Size = new System.Drawing.Size(260, 70);
             this.buttonBooks.TabIndex = 0;
             this.buttonBooks.Text = "Книги";
             this.buttonBooks.UseVisualStyleBackColor = true;
@@ -133,7 +135,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(257, 216);
+            this.panel2.Size = new System.Drawing.Size(260, 200);
             this.panel2.TabIndex = 1;
             // 
             // label1
@@ -141,7 +143,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(48, 176);
+            this.label1.Location = new System.Drawing.Point(51, 165);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(152, 23);
@@ -151,10 +153,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(27, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(33, 19);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(191, 137);
+            this.pictureBox1.Size = new System.Drawing.Size(190, 140);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -163,16 +165,16 @@
             // 
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panelContent.Location = new System.Drawing.Point(257, 0);
+            this.panelContent.Location = new System.Drawing.Point(260, 0);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(772, 630);
+            this.panelContent.Size = new System.Drawing.Size(724, 611);
             this.panelContent.TabIndex = 1;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1029, 630);
+            this.ClientSize = new System.Drawing.Size(984, 611);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
