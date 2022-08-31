@@ -18,7 +18,8 @@ namespace LibraryBooks.Forms
             InitializeComponent();
         }
 
-        public AuthorForm(Author author) : this()
+        // to fill in all the input fields on the form
+        public AuthorForm(Author author) : this()  // :this() - calling the default constructor
         {
             textBoxName.Text = author.Name;
         }
