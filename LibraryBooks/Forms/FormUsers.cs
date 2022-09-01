@@ -5,24 +5,26 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormBooks : Form
+    public partial class FormUsers : Form
     {
         private readonly LibraryBooksContext _context;
 
-        public FormBooks()
+        public FormUsers()
         {
             InitializeComponent();
 
             _context = new LibraryBooksContext();
-            _context.Books.Load();
+            _context.Users.Load();
 
-            dataGridViewBooks.DataSource = _context.Books.Local.ToBindingList();
-            dataGridViewBooks.Columns["Id"].DisplayIndex = 0;
+            dataGridViewUsers.DataSource = _context.Users.Local.ToBindingList();
+            dataGridViewUsers.Columns["Id"].DisplayIndex = 0;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
