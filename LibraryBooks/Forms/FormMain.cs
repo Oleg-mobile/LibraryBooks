@@ -27,10 +27,6 @@ namespace LibraryBooks.Forms
             OpenChildForm(new FormGenres());
         }
 
-        private void buttonUsers_Click(object sender, EventArgs e)
-        {
-            //OpenChildForm(new FormUsers());
-        }
 
         /// <summary>
         /// Open child form
@@ -49,6 +45,14 @@ namespace LibraryBooks.Forms
             panelContent.Controls.Add(activeForm);             // add to the main form panel
 
             activeForm.Show(); 
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            var formAuthize = new AuthorizationForm();
+            formAuthize.Show();
+            // TODO доработать закрытие приложения
+            this.Close();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace LibraryBooks.Forms
 {
@@ -36,8 +37,7 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            var author = new Author();
-            author.Name = authForm.textBoxName.Text;
+            var author = new Author(authForm.textBoxName.Text);
 
             _context.Authors.Add(author);
             _context.SaveChanges();
@@ -45,14 +45,25 @@ namespace LibraryBooks.Forms
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            // TODO Исправить множественное удаление
-            int rowsToDel = dataGridViewAuthors.SelectedRows.Count;
-            for (int i = 0; i < rowsToDel; i++)
+            var authors = SelectedRowsMapToAuthors();
+
+            foreach (var author in authors)
             {
-                var author = (Author)dataGridViewAuthors.SelectedRows[i].DataBoundItem;
                 _context.Remove(author);
                 _context.SaveChanges();
             }
+        }
+
+        private IEnumerable<Author> SelectedRowsMapToAuthors()
+        {
+            var authors = new List<Author>();
+
+            for (int i = 0; i < dataGridViewAuthors.SelectedRows.Count; i++)
+            {
+                var author = (Author)dataGridViewAuthors.SelectedRows[i].DataBoundItem;
+                authors.Add(author);
+            }
+            return authors;
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)

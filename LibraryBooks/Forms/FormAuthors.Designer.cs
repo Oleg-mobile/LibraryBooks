@@ -32,6 +32,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuthors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,11 +79,21 @@
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(200, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Авторы";
+            // 
             // FormAuthors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 441);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
@@ -91,6 +102,7 @@
             this.Text = "Авторы";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuthors)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -100,5 +112,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Label label1;
     }
 }

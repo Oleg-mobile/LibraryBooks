@@ -19,7 +19,7 @@ namespace LibraryBooks
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // The form that runs when the application starts
-            Application.Run(new FormMain());
+            Application.Run(new AuthorizationForm());
         }
     }
 }

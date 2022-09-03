@@ -47,13 +47,25 @@ namespace LibraryBooks.Forms
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            // TODO Исправить множественное удаление
-            for (int i = 0; i < dataGridViewGenres.SelectedRows.Count; i++)
+            var genres = SelectedRowsMapToGenres();
+
+            foreach (var genre in genres)
             {
-                var genre = (Genre)dataGridViewGenres.SelectedRows[i].DataBoundItem;
                 _context.Remove(genre);
                 _context.SaveChanges();
             }
+        }
+
+        private IEnumerable<Genre> SelectedRowsMapToGenres()
+        {
+            var genres = new List<Genre>();
+
+            for (int i = 0; i < dataGridViewGenres.SelectedRows.Count; i++)
+            {
+                var genre = (Genre)dataGridViewGenres.SelectedRows[i].DataBoundItem;
+                genres.Add(genre);
+            }
+            return genres;
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)

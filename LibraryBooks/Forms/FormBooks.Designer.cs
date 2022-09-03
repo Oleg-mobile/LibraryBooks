@@ -32,6 +32,7 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.dataGridViewBooks = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,11 +80,21 @@
             this.dataGridViewBooks.Size = new System.Drawing.Size(320, 370);
             this.dataGridViewBooks.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(200, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Книги";
+            // 
             // FormBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 441);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewBooks);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
@@ -92,6 +103,7 @@
             this.Text = "Книги";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -101,5 +113,6 @@
         private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.DataGridView dataGridViewBooks;
+        private System.Windows.Forms.Label label1;
     }
 }

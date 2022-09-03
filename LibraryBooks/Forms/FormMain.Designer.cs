@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonUsers = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.buttonGenres = new System.Windows.Forms.Button();
             this.buttonAuthors = new System.Windows.Forms.Button();
             this.buttonBooks = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.buttonUsers);
+            this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonGenres);
             this.panel1.Controls.Add(this.buttonAuthors);
             this.panel1.Controls.Add(this.buttonBooks);
@@ -58,22 +58,22 @@
             this.panel1.Size = new System.Drawing.Size(260, 611);
             this.panel1.TabIndex = 0;
             // 
-            // buttonUsers
+            // buttonExit
             // 
-            this.buttonUsers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonUsers.FlatAppearance.BorderSize = 0;
-            this.buttonUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonUsers.Image = ((System.Drawing.Image)(resources.GetObject("buttonUsers.Image")));
-            this.buttonUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonUsers.Location = new System.Drawing.Point(0, 410);
-            this.buttonUsers.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonUsers.Name = "buttonUsers";
-            this.buttonUsers.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.buttonUsers.Size = new System.Drawing.Size(260, 70);
-            this.buttonUsers.TabIndex = 4;
-            this.buttonUsers.Text = "Пользователи";
-            this.buttonUsers.UseVisualStyleBackColor = true;
-            this.buttonUsers.Click += new System.EventHandler(this.buttonUsers_Click);
+            this.buttonExit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonExit.FlatAppearance.BorderSize = 0;
+            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExit.Image = ((System.Drawing.Image)(resources.GetObject("buttonExit.Image")));
+            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonExit.Location = new System.Drawing.Point(0, 410);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
+            this.buttonExit.Size = new System.Drawing.Size(260, 70);
+            this.buttonExit.TabIndex = 4;
+            this.buttonExit.Text = "Выход";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonGenres
             // 
@@ -198,9 +198,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button buttonUsers;
         private System.Windows.Forms.Button buttonGenres;
         private System.Windows.Forms.Button buttonAuthors;
         private System.Windows.Forms.Panel panelContent;
+        private System.Windows.Forms.Button buttonExit;
     }
 }
