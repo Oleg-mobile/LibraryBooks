@@ -39,6 +39,7 @@ namespace LibraryBooks.Forms
             var book = new Book();
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
+            // TODO try catch?
             book.Year = Int32.Parse(bookForm.textBoxYear.Text);
             book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
             // TODO ошибка при добавлении
