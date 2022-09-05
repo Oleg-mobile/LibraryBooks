@@ -63,6 +63,7 @@ namespace LibraryBooks.Forms
                 var author = (Author)dataGridViewAuthors.SelectedRows[i].DataBoundItem;
                 authors.Add(author);
             }
+
             return authors;
         }
 

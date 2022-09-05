@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -21,6 +22,9 @@ namespace LibraryBooks.Forms
 
             _context = new LibraryBooksContext();
             _context.Books.Load();
+            _context.Genres.Load();
+            _context.Authors.Load();
+            _context.Users.Load();
 
             dataGridViewBooks.DataSource = _context.Books.Local.ToBindingList();
             dataGridViewBooks.Columns["Id"].DisplayIndex = 0;
@@ -39,15 +43,15 @@ namespace LibraryBooks.Forms
             var book = new Book();
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
-            // TODO try catch?
+            // TODO try catch? nulable?
             book.Year = Int32.Parse(bookForm.textBoxYear.Text);
             book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
-            // TODO ошибка при добавлении
-            book.Genre.Name = bookForm.comboBoxGenre.Text;
-            book.User.Login = bookForm.comboBoxUser.Text;
-            book.Author.Name = bookForm.comboBoxAuthor.Text;
-            book.PathToBook = bookForm.textBoxPathToBook.Text;
             book.Mark = Int32.Parse(bookForm.textBoxMark.Text);
+            // TODO нагородил
+            book.Genre = _context.Genres.First(g => g.Name.Equals(bookForm.comboBoxGenre.Text));
+            book.User = _context.Users.First(u => u.Login.Equals(bookForm.comboBoxUser.Text));
+            book.Author = _context.Authors.First(a => a.Name.Equals(bookForm.comboBoxAuthor.Text));
+            book.PathToBook = bookForm.textBoxPathToBook.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
 
@@ -70,7 +74,7 @@ namespace LibraryBooks.Forms
         {
             var books = new List<Book>();
 
-            for (int i = 0; i < dataGridViewBooks.SelectedColumns.Count; i++)
+            for (int i = 0; i < dataGridViewBooks.SelectedRows.Count; i++)
             {
                 var book = (Book)dataGridViewBooks.SelectedRows[i].DataBoundItem;
                 books.Add(book);
@@ -96,11 +100,11 @@ namespace LibraryBooks.Forms
                 book.Publication = bookForm.textBoxPublication.Text;
                 book.Year = Int32.Parse(bookForm.textBoxYear.Text);
                 book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
-                book.Genre.Name = bookForm.comboBoxGenre.Text;
-                book.User.Login = bookForm.comboBoxUser.Text;
-                book.Author.Name = bookForm.comboBoxAuthor.Text;
-                book.PathToBook = bookForm.textBoxPathToBook.Text;
                 book.Mark = Int32.Parse(bookForm.textBoxMark.Text);
+                book.Genre = _context.Genres.First(g => g.Name.Equals(bookForm.comboBoxGenre.Text));
+                book.User = _context.Users.First(u => u.Login.Equals(bookForm.comboBoxUser.Text));
+                book.Author = _context.Authors.First(a => a.Name.Equals(bookForm.comboBoxAuthor.Text));
+                book.PathToBook = bookForm.textBoxPathToBook.Text;
                 book.IsLiked = bookForm.checkBoxIsLiked.Checked;
                 book.IsFinished = bookForm.checkBoxIsFinished.Checked;
 
