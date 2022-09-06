@@ -43,19 +43,53 @@ namespace LibraryBooks.Forms
             var book = new Book();
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
-            // TODO try catch? nulable?
-            book.Year = Int32.Parse(bookForm.textBoxYear.Text);
-            book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
-            book.Mark = Int32.Parse(bookForm.textBoxMark.Text);
+
+            // TODO try catch? nullable?
+
+            //if (!Int32.TryParse(bookForm.textBoxYear.Text, out int year))
+            //{
+            //    //throw new InvalidOperationException("Не верный формат года");
+            //    throw new FormatException("Не верный формат года");
+            //}
+            //book.Year = year;
+
+            try
+            {
+                book.Year = Int32.Parse(bookForm.textBoxYear.Text);
+            }
+            catch (FormatException )
+            {
+                MessageBox.Show("Не верный формат года");
+            }
+
+            try
+            {
+                book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Не верный формат количества страниц");
+            }
+
+            try
+            {
+                book.Mark = Int32.Parse(bookForm.textBoxMark.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Не верный формат закладки");
+            }
+
             // TODO нагородил
-            book.Genre = _context.Genres.First(g => g.Name.Equals(bookForm.comboBoxGenre.Text));
-            book.User = _context.Users.First(u => u.Login.Equals(bookForm.comboBoxUser.Text));
-            book.Author = _context.Authors.First(a => a.Name.Equals(bookForm.comboBoxAuthor.Text));
+            book.Genre = _context.Genres.FirstOrDefault(g => g.Name.Equals(bookForm.comboBoxGenre.Text));  // FirstOrDefault - т.к. список может быть пуст
+            book.User = _context.Users.FirstOrDefault(u => u.Login.Equals(bookForm.comboBoxUser.Text));
+            book.Author = _context.Authors.FirstOrDefault(a => a.Name.Equals(bookForm.comboBoxAuthor.Text));
             book.PathToBook = bookForm.textBoxPathToBook.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
 
             _context.Books.Add(book);
+            // TODO ошибка если нет жанров
             _context.SaveChanges();
         }
 

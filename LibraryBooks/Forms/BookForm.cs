@@ -35,17 +35,26 @@ namespace LibraryBooks.Forms
             _context.Authors.Local.ToList().ForEach(a => authors.Add(a));
             comboBoxAuthor.DataSource = authors;
             comboBoxAuthor.DisplayMember = "Name";
-            comboBoxAuthor.SelectedIndex = 0;
+            if (!authors.Any())
+            {
+                comboBoxAuthor.SelectedIndex = 0;
+            }
 
             _context.Genres.Local.ToList().ForEach(g => genres.Add(g));
             comboBoxGenre.DataSource = genres;
             comboBoxGenre.DisplayMember = "Name";
-            comboBoxGenre.SelectedIndex = 0;
+            if (!authors.Any())
+            {
+                comboBoxAuthor.SelectedIndex = 0;
+            }
 
             _context.Users.Local.ToList().ForEach(u => users.Add(u));
             comboBoxUser.DataSource = users;
             comboBoxUser.DisplayMember = "Login";
-            comboBoxUser.SelectedIndex = 0;
+            if (!authors.Any())
+            {
+                comboBoxAuthor.SelectedIndex = 0;
+            }
         }
 
         public BookForm(Book book) : this()
@@ -66,6 +75,37 @@ namespace LibraryBooks.Forms
         {
             Close();
             DialogResult = DialogResult.OK;
+        }
+
+        // TODO оганиченеи ввода символов
+        private void textBoxYear_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if (!Char.IsDigit(number))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxPageCount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if (!Char.IsDigit(number))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxMark_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if (!Char.IsDigit(number))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
