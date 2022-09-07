@@ -56,7 +56,7 @@ namespace LibraryBooks.Forms
 
         private IEnumerable<Author> SelectedRowsMapToAuthors()
         {
-            var authors = new List<Author>();
+            var authors = new List<Author>();  // to save references to objects (protection from the garbage collector)
 
             for (int i = 0; i < dataGridViewAuthors.SelectedRows.Count; i++)
             {
