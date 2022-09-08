@@ -1,14 +1,9 @@
 ﻿using LibraryBooks.Core;
 using LibraryBooks.Core.Models;
+using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -29,86 +24,62 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            bool IsRegOk = true;
-            var users = new List<User>();
-            var user = new User();
-            _context.Users.Local.ToList().ForEach(u => users.Add(u));
+            string login = textBoxName.Text;
+            string password = textBoxPassword.Text;
 
-            if (textBoxName.Text != "")
+            // TODO вынести валидацию в класс вадидатор
+
+            if (string.IsNullOrEmpty(login))
             {
-                if (textBoxPassword.Text != "")
-                {
-                    if (textBoxPassword.Text.Equals(textBoxPasswordRepeat.Text))
-                    {
-                        foreach (var usr in users)
-                        {
-                            if (textBoxName.Text.Equals(usr.Login))
-                            {
-                                DialogResult = MessageBox.Show(
-                                    "Существующий пользователь",
-                                    "Ошибка ввода",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error
-                                    );
-
-                                textBoxName.Text = "";
-                                textBoxPassword.Text = "";
-                                textBoxPasswordRepeat.Text = "";
-                                IsRegOk = false;
-
-                                break;
-                            }
-                        }
-
-                        if (IsRegOk)
-                        {
-                            MessageBox.Show("Пользователь добавлен");
-
-                            user.Login = textBoxName.Text;
-                            user.Password = textBoxPassword.Text;
-
-                            _context.Users.Add(user);
-                            _context.SaveChanges();
-
-                            var authorizeForm = new AuthorizationForm();
-                            authorizeForm.Show();
-                            authorizeForm.textBoxLogin.Text = this.textBoxName.Text;
-
-                            Close();
-                        }
-                    }
-                    else
-                    {
-                        DialogResult = MessageBox.Show(
-                            "Пароли не совпадают",
-                            "Ошибка ввода",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error
-                            );
-
-                        textBoxPassword.Text = "";
-                        textBoxPasswordRepeat.Text = "";
-                    }
-                }
-                else
-                {
-                    DialogResult = MessageBox.Show(
-                        "Введите пароль",
-                        "Ошибка ввода",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                        );
-                }
+                MessageBoxExtention.ErrorInput("Введите логин");
+                return;
             }
-            else
+
+            if (string.IsNullOrEmpty(password))
             {
-                DialogResult = MessageBox.Show(
-                    "Введите логин",
-                    "Ошибка ввода",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                    );
+                MessageBoxExtention.ErrorInput("Введите пароль");
+                return;
             }
+
+            if (textBoxPassword.Text != textBoxPasswordRepeat.Text)
+            {
+                MessageBoxExtention.ErrorInput("Пароли не совпадают");
+                ResetPassword();
+                return;
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Login == login);
+            if (user is not null)
+            {
+                MessageBoxExtention.ErrorInput("Существующий пользователь");
+                ResetForm();
+                return;
+            }
+
+            // TODO вынести в репозиторий
+
+            _context.Users.Add(new User { Login = login, Password = password});
+            _context.SaveChanges();
+
+            MessageBox.Show("Пользователь добавлен");
+
+            var authorizeForm = new AuthorizationForm();
+            authorizeForm.Show();
+            authorizeForm.textBoxLogin.Text = login;
+
+            Close();
+        }
+
+        private void ResetForm()
+        {
+            textBoxName.Text = "";
+            ResetPassword();
+        }
+
+        private void ResetPassword()
+        {
+            textBoxPassword.Text = "";
+            textBoxPasswordRepeat.Text = "";
         }
     }
 }

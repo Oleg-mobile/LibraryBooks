@@ -1,14 +1,9 @@
 ﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Models;
+using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -29,32 +24,30 @@ namespace LibraryBooks.Forms
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            bool IsRegOk = false;
-            var users = new List<User>();
-            _context.Users.Local.ToList().ForEach(u => users.Add(u));
+            string login = textBoxLogin.Text;
+            string password = textBoxPassword.Text;
 
-            foreach (var user in users)
+            if (string.IsNullOrEmpty(login))
             {
-                if (user.Login.Equals(textBoxLogin.Text) && user.Password.Equals(textBoxPassword.Text))
-                {
-                    IsRegOk = true;
-                    var formMain = new FormMain();
-                    formMain.Show();
-                    Hide();
-                    break;
-                }
+                MessageBoxExtention.ErrorInput("Введите логин");
+                return;
             }
 
-            if (IsRegOk == false)
+            if (string.IsNullOrEmpty(password))
             {
-                DialogResult result = MessageBox.Show(
-                    "Не верный логин или пароль",
-                    "Ошибка авторизации!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-
-                    );
+                MessageBoxExtention.ErrorInput("Введите пароль");
+                return;
             }
+
+            var user = _context.Users.FirstOrDefault(u => u.Login == login && u.Password == password);
+            if (user is null)
+            {
+                MessageBoxExtention.Error("Не верный логин или пароль","Ошибка авторизации!");
+                return;
+            }
+
+            new FormMain().Show();
+            Hide();
         }
 
         private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e)
