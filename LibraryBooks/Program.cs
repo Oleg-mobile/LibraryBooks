@@ -9,6 +9,8 @@ namespace LibraryBooks
 {
     internal static class Program
     {
+        public static AuthorizationForm AuthForm = new AuthorizationForm();
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -19,7 +21,7 @@ namespace LibraryBooks
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // The form that runs when the application starts
-            Application.Run(new AuthorizationForm());
+            Application.Run(AuthForm);
         }
     }
 }

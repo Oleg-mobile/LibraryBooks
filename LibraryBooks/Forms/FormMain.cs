@@ -47,12 +47,14 @@ namespace LibraryBooks.Forms
             activeForm.Show(); 
         }
 
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void buttonExit_Click(object sender, EventArgs e) => Exit();
+
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e) => Program.AuthForm.Show();
+
+        private void Exit()
         {
-            var formAuthize = new AuthorizationForm();
-            formAuthize.Show();
-            // TODO доработать закрытие приложения
-            this.Close();
+            Program.AuthForm.Show();
+            Close();
         }
     }
 }

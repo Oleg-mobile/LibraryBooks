@@ -22,39 +22,19 @@ namespace LibraryBooks.Forms
             InitializeComponent();
             AcceptButton = buttonSave;
 
-            // TODO разобраться с ComboBox
             _context = new LibraryBooksContext();
             _context.Authors.Load();
             _context.Genres.Load();
             _context.Users.Load();
 
-            var authors = new List<Author>();
-            var users = new List<User>();
-            var genres = new List<Genre>();
-
-            _context.Authors.Local.ToList().ForEach(a => authors.Add(a));
-            comboBoxAuthor.DataSource = authors;
+            comboBoxAuthor.DataSource = _context.Authors;
             comboBoxAuthor.DisplayMember = "Name";
-            if (!authors.Any())
-            {
-                comboBoxAuthor.SelectedIndex = 0;
-            }
 
-            _context.Genres.Local.ToList().ForEach(g => genres.Add(g));
-            comboBoxGenre.DataSource = genres;
+            comboBoxGenre.DataSource = _context.Genres;
             comboBoxGenre.DisplayMember = "Name";
-            if (!authors.Any())
-            {
-                comboBoxAuthor.SelectedIndex = 0;
-            }
 
-            _context.Users.Local.ToList().ForEach(u => users.Add(u));
-            comboBoxUser.DataSource = users;
+            comboBoxUser.DataSource = _context.Users;
             comboBoxUser.DisplayMember = "Login";
-            if (!authors.Any())
-            {
-                comboBoxAuthor.SelectedIndex = 0;
-            }
         }
 
         public BookForm(Book book) : this()
@@ -77,32 +57,10 @@ namespace LibraryBooks.Forms
             DialogResult = DialogResult.OK;
         }
 
-        // TODO оганиченеи ввода символов
-        private void textBoxYear_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxIntegerMask_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-
-            if (!Char.IsDigit(number))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxPageCount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-
-            if (!Char.IsDigit(number))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxMark_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-
-            if (!Char.IsDigit(number))
+            char input = e.KeyChar;
+            if (!char.IsDigit(input))
             {
                 e.Handled = true;
             }

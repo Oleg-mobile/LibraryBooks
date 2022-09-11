@@ -109,7 +109,7 @@
             this.textBoxMark.Name = "textBoxMark";
             this.textBoxMark.Size = new System.Drawing.Size(180, 23);
             this.textBoxMark.TabIndex = 20;
-            this.textBoxMark.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMark_KeyPress);
+            this.textBoxMark.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntegerMask_KeyPress);
             // 
             // textBoxPathToBook
             // 
@@ -140,7 +140,7 @@
             this.textBoxPageCount.Name = "textBoxPageCount";
             this.textBoxPageCount.Size = new System.Drawing.Size(180, 23);
             this.textBoxPageCount.TabIndex = 16;
-            this.textBoxPageCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPageCount_KeyPress);
+            this.textBoxPageCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntegerMask_KeyPress);
             // 
             // textBoxYear
             // 
@@ -148,7 +148,7 @@
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(180, 23);
             this.textBoxYear.TabIndex = 15;
-            this.textBoxYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxYear_KeyPress);
+            this.textBoxYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntegerMask_KeyPress);
             // 
             // textBoxPublication
             // 

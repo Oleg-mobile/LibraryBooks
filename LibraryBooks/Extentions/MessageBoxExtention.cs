@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LibraryBooks.Extentions
 {
@@ -14,9 +15,20 @@ namespace LibraryBooks.Extentions
             );
         }
 
-        public static DialogResult ErrorInput(string text)
+        public static DialogResult ErrorInput(string text) => Error(text, "Ошибка ввода");
+
+
+        public static DialogResult Warning(string text, string caption)
         {
-            return Error(text, "Ошибка ввода");
+            return MessageBox.Show(
+                text,
+                caption,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
         }
+
+        public static DialogResult WarningInput(string text) => Warning(text, "Внимание");
+
     }
 }

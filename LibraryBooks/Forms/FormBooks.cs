@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Core;
 using LibraryBooks.Core.Models;
+using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace LibraryBooks.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var bookForm = new BookForm();
+            lableShow:
             DialogResult result = bookForm.ShowDialog();
 
             if (result == DialogResult.Cancel)
@@ -40,57 +42,55 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            var book = new Book();
-            book.Name = bookForm.textBoxName.Text;
-            book.Publication = bookForm.textBoxPublication.Text;
-
-            // TODO try catch? nullable?
-
-            //if (!Int32.TryParse(bookForm.textBoxYear.Text, out int year))
-            //{
-            //    //throw new InvalidOperationException("Не верный формат года");
-            //    throw new FormatException("Не верный формат года");
-            //}
-            //book.Year = year;
-
             try
             {
-                book.Year = Int32.Parse(bookForm.textBoxYear.Text);
-            }
-            catch (FormatException )
-            {
-                MessageBox.Show("Не верный формат года");
-            }
+                if (!int.TryParse(bookForm.textBoxYear.Text, out int year))
+                {
+                    throw new FormatException("Не верный формат года");
+                }
 
-            try
-            {
-                book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Не верный формат количества страниц");
-            }
+                if (!int.TryParse(bookForm.textBoxPageCount.Text, out int pageCount))
+                {
+                    throw new FormatException("Не верный формат количества страниц");
+                }
 
-            try
-            {
-                book.Mark = Int32.Parse(bookForm.textBoxMark.Text);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Не верный формат закладки");
-            }
+                if (!int.TryParse(bookForm.textBoxMark.Text, out int mark))
+                {
+                    throw new FormatException("Не верный формат закладки");
+                }
 
-            // TODO нагородил
-            book.Genre = _context.Genres.FirstOrDefault(g => g.Name.Equals(bookForm.comboBoxGenre.Text));  // FirstOrDefault - т.к. список может быть пуст
-            book.User = _context.Users.FirstOrDefault(u => u.Login.Equals(bookForm.comboBoxUser.Text));
-            book.Author = _context.Authors.FirstOrDefault(a => a.Name.Equals(bookForm.comboBoxAuthor.Text));
-            book.PathToBook = bookForm.textBoxPathToBook.Text;
-            book.IsLiked = bookForm.checkBoxIsLiked.Checked;
-            book.IsFinished = bookForm.checkBoxIsFinished.Checked;
+                if (bookForm.comboBoxGenre.SelectedItem is null)
+                {
+                    throw new FormatException("Жанр не выбран");
+                }
 
-            _context.Books.Add(book);
-            // TODO ошибка если нет жанров
-            _context.SaveChanges();
+                if (bookForm.comboBoxAuthor.SelectedItem is null)
+                {
+                    throw new FormatException("Автор не выбран");
+                }
+
+                var book = new Book {
+                    Name = bookForm.textBoxName.Text,
+                    Publication = bookForm.textBoxPublication.Text,
+                    Year = year,
+                    PageCount = pageCount,
+                    Mark = mark,
+                    Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
+                    User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
+                    Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
+                    PathToBook = bookForm.textBoxPathToBook.Text,
+                    IsLiked = bookForm.checkBoxIsLiked.Checked,
+                    IsFinished = bookForm.checkBoxIsFinished.Checked
+                };
+
+                _context.Books.Add(book);
+                _context.SaveChanges();
+            }
+            catch (FormatException ex)
+            {
+                MessageBoxExtention.WarningInput(ex.Message);
+                goto lableShow;
+            }
         }
 
         private void buttonDel_Click(object sender, EventArgs e)
@@ -100,8 +100,8 @@ namespace LibraryBooks.Forms
             foreach (var book in books)
             {
                 _context.Remove(book);
-                _context.SaveChanges();
             }
+            _context.SaveChanges();
         }
 
         private IEnumerable<Book> SelectedRowsMapToBooks()

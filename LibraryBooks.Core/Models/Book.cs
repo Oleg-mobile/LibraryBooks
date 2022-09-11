@@ -22,7 +22,7 @@ namespace LibraryBooks.Core.Models
         [ForeignKey("AuthorId")]
         public Author Author { get; set; }
 
-        public int GenreId { get; set; }   // TODO nullable?
+        public int GenreId { get; set; }
 
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }

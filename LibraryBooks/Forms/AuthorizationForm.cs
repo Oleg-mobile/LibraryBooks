@@ -2,7 +2,6 @@
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -17,6 +16,9 @@ namespace LibraryBooks.Forms
             InitializeComponent();
             ActiveControl = textBoxLogin;
             AcceptButton = buttonLogin;
+
+            pictureBoxClose.Visible = true;
+            pictureBoxOpen.Visible = false;
 
             _context = new LibraryBooksContext();
             _context.Users.Load();
@@ -42,7 +44,7 @@ namespace LibraryBooks.Forms
             var user = _context.Users.FirstOrDefault(u => u.Login == login && u.Password == password);
             if (user is null)
             {
-                MessageBoxExtention.Error("Не верный логин или пароль","Ошибка авторизации!");
+                MessageBoxExtention.Error("Не верный логин или пароль", "Ошибка авторизации!");
                 return;
             }
 
@@ -60,6 +62,21 @@ namespace LibraryBooks.Forms
             var regForm = new RegistrationForm();
             regForm.Show();
             Hide();
+        }
+
+        // TODO скрыть пароль
+        private void pictureBoxClose_Click(object sender, EventArgs e)
+        {
+            textBoxPassword.UseSystemPasswordChar = false;
+            pictureBoxOpen.Visible = true;
+            pictureBoxClose.Visible = false;
+        }
+
+        private void pictureBoxOpen_Click(object sender, EventArgs e)
+        {
+            textBoxPassword.UseSystemPasswordChar = true;
+            pictureBoxOpen.Visible = false;
+            pictureBoxClose.Visible = true;
         }
     }
 }
