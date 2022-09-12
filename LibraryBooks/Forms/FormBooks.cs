@@ -38,8 +38,6 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var authorizeForm = new AuthorizationForm();
-
             var bookForm = new BookForm();
             lableShow:
             DialogResult result = bookForm.ShowDialog();
@@ -85,8 +83,8 @@ namespace LibraryBooks.Forms
 
                     // TODO отображать не класс, а имя (Переопределить ToString?)
                     Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
-                    //User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
-                    User = _context.Users.First(u => u.Login == authorizeForm.textBoxLogin.Text),
+                    User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
+                    //User = _context.Users.First(u => u.Login == authorizeForm.textBoxLogin.Text),
                     Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
                     PathToBook = bookForm.textBoxPathToBook.Text,
                     IsLiked = bookForm.checkBoxIsLiked.Checked,
@@ -111,6 +109,7 @@ namespace LibraryBooks.Forms
             {
                 _context.Remove(book);
             }
+
             _context.SaveChanges();
         }
 

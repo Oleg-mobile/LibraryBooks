@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBoxGenre = new System.Windows.Forms.PictureBox();
+            this.pictureBoxAuthor = new System.Windows.Forms.PictureBox();
             this.checkBoxIsFinished = new System.Windows.Forms.CheckBox();
             this.checkBoxIsLiked = new System.Windows.Forms.CheckBox();
             this.textBoxMark = new System.Windows.Forms.TextBox();
@@ -51,10 +54,14 @@
             this.comboBoxAuthor = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenre)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthor)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBoxGenre);
+            this.groupBox1.Controls.Add(this.pictureBoxAuthor);
             this.groupBox1.Controls.Add(this.checkBoxIsFinished);
             this.groupBox1.Controls.Add(this.checkBoxIsLiked);
             this.groupBox1.Controls.Add(this.textBoxMark);
@@ -82,6 +89,28 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Книга";
+            // 
+            // pictureBoxGenre
+            // 
+            this.pictureBoxGenre.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxGenre.Image")));
+            this.pictureBoxGenre.Location = new System.Drawing.Point(242, 310);
+            this.pictureBoxGenre.Name = "pictureBoxGenre";
+            this.pictureBoxGenre.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxGenre.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxGenre.TabIndex = 24;
+            this.pictureBoxGenre.TabStop = false;
+            this.pictureBoxGenre.Click += new System.EventHandler(this.pictureBoxGenre_Click);
+            // 
+            // pictureBoxAuthor
+            // 
+            this.pictureBoxAuthor.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxAuthor.Image")));
+            this.pictureBoxAuthor.Location = new System.Drawing.Point(242, 110);
+            this.pictureBoxAuthor.Name = "pictureBoxAuthor";
+            this.pictureBoxAuthor.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxAuthor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxAuthor.TabIndex = 23;
+            this.pictureBoxAuthor.TabStop = false;
+            this.pictureBoxAuthor.Click += new System.EventHandler(this.pictureBoxAuthor_Click);
             // 
             // checkBoxIsFinished
             // 
@@ -273,6 +302,8 @@
             this.Text = "Книга";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenre)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -301,5 +332,7 @@
         public System.Windows.Forms.ComboBox comboBoxUser;
         public System.Windows.Forms.CheckBox checkBoxIsFinished;
         public System.Windows.Forms.CheckBox checkBoxIsLiked;
+        private System.Windows.Forms.PictureBox pictureBoxGenre;
+        private System.Windows.Forms.PictureBox pictureBoxAuthor;
     }
 }

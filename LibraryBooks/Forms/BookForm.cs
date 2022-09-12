@@ -27,13 +27,13 @@ namespace LibraryBooks.Forms
             _context.Genres.Load();
             _context.Users.Load();
 
-            comboBoxAuthor.DataSource = _context.Authors;
+            comboBoxAuthor.DataSource = _context.Authors.ToList();
             comboBoxAuthor.DisplayMember = "Name";
 
-            comboBoxGenre.DataSource = _context.Genres;
+            comboBoxGenre.DataSource = _context.Genres.ToList();
             comboBoxGenre.DisplayMember = "Name";
 
-            comboBoxUser.DataSource = _context.Users;
+            comboBoxUser.DataSource = _context.Users.ToList();
             comboBoxUser.DisplayMember = "Login";
         }
 
@@ -64,6 +64,18 @@ namespace LibraryBooks.Forms
             {
                 e.Handled = true;
             }
+        }
+
+        private void pictureBoxAuthor_Click(object sender, EventArgs e)
+        {
+            var authorForm = new AuthorForm();
+            DialogResult result = authorForm.ShowDialog();
+        }
+
+        private void pictureBoxGenre_Click(object sender, EventArgs e)
+        {
+            var genreForm = new GenreForm();
+            DialogResult result = genreForm.ShowDialog();
         }
     }
 }

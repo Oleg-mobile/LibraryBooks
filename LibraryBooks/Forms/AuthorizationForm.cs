@@ -3,6 +3,7 @@ using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -69,6 +70,8 @@ namespace LibraryBooks.Forms
             {
                 textBoxPassword.UseSystemPasswordChar = false;
                 pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeOpen.png");
+                //pictureBoxClose.Image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Images\eyeOpen.png"));
+
             }
             else
             {

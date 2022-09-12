@@ -51,8 +51,9 @@ namespace LibraryBooks.Forms
             foreach (var author in authors)
             {
                 _context.Remove(author);
-                _context.SaveChanges();
             }
+
+            _context.SaveChanges();
         }
 
         private IEnumerable<Author> SelectedRowsMapToAuthors()

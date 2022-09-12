@@ -53,8 +53,9 @@ namespace LibraryBooks.Forms
             foreach (var genre in genres)
             {
                 _context.Remove(genre);
-                _context.SaveChanges();
             }
+
+            _context.SaveChanges();
         }
 
         private IEnumerable<Genre> SelectedRowsMapToGenres()
@@ -66,6 +67,7 @@ namespace LibraryBooks.Forms
                 var genre = (Genre)dataGridViewGenres.SelectedRows[i].DataBoundItem;
                 genres.Add(genre);
             }
+
             return genres;
         }
 
