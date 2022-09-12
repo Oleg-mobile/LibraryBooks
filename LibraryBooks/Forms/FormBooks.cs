@@ -28,11 +28,18 @@ namespace LibraryBooks.Forms
             _context.Users.Load();
 
             dataGridViewBooks.DataSource = _context.Books.Local.ToBindingList();
-            dataGridViewBooks.Columns["Id"].DisplayIndex = 0;
+            // TODO ограничение отображения колонок
+            dataGridViewBooks.Columns["Id"].Visible = false;
+            dataGridViewBooks.Columns["UserId"].Visible = false;
+            dataGridViewBooks.Columns["GenreId"].Visible = false;
+            dataGridViewBooks.Columns["IsLiked"].Visible = false;
+            dataGridViewBooks.Columns["IsFinished"].Visible = false;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            var authorizeForm = new AuthorizationForm();
+
             var bookForm = new BookForm();
             lableShow:
             DialogResult result = bookForm.ShowDialog();
@@ -75,8 +82,11 @@ namespace LibraryBooks.Forms
                     Year = year,
                     PageCount = pageCount,
                     Mark = mark,
+
+                    // TODO отображать не класс, а имя (Переопределить ToString?)
                     Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
-                    User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
+                    //User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
+                    User = _context.Users.First(u => u.Login == authorizeForm.textBoxLogin.Text),
                     Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
                     PathToBook = bookForm.textBoxPathToBook.Text,
                     IsLiked = bookForm.checkBoxIsLiked.Checked,
@@ -121,8 +131,11 @@ namespace LibraryBooks.Forms
         {
             if (dataGridViewBooks.SelectedRows.Count > 0)
             {
-                var book = (Book)dataGridViewBooks.SelectedRows [0].DataBoundItem;
+                var book = (Book)dataGridViewBooks.SelectedRows[0].DataBoundItem;
                 var bookForm = new BookForm(book);
+                lableShow:
+
+                // TODO ошибка при редактировании книги
                 DialogResult result = bookForm.ShowDialog();
 
                 if (result == DialogResult.Cancel)
@@ -130,20 +143,55 @@ namespace LibraryBooks.Forms
                     return;
                 }
 
-                book.Name = bookForm.textBoxName.Text;
-                book.Publication = bookForm.textBoxPublication.Text;
-                book.Year = Int32.Parse(bookForm.textBoxYear.Text);
-                book.PageCount = Int32.Parse(bookForm.textBoxPageCount.Text);
-                book.Mark = Int32.Parse(bookForm.textBoxMark.Text);
-                book.Genre = _context.Genres.First(g => g.Name.Equals(bookForm.comboBoxGenre.Text));
-                book.User = _context.Users.First(u => u.Login.Equals(bookForm.comboBoxUser.Text));
-                book.Author = _context.Authors.First(a => a.Name.Equals(bookForm.comboBoxAuthor.Text));
-                book.PathToBook = bookForm.textBoxPathToBook.Text;
-                book.IsLiked = bookForm.checkBoxIsLiked.Checked;
-                book.IsFinished = bookForm.checkBoxIsFinished.Checked;
+                try
+                {
+                    if (!int.TryParse(bookForm.textBoxYear.Text, out int year))
+                    {
+                        throw new FormatException("Не верный формат года");
+                    }
 
-                _context.SaveChanges();
-                dataGridViewBooks.Refresh();
+                    if (!int.TryParse(bookForm.textBoxPageCount.Text, out int pageCount))
+                    {
+                        throw new FormatException("Не верный формат количества страниц");
+                    }
+
+                    if (!int.TryParse(bookForm.textBoxMark.Text, out int mark))
+                    {
+                        throw new FormatException("Не верный формат закладки");
+                    }
+
+                    if (bookForm.comboBoxGenre.SelectedItem is null)
+                    {
+                        throw new FormatException("Жанр не выбран");
+                    }
+
+                    if (bookForm.comboBoxAuthor.SelectedItem is null)
+                    {
+                        throw new FormatException("Автор не выбран");
+                    }
+
+                    book.Name = bookForm.textBoxName.Text;
+                    book.Publication = bookForm.textBoxPublication.Text;
+                    book.Year = year;
+                    book.PageCount = pageCount;
+                    book.Mark = mark;
+
+                    // TODO отображать не класс, а имя
+                    book.Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text);
+                    book.User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text);
+                    book.Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text);
+                    book.PathToBook = bookForm.textBoxPathToBook.Text;
+                    book.IsLiked = bookForm.checkBoxIsLiked.Checked;
+                    book.IsFinished = bookForm.checkBoxIsFinished.Checked;
+
+                    _context.SaveChanges();
+                    dataGridViewBooks.Refresh();
+                }
+                catch (FormatException ex)
+                {
+                    MessageBoxExtention.WarningInput(ex.Message);
+                    goto lableShow;
+                }
             }
         }
     }

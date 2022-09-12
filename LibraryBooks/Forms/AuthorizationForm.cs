@@ -2,6 +2,7 @@
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,9 +17,6 @@ namespace LibraryBooks.Forms
             InitializeComponent();
             ActiveControl = textBoxLogin;
             AcceptButton = buttonLogin;
-
-            pictureBoxClose.Visible = true;
-            pictureBoxOpen.Visible = false;
 
             _context = new LibraryBooksContext();
             _context.Users.Load();
@@ -64,19 +62,19 @@ namespace LibraryBooks.Forms
             Hide();
         }
 
-        // TODO скрыть пароль
+        // TODO относительная ссылка?
         private void pictureBoxClose_Click(object sender, EventArgs e)
         {
-            textBoxPassword.UseSystemPasswordChar = false;
-            pictureBoxOpen.Visible = true;
-            pictureBoxClose.Visible = false;
-        }
-
-        private void pictureBoxOpen_Click(object sender, EventArgs e)
-        {
-            textBoxPassword.UseSystemPasswordChar = true;
-            pictureBoxOpen.Visible = false;
-            pictureBoxClose.Visible = true;
+            if (textBoxPassword.UseSystemPasswordChar)
+            {
+                textBoxPassword.UseSystemPasswordChar = false;
+                pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeOpen.png");
+            }
+            else
+            {
+                textBoxPassword.UseSystemPasswordChar = true;
+                pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeClose.png");
+            }
         }
     }
 }

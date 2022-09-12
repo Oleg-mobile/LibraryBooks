@@ -37,10 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBoxClose = new System.Windows.Forms.PictureBox();
-            this.pictureBoxOpen = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpen)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -117,23 +115,11 @@
             this.pictureBoxClose.TabStop = false;
             this.pictureBoxClose.Click += new System.EventHandler(this.pictureBoxClose_Click);
             // 
-            // pictureBoxOpen
-            // 
-            this.pictureBoxOpen.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxOpen.Image")));
-            this.pictureBoxOpen.Location = new System.Drawing.Point(249, 146);
-            this.pictureBoxOpen.Name = "pictureBoxOpen";
-            this.pictureBoxOpen.Size = new System.Drawing.Size(23, 23);
-            this.pictureBoxOpen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxOpen.TabIndex = 8;
-            this.pictureBoxOpen.TabStop = false;
-            this.pictureBoxOpen.Click += new System.EventHandler(this.pictureBoxOpen_Click);
-            // 
             // AuthorizationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.pictureBoxOpen);
             this.Controls.Add(this.pictureBoxClose);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -147,7 +133,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AuthorizationForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,6 +148,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBoxClose;
-        private System.Windows.Forms.PictureBox pictureBoxOpen;
     }
 }

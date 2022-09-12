@@ -3,6 +3,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace LibraryBooks.Extentions
 {
+    /// <summary>
+    /// Expanding the functionality of methods
+    /// </summary>
     public static class MessageBoxExtention
     {
         public static DialogResult Error(string text, string caption)
@@ -16,7 +19,6 @@ namespace LibraryBooks.Extentions
         }
 
         public static DialogResult ErrorInput(string text) => Error(text, "Ошибка ввода");
-
 
         public static DialogResult Warning(string text, string caption)
         {

@@ -24,7 +24,8 @@ namespace LibraryBooks.Forms
             _context.Authors.Load(); // loading data from a table into a variable (Entity Framework)
 
             dataGridViewAuthors.DataSource = _context.Authors.Local.ToBindingList();
-            dataGridViewAuthors.Columns["Id"].DisplayIndex = 0;
+            dataGridViewAuthors.Columns["Id"].Visible = false;
+            dataGridViewAuthors.Columns["Name"].HeaderText = "Имя автора";
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

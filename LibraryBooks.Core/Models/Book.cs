@@ -20,12 +20,12 @@ namespace LibraryBooks.Core.Models
         public int AuthorId { get; set; }
 
         [ForeignKey("AuthorId")]
-        public Author Author { get; set; }
+        public Author Author { get; set; }  // navigation property for JOIN
 
         public int GenreId { get; set; }
 
         [ForeignKey("GenreId")]
-        public Genre Genre { get; set; }
+        public Genre Genre { get; set; }  // navigation property for JOIN
 
         public string Name { get; set; }
         public string Publication { get; set; }

@@ -29,7 +29,7 @@ namespace LibraryBooks.Forms
 
             // TODO вынести валидацию в класс вадидатор
 
-            if (string.IsNullOrEmpty(login))
+            if (string.IsNullOrEmpty(login))  // checking for empty and null
             {
                 MessageBoxExtention.ErrorInput("Введите логин");
                 return;

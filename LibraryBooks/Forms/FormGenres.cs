@@ -25,7 +25,8 @@ namespace LibraryBooks.Forms
             _context.Genres.Load();
 
             dataGridViewGenres.DataSource = _context.Genres.Local.ToBindingList();
-            dataGridViewGenres.Columns["Id"].DisplayIndex = 0;
+            dataGridViewGenres.Columns["Id"].Visible = false;
+            dataGridViewGenres.Columns["Name"].HeaderText = "Жанр";
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
