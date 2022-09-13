@@ -84,12 +84,16 @@ namespace LibraryBooks.Forms
                     // TODO отображать не класс, а имя (Переопределить ToString?)
                     Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
                     User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
+
+                    // TODO вынести юзера в глобальную переменную?
                     //User = _context.Users.First(u => u.Login == authorizeForm.textBoxLogin.Text),
                     Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
                     PathToBook = bookForm.textBoxPathToBook.Text,
                     IsLiked = bookForm.checkBoxIsLiked.Checked,
                     IsFinished = bookForm.checkBoxIsFinished.Checked
                 };
+
+                //MessageBox.Show(authorizeForm.textBoxLogin.Text);
 
                 _context.Books.Add(book);
                 _context.SaveChanges();
@@ -134,7 +138,6 @@ namespace LibraryBooks.Forms
                 var bookForm = new BookForm(book);
                 lableShow:
 
-                // TODO ошибка при редактировании книги
                 DialogResult result = bookForm.ShowDialog();
 
                 if (result == DialogResult.Cancel)
@@ -174,8 +177,6 @@ namespace LibraryBooks.Forms
                     book.Year = year;
                     book.PageCount = pageCount;
                     book.Mark = mark;
-
-                    // TODO отображать не класс, а имя
                     book.Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text);
                     book.User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text);
                     book.Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text);
