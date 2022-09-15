@@ -66,16 +66,49 @@ namespace LibraryBooks.Forms
             }
         }
 
+        // TODO куча одинакового кода
         private void pictureBoxAuthor_Click(object sender, EventArgs e)
         {
             var authorForm = new AuthorForm();
             DialogResult result = authorForm.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            var authorName = authorForm.textBoxName.Text;
+            var author = new Author(authorName);
+
+            _context.Authors.Add(author);
+            _context.SaveChanges();
+
+            comboBoxAuthor.DataSource = _context.Authors.ToList();
+            comboBoxAuthor.DisplayMember = "Name";
+            int index = comboBoxAuthor.FindString(authorName);
+            comboBoxAuthor.SelectedIndex = index;
         }
 
         private void pictureBoxGenre_Click(object sender, EventArgs e)
         {
             var genreForm = new GenreForm();
             DialogResult result = genreForm.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            var genreName = genreForm.textBoxName.Text;
+            var genre = new Genre(genreName);
+
+            _context.Genres.Add(genre);
+            _context.SaveChanges();
+
+            comboBoxGenre.DataSource = _context.Genres.ToList();
+            comboBoxGenre.DisplayMember = "Name";
+            int index = comboBoxGenre.FindString(genreName);
+            comboBoxGenre.SelectedIndex = index;
         }
     }
 }

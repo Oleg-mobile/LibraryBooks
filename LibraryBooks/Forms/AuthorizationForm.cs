@@ -76,7 +76,7 @@ namespace LibraryBooks.Forms
             {
                 textBoxPassword.UseSystemPasswordChar = false;
                 pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeOpen.png");
-            }
+            // TODO или лучше в ифе ретёрн и без элса?
             else
             {
                 textBoxPassword.UseSystemPasswordChar = true;

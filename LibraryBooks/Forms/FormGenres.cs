@@ -39,8 +39,7 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            var genre = new Genre();
-            genre.Name = genreForm.textBoxName.Text;
+            var genre = new Genre(genreForm.textBoxName.Text);
 
             _context.Genres.Add(genre);
             _context.SaveChanges();
