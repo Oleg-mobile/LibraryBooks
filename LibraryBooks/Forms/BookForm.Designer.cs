@@ -53,6 +53,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxAuthor = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthor)).BeginInit();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.pictureBoxGenre);
             this.groupBox1.Controls.Add(this.pictureBoxAuthor);
             this.groupBox1.Controls.Add(this.checkBoxIsFinished);
@@ -292,6 +294,15 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(408, 319);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 15);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "label9";
+            // 
             // BookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -334,5 +345,6 @@
         public System.Windows.Forms.CheckBox checkBoxIsLiked;
         private System.Windows.Forms.PictureBox pictureBoxGenre;
         private System.Windows.Forms.PictureBox pictureBoxAuthor;
+        private System.Windows.Forms.Label label9;
     }
 }

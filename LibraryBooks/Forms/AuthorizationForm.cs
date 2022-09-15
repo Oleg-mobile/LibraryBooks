@@ -21,6 +21,12 @@ namespace LibraryBooks.Forms
 
             _context = new LibraryBooksContext();
             _context.Users.Load();
+
+            //MessageBox.Show(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            //MessageBox.Show(Environment.CurrentDirectory);
+            //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
+            //MessageBox.Show(Application.StartupPath);
+            //MessageBox.Show(Path.GetFullPath("eyeClose.png"));
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -70,14 +76,17 @@ namespace LibraryBooks.Forms
             {
                 textBoxPassword.UseSystemPasswordChar = false;
                 pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeOpen.png");
-                //pictureBoxClose.Image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Images\eyeOpen.png"));
-
             }
             else
             {
                 textBoxPassword.UseSystemPasswordChar = true;
                 pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeClose.png");
             }
+        }
+
+        private void AuthorizationForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
