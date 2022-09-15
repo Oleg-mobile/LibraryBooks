@@ -9,6 +9,7 @@ namespace LibraryBooks
 {
     internal static class Program
     {
+        // to save form data
         public static AuthorizationForm AuthForm = new AuthorizationForm();
 
         /// <summary>

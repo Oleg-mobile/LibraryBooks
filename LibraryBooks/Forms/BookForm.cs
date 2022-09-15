@@ -33,8 +33,7 @@ namespace LibraryBooks.Forms
             comboBoxGenre.DataSource = _context.Genres.ToList();
             comboBoxGenre.DisplayMember = "Name";
 
-            comboBoxUser.DataSource = _context.Users.ToList();
-            comboBoxUser.DisplayMember = "Login";
+            label9.Text = Program.AuthForm.textBoxLogin.Text;
         }
 
         public BookForm(Book book) : this()
@@ -45,7 +44,7 @@ namespace LibraryBooks.Forms
             textBoxYear.Text = book.Year.ToString();
             textBoxPageCount.Text = book.PageCount.ToString();
             comboBoxGenre.Text = book.Genre.Name;
-            comboBoxUser.Text = book.User.Login;
+            label9.Text = book.User.Login;
             textBoxPathToBook.Text = book.PathToBook;
             textBoxMark.Text = book.Mark.ToString();
             checkBoxIsLiked.Checked = book.IsLiked;

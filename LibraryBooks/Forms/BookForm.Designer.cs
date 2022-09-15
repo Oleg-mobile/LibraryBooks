@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.pictureBoxGenre = new System.Windows.Forms.PictureBox();
             this.pictureBoxAuthor = new System.Windows.Forms.PictureBox();
             this.checkBoxIsFinished = new System.Windows.Forms.CheckBox();
             this.checkBoxIsLiked = new System.Windows.Forms.CheckBox();
             this.textBoxMark = new System.Windows.Forms.TextBox();
             this.textBoxPathToBook = new System.Windows.Forms.TextBox();
-            this.comboBoxUser = new System.Windows.Forms.ComboBox();
             this.comboBoxGenre = new System.Windows.Forms.ComboBox();
             this.textBoxPageCount = new System.Windows.Forms.TextBox();
             this.textBoxYear = new System.Windows.Forms.TextBox();
@@ -53,7 +53,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxAuthor = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthor)).BeginInit();
@@ -68,7 +67,6 @@
             this.groupBox1.Controls.Add(this.checkBoxIsLiked);
             this.groupBox1.Controls.Add(this.textBoxMark);
             this.groupBox1.Controls.Add(this.textBoxPathToBook);
-            this.groupBox1.Controls.Add(this.comboBoxUser);
             this.groupBox1.Controls.Add(this.comboBoxGenre);
             this.groupBox1.Controls.Add(this.textBoxPageCount);
             this.groupBox1.Controls.Add(this.textBoxYear);
@@ -92,10 +90,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Книга";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(410, 325);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 15);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "label9";
+            // 
             // pictureBoxGenre
             // 
             this.pictureBoxGenre.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxGenre.Image")));
-            this.pictureBoxGenre.Location = new System.Drawing.Point(242, 310);
+            this.pictureBoxGenre.Location = new System.Drawing.Point(242, 258);
             this.pictureBoxGenre.Name = "pictureBoxGenre";
             this.pictureBoxGenre.Size = new System.Drawing.Size(23, 23);
             this.pictureBoxGenre.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -149,25 +156,17 @@
             this.textBoxPathToBook.Size = new System.Drawing.Size(180, 23);
             this.textBoxPathToBook.TabIndex = 19;
             // 
-            // comboBoxUser
-            // 
-            this.comboBoxUser.FormattingEnabled = true;
-            this.comboBoxUser.Location = new System.Drawing.Point(410, 60);
-            this.comboBoxUser.Name = "comboBoxUser";
-            this.comboBoxUser.Size = new System.Drawing.Size(180, 23);
-            this.comboBoxUser.TabIndex = 18;
-            // 
             // comboBoxGenre
             // 
             this.comboBoxGenre.FormattingEnabled = true;
-            this.comboBoxGenre.Location = new System.Drawing.Point(45, 310);
+            this.comboBoxGenre.Location = new System.Drawing.Point(45, 260);
             this.comboBoxGenre.Name = "comboBoxGenre";
             this.comboBoxGenre.Size = new System.Drawing.Size(180, 23);
             this.comboBoxGenre.TabIndex = 17;
             // 
             // textBoxPageCount
             // 
-            this.textBoxPageCount.Location = new System.Drawing.Point(45, 260);
+            this.textBoxPageCount.Location = new System.Drawing.Point(410, 60);
             this.textBoxPageCount.Name = "textBoxPageCount";
             this.textBoxPageCount.Size = new System.Drawing.Size(180, 23);
             this.textBoxPageCount.TabIndex = 16;
@@ -216,7 +215,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(410, 40);
+            this.label7.Location = new System.Drawing.Point(410, 300);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 15);
             this.label7.TabIndex = 8;
@@ -225,7 +224,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(45, 290);
+            this.label6.Location = new System.Drawing.Point(45, 240);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 15);
             this.label6.TabIndex = 7;
@@ -234,7 +233,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 240);
+            this.label5.Location = new System.Drawing.Point(410, 40);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 15);
             this.label5.TabIndex = 6;
@@ -286,22 +285,13 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(45, 360);
+            this.buttonSave.Location = new System.Drawing.Point(45, 310);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(180, 30);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(408, 319);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 15);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "label9";
             // 
             // BookForm
             // 
@@ -340,7 +330,6 @@
         public System.Windows.Forms.ComboBox comboBoxGenre;
         public System.Windows.Forms.TextBox textBoxMark;
         public System.Windows.Forms.TextBox textBoxPathToBook;
-        public System.Windows.Forms.ComboBox comboBoxUser;
         public System.Windows.Forms.CheckBox checkBoxIsFinished;
         public System.Windows.Forms.CheckBox checkBoxIsLiked;
         private System.Windows.Forms.PictureBox pictureBoxGenre;

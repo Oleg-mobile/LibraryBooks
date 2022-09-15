@@ -39,6 +39,7 @@ namespace LibraryBooks.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var bookForm = new BookForm();
+            // a label so that the window does not close when an exception occurs
             lableShow:
             DialogResult result = bookForm.ShowDialog();
 
@@ -83,10 +84,10 @@ namespace LibraryBooks.Forms
 
                     // TODO отображать не класс, а имя (Переопределить ToString?)
                     Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
-                    User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
 
-                    // TODO вынести юзера в глобальную переменную?
-                    //User = _context.Users.First(u => u.Login == authorizeForm.textBoxLogin.Text),
+                    // TODO юзер
+                    //User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
+                    User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text),
                     Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
                     PathToBook = bookForm.textBoxPathToBook.Text,
                     IsLiked = bookForm.checkBoxIsLiked.Checked,
@@ -178,7 +179,7 @@ namespace LibraryBooks.Forms
                     book.PageCount = pageCount;
                     book.Mark = mark;
                     book.Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text);
-                    book.User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text);
+                    book.User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text);
                     book.Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text);
                     book.PathToBook = bookForm.textBoxPathToBook.Text;
                     book.IsLiked = bookForm.checkBoxIsLiked.Checked;
