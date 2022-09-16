@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core.Repositories
 {
+    // base class (additional common methods)
     public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
         public abstract void Delete(TPrimaryKey id);

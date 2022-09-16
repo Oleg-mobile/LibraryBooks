@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
 {
+    // repository implementation for entity framework
     public class EfCoreRepositoryBase<TDbContext, TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey> where TDbContext : DbContext
     {
         public override void Delete(TPrimaryKey id)

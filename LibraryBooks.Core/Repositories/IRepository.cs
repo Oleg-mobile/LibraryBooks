@@ -9,6 +9,7 @@ namespace LibraryBooks.Core.Repositories
 {
     public interface IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
+        // methods for working with data
         IQueryable<TEntity> GetAll();
         TEntity Get(TPrimaryKey id);
         TEntity FirstOrDefault(TPrimaryKey id);
@@ -18,6 +19,7 @@ namespace LibraryBooks.Core.Repositories
         void Delete(TEntity entity);
     }
 
+    // simplified wrapper IRepository (our case)
     public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : Entity<int>
     {
 
