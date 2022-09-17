@@ -69,20 +69,11 @@ namespace LibraryBooks.Forms
             Hide();
         }
 
-        // TODO относительная ссылка?
         private void pictureBoxClose_Click(object sender, EventArgs e)
         {
-            if (textBoxPassword.UseSystemPasswordChar)
-            {
-                textBoxPassword.UseSystemPasswordChar = false;
-                pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeOpen.png");
-            }
-            // TODO или лучше в ифе ретёрн и без элса?
-            else
-            {
-                textBoxPassword.UseSystemPasswordChar = true;
-                pictureBoxClose.Image = Image.FromFile(@"C:\Users\User\source\repos\CoreAPI\WebAPI\LibraryBooks\LibraryBooks\Images\eyeClose.png");
-            }
+            bool isVisiblePass = textBoxPassword.UseSystemPasswordChar;
+            textBoxPassword.UseSystemPasswordChar = !isVisiblePass;
+            pictureBoxClose.Image = Image.FromFile(@$"Images\{(isVisiblePass ? "eyeOpen.png" : "eyeClose.png")}");
         }
     }
 }

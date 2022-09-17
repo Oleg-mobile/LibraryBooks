@@ -11,29 +11,37 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
     // repository implementation for entity framework
     public class EfCoreRepositoryBase<TDbContext, TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey> where TDbContext : DbContext
     {
+        private TDbContext Context { get; }
+
+        protected DbSet<TEntity> Table => Context.Set<TEntity>();
+
+        public EfCoreRepositoryBase(TDbContext context)
+        {
+            Context = context;
+        }
+
         public override void Delete(TPrimaryKey id)
         {
-            throw new NotImplementedException();
+            var entity = Get(id);
+            Delete(entity);
         }
 
-        public override void Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        public override void Delete(TEntity entity) => Table.Remove(entity);
 
-        public override IQueryable<TEntity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public override IQueryable<TEntity> GetAll() => Table.AsQueryable();
 
-        public override TEntity Insert(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        public override TEntity Insert(TEntity entity) => Table.Add(entity).Entity;
 
-        public override TEntity Update(TEntity entity)
+        public override TEntity Update(TEntity entity) => Table.Update(entity).Entity;
+
+        public void SaveChanges() => Context.SaveChanges();
+
+    }
+
+    public class EfCoreRepositoryBase<TDbContext, TEntity> : EfCoreRepositoryBase<TDbContext, TEntity, int> where TEntity : Entity<int> where TDbContext : DbContext
+    {
+        public EfCoreRepositoryBase(TDbContext context) : base(context)
         {
-            throw new NotImplementedException();
         }
     }
 }
