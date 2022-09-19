@@ -25,6 +25,7 @@ namespace LibraryBooks.Forms
 
             _context = new LibraryBooksContext();
             _authorRepository = new EfCoreRepositoryBase<LibraryBooksContext, Author>(_context);
+            // TODO ToListAsync?
             var a = _authorRepository.GetAll().ToList();
 
             _context.Authors.Load(); // loading data from a table into a variable (Entity Framework)

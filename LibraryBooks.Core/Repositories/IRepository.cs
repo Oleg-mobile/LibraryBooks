@@ -10,6 +10,7 @@ namespace LibraryBooks.Core.Repositories
     public interface IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
         // methods for working with data
+        // TODO Create не нужен?
         IQueryable<TEntity> GetAll();
         TEntity Get(TPrimaryKey id);
         TEntity FirstOrDefault(TPrimaryKey id);
