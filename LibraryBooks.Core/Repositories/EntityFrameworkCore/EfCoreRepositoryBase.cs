@@ -8,21 +8,25 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
 {
-    // repository implementation for entity framework
+    // repository implementation for entity framework (basic CRUD operations)
     public class EfCoreRepositoryBase<TDbContext, TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey> where TDbContext : DbContext
     {
+        /// <summary>
+        /// to access the context
+        /// </summary>
         private TDbContext Context { get; }
 
-        protected DbSet<TEntity> Table => Context.Set<TEntity>();
+        protected DbSet<TEntity> Table => Context.Set<TEntity>();  // universal way to access a database table
 
         public EfCoreRepositoryBase(TDbContext context)
         {
+            // set; implementation
             Context = context;
         }
 
         public override void Delete(TPrimaryKey id)
         {
-            var entity = Get(id);
+            var entity = Get(id);  // returns null if there is no such entity
             Delete(entity);
         }
 
