@@ -14,7 +14,7 @@ using LibraryBooks.Core.Repositories.EntityFrameworkCore;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormAuthors : Form
+    public partial class FormAuthors : LibrarryBooksForm
     {
         private readonly LibraryBooksContext _context;  // Database model. Private - only in this class. Readonly - immutable database connection.
         private readonly IRepository<Author, int> _authorRepository;
@@ -24,9 +24,9 @@ namespace LibraryBooks.Forms
             InitializeComponent(); // initializing all components
 
             _context = new LibraryBooksContext();
-            _authorRepository = new EfCoreRepositoryBase<LibraryBooksContext, Author>(_context);
+            //_authorRepository = new EfCoreRepositoryBase<LibraryBooksContext, Author>(_context);
             // TODO ToListAsync?
-            var a = _authorRepository.GetAll().ToList();
+            //var a = _authorRepository.GetAll().ToList();
 
             _context.Authors.Load(); // loading data from a table into a variable (Entity Framework)
 

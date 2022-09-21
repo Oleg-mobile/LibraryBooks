@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class GenreForm : Form
+    public partial class GenreForm : LibrarryBooksForm
     {
         public GenreForm()
         {

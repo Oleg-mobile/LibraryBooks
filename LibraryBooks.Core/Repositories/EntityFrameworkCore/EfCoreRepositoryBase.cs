@@ -42,10 +42,18 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
 
     }
 
-    public class EfCoreRepositoryBase<TDbContext, TEntity> : EfCoreRepositoryBase<TDbContext, TEntity, int> where TEntity : Entity<int> where TDbContext : DbContext
+    public class EfCoreRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<LibraryBooksContext, TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
-        public EfCoreRepositoryBase(TDbContext context) : base(context)
+        public EfCoreRepositoryBase(LibraryBooksContext context) : base(context)
         {
         }
     }
+
+    //TODO сделать для Irepository TEntity
+    //public class EfCoreRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<LibraryBooksContext, TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
+    //{
+    //    public EfCoreRepositoryBase(LibraryBooksContext context) : base(context)
+    //    {
+    //    }
+    //}
 }

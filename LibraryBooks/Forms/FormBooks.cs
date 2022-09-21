@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormBooks : Form
+    public partial class FormBooks : LibrarryBooksForm
     {
         private readonly LibraryBooksContext _context;
 

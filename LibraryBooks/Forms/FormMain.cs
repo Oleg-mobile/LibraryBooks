@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormMain : Form
+    public partial class FormMain : LibrarryBooksForm
     {
         private Form activeForm;
 

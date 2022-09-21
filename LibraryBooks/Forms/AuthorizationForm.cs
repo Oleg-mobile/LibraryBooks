@@ -63,12 +63,21 @@ namespace LibraryBooks.Forms
             Hide();
         }
 
-        // TODO сделать public для использования на форме регистрации?
         private void pictureBoxClose_Click(object sender, EventArgs e)
         {
-            bool isVisiblePass = textBoxPassword.UseSystemPasswordChar;
-            textBoxPassword.UseSystemPasswordChar = !isVisiblePass;
-            pictureBoxClose.Image = Image.FromFile(@$"Images\{(isVisiblePass ? "eyeOpen.png" : "eyeClose.png")}");
+            ToggleVisiblePassword(pictureBoxClose, textBoxPassword);
+
+        }
+
+        //TODO убрал static
+        public void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)
+        {
+            bool isVisiblePass = textBoxPasswords[0].UseSystemPasswordChar;
+            foreach (TextBox textBoxPassword in textBoxPasswords)
+            {
+                textBoxPassword.UseSystemPasswordChar = !isVisiblePass;
+            }
+            pictureBox.Image = Image.FromFile(@$"Images\{(isVisiblePass ? "eyeOpen.png" : "eyeClose.png")}");
             // @ - take the string literally without escaping service characters
             // $ - string interpolation, you can use variables
         }

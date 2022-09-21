@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrationForm));
             this.buttonAdd = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -35,6 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pictureBoxPassVis = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPassVis)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -97,11 +100,23 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Повторите пароль:";
             // 
+            // pictureBoxPassVis
+            // 
+            this.pictureBoxPassVis.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPassVis.Image")));
+            this.pictureBoxPassVis.Location = new System.Drawing.Point(248, 100);
+            this.pictureBoxPassVis.Name = "pictureBoxPassVis";
+            this.pictureBoxPassVis.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxPassVis.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxPassVis.TabIndex = 7;
+            this.pictureBoxPassVis.TabStop = false;
+            this.pictureBoxPassVis.Click += new System.EventHandler(this.pictureBoxPassVis_Click);
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.pictureBoxPassVis);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -111,6 +126,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Name = "RegistrationForm";
             this.Text = "Регистрация";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPassVis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +141,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBoxPassVis;
     }
 }
