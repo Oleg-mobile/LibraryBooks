@@ -17,9 +17,10 @@ namespace LibraryBooks.Forms
 {
     public abstract class LibrarryBooksForm : Form
     {
-        private static IWindsorContainer _iocContainer;
-
-        protected static IWindsorContainer IocContainer 
+        // container for dependency registration
+        private static IWindsorContainer _iocContainer;  // static - for the entire program, without reference to an object
+        // Singleton
+        protected static IWindsorContainer IocContainer  // protected - only for heirs
         {
             get 
             {
@@ -33,9 +34,12 @@ namespace LibraryBooks.Forms
             }
         }
 
+        // dependency registration
         private static void RegisterServices()
         {
+            // container creation (registration)
             _iocContainer.Register(Component.For<LibraryBooksContext, LibraryBooksContext>().LifestyleTransient());
+            // if you want a IRepository<,>, you will get its implementation like this - EfCoreRepositoryBase<,>
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
         }
 

@@ -73,6 +73,7 @@ namespace LibraryBooks.Forms
         public void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)
         {
             bool isVisiblePass = textBoxPasswords[0].UseSystemPasswordChar;
+            // in case of multiple textBoxes
             foreach (TextBox textBoxPassword in textBoxPasswords)
             {
                 textBoxPassword.UseSystemPasswordChar = !isVisiblePass;
