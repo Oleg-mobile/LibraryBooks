@@ -17,7 +17,7 @@ namespace LibraryBooks.Forms
 {
     public abstract class LibrarryBooksForm : Form
     {
-        // container for dependency registration
+        // container for dependency registration (reference to an object instance)
         private static IWindsorContainer _iocContainer;  // static - for the entire program, without reference to an object
         // Singleton
         protected static IWindsorContainer IocContainer  // protected - only for heirs
