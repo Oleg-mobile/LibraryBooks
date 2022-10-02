@@ -18,12 +18,9 @@ namespace LibraryBooks.Forms
         public AuthorForm()
         {
             InitializeComponent();
+
             ActiveControl = textBoxName;
             AcceptButton = buttonSave;
-
-            // for test
-            IRepository<Author, int> a = Resolve<IRepository<Author, int>>();
-            var b = a.GetAll().ToList();
         }
 
         // to fill in all the input fields on the form

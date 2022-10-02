@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Core;
 using LibraryBooks.Core.Models;
+using LibraryBooks.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,22 +16,22 @@ namespace LibraryBooks.Forms
 {
     public partial class BookForm : LibrarryBooksForm
     {
-        private readonly LibraryBooksContext _context;
+        private readonly IRepository<Author, int> _authorRepository;
+        private readonly IRepository<Genre, int> _genreRepository;
 
         public BookForm()
         {
             InitializeComponent();
+
+            _authorRepository = Resolve<IRepository<Author, int>>();
+            _genreRepository = Resolve<IRepository<Genre, int>>();
+
             AcceptButton = buttonSave;
 
-            _context = new LibraryBooksContext();
-            _context.Authors.Load();
-            _context.Genres.Load();
-            _context.Users.Load();
-
-            comboBoxAuthor.DataSource = _context.Authors.ToList();
+            comboBoxAuthor.DataSource = _authorRepository.GetAll().ToList();
             comboBoxAuthor.DisplayMember = "Name";
 
-            comboBoxGenre.DataSource = _context.Genres.ToList();
+            comboBoxGenre.DataSource = _genreRepository.GetAll().ToList();
             comboBoxGenre.DisplayMember = "Name";
 
             label9.Text = Program.AuthForm.textBoxLogin.Text;
@@ -50,6 +51,7 @@ namespace LibraryBooks.Forms
             checkBoxIsLiked.Checked = book.IsLiked;
             checkBoxIsFinished.Checked = book.IsFinished;
         }
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
             Close();
@@ -79,11 +81,11 @@ namespace LibraryBooks.Forms
             var authorName = authorForm.textBoxName.Text;
             var author = new Author(authorName);
 
-            _context.Authors.Add(author);
-            _context.SaveChanges();
+            _authorRepository.Insert(author);
 
-            comboBoxAuthor.DataSource = _context.Authors.ToList();
+            comboBoxAuthor.DataSource = _authorRepository.GetAll().ToList();
             comboBoxAuthor.DisplayMember = "Name";
+
             int index = comboBoxAuthor.FindString(authorName);
             comboBoxAuthor.SelectedIndex = index;
         }
@@ -101,13 +103,33 @@ namespace LibraryBooks.Forms
             var genreName = genreForm.textBoxName.Text;
             var genre = new Genre(genreName);
 
-            _context.Genres.Add(genre);
-            _context.SaveChanges();
+            _genreRepository.Insert(genre);
 
-            comboBoxGenre.DataSource = _context.Genres.ToList();
+            comboBoxGenre.DataSource = _genreRepository.GetAll().ToList();
             comboBoxGenre.DisplayMember = "Name";
             int index = comboBoxGenre.FindString(genreName);
             comboBoxGenre.SelectedIndex = index;
+        }
+
+        private void pictureBoxGenre_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox) 
+            where TForm : LibrarryBooksForm, new() 
+            where TEntity : Entity<int>, new()
+        {
+            var form = new TForm();
+            DialogResult result = form.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            repository.Insert(getEntity(getName(form)));
+
+            comboBox.DataSource = repository.GetAll().ToList();
+            comboBox.DisplayMember = "Name";
+
+            int index = comboBox.FindString(getName(form));
+            comboBox.SelectedIndex = index;
         }
     }
 }

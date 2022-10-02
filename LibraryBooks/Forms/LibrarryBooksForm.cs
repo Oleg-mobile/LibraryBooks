@@ -3,6 +3,7 @@ using Castle.Windsor;
 using LibraryBooks.Core;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
+using LibraryBooks.Core.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public abstract class LibrarryBooksForm : Form
+    public class LibrarryBooksForm : Form
     {
         // container for dependency registration (reference to an object instance)
         private static IWindsorContainer _iocContainer;  // static - for the entire program, without reference to an object
@@ -41,6 +42,7 @@ namespace LibraryBooks.Forms
             _iocContainer.Register(Component.For<LibraryBooksContext, LibraryBooksContext>().LifestyleTransient());
             // if you want a IRepository<,>, you will get its implementation like this - EfCoreRepositoryBase<,>
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
+            _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
         }
 
         protected TService Resolve<TService>()

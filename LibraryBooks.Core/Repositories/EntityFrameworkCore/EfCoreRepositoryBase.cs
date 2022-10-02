@@ -14,7 +14,7 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
         /// <summary>
         /// to access the context
         /// </summary>
-        private TDbContext Context { get; }
+        protected TDbContext Context { get; }
 
         protected DbSet<TEntity> Table => Context.Set<TEntity>();  // universal way to access a database table
 
@@ -30,13 +30,27 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
             Delete(entity);
         }
 
-        public override void Delete(TEntity entity) => Table.Remove(entity);
+        public override void Delete(TEntity entity)
+        {
+            Table.Remove(entity);
+            SaveChanges();
+        }
 
         public override IQueryable<TEntity> GetAll() => Table.AsQueryable();
 
-        public override TEntity Insert(TEntity entity) => Table.Add(entity).Entity;
+        public override TEntity Insert(TEntity entity)
+        {
+            var result = Table.Add(entity).Entity;
+            SaveChanges();
+            return result;
+        }
 
-        public override TEntity Update(TEntity entity) => Table.Update(entity).Entity;
+        public override TEntity Update(TEntity entity)
+        {
+            var result = Table.Update(entity).Entity;
+            SaveChanges();
+            return result;
+        }
 
         public void SaveChanges() => Context.SaveChanges();
 

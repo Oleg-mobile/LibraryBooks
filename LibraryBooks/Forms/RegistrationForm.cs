@@ -84,7 +84,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxPassVis_Click(object sender, EventArgs e)
         {
-            Program.AuthForm.ToggleVisiblePassword(pictureBoxPassVis, textBoxPassword, textBoxPasswordRepeat);
+            AuthorizationForm.ToggleVisiblePassword(pictureBoxPassVis, textBoxPassword, textBoxPasswordRepeat);
         }
     }
 }

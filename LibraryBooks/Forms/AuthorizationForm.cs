@@ -1,4 +1,5 @@
 ﻿using LibraryBooks.Core;
+using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,18 +10,17 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class AuthorizationForm : Form
+    public partial class AuthorizationForm : LibrarryBooksForm
     {
-        private readonly LibraryBooksContext _context;
-
+        private readonly IUserRepository _userRepository;
         public AuthorizationForm()
         {
             InitializeComponent();
+
             ActiveControl = textBoxLogin;
             AcceptButton = buttonLogin;
 
-            _context = new LibraryBooksContext();
-            _context.Users.Load();
+            _userRepository = Resolve<IUserRepository>();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -40,8 +40,7 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Login == login && u.Password == password);
-            if (user is null)
+            if (!_userRepository.IsExist(login, password))
             {
                 MessageBoxExtention.Error("Не верный логин или пароль", "Ошибка авторизации!");
                 return;
@@ -51,26 +50,17 @@ namespace LibraryBooks.Forms
             Hide();
         }
 
-        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
+        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
-            var regForm = new RegistrationForm();
-            regForm.Show();
+            new RegistrationForm().Show();
             Hide();
         }
 
-        private void pictureBoxClose_Click(object sender, EventArgs e)
-        {
-            ToggleVisiblePassword(pictureBoxClose, textBoxPassword);
+        private void pictureBoxClose_Click(object sender, EventArgs e) => ToggleVisiblePassword(pictureBoxClose, textBoxPassword);
 
-        }
-
-        //TODO убрал static
-        public void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)
+        public static void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)
         {
             bool isVisiblePass = textBoxPasswords[0].UseSystemPasswordChar;
             // in case of multiple textBoxes
