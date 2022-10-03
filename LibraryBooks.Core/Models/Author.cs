@@ -14,6 +14,10 @@ namespace LibraryBooks.Core.Models
     {
         public string Name { get; set; }
 
+        public Author()
+        {
+        }
+
         public Author(string name)
         {
             Name = name;

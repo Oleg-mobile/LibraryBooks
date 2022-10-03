@@ -13,6 +13,10 @@ namespace LibraryBooks.Core.Models
     {
         public string Name { get; set; }
 
+        public Genre()
+        {
+        }
+
         public Genre(string name)
         {
             Name = name;

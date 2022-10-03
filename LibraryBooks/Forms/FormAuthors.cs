@@ -16,23 +16,23 @@ namespace LibraryBooks.Forms
 {
     public partial class FormAuthors : LibrarryBooksForm
     {
-        private readonly LibraryBooksContext _context;  // Database model. Private - only in this class. Readonly - immutable database connection.
+        //private readonly LibraryBooksContext _context;  // Database model. Private - only in this class. Readonly - immutable database connection.
+        
         private readonly IRepository<Author, int> _authorRepository;
 
         public FormAuthors()
         {
             InitializeComponent(); // initializing all components
+            _authorRepository = Resolve<IRepository<Author, int>>();
 
-            _context = new LibraryBooksContext();
-            //_authorRepository = new EfCoreRepositoryBase<LibraryBooksContext, Author>(_context);
-            // TODO ToListAsync?
-            //var a = _authorRepository.GetAll().ToList();
-
-            _context.Authors.Load(); // loading data from a table into a variable (Entity Framework)
-
-            dataGridViewAuthors.DataSource = _context.Authors.Local.ToBindingList();
+            RefrashTable();
             dataGridViewAuthors.Columns["Id"].Visible = false;
             dataGridViewAuthors.Columns["Name"].HeaderText = "Имя автора";
+        }
+
+        private void RefrashTable()
+        {
+            dataGridViewAuthors.DataSource = _authorRepository.GetAll().ToList();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -47,8 +47,8 @@ namespace LibraryBooks.Forms
 
             var author = new Author(authForm.textBoxName.Text);
 
-            _context.Authors.Add(author);
-            _context.SaveChanges();
+            _authorRepository.Insert(author);
+            RefrashTable();
         }
 
         private void buttonDel_Click(object sender, EventArgs e)
@@ -57,10 +57,10 @@ namespace LibraryBooks.Forms
 
             foreach (var author in authors)
             {
-                _context.Remove(author);
+                _authorRepository.Delete(author);
             }
 
-            _context.SaveChanges();
+            RefrashTable();
         }
 
         private IEnumerable<Author> SelectedRowsMapToAuthors()
@@ -90,8 +90,8 @@ namespace LibraryBooks.Forms
                 }
 
                 author.Name = authorForm.textBoxName.Text;
-                _context.SaveChanges();
-                dataGridViewAuthors.Refresh();
+                _authorRepository.Update(author);
+                RefrashTable();
             }
         }
     }

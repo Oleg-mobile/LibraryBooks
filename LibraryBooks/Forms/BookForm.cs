@@ -67,51 +67,50 @@ namespace LibraryBooks.Forms
             }
         }
 
-        // TODO куча одинакового кода
         private void pictureBoxAuthor_Click(object sender, EventArgs e)
         {
-            var authorForm = new AuthorForm();
-            DialogResult result = authorForm.ShowDialog();
+            pictureBox_Click<AuthorForm, Author>
+            (
+                f => f.textBoxName.Text, 
+                _authorRepository, 
+                name => new Author(name), 
+                comboBoxAuthor
+            );
 
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
+            #region Как было
+            //var authorForm = new AuthorForm();
+            //DialogResult result = authorForm.ShowDialog();
 
-            var authorName = authorForm.textBoxName.Text;
-            var author = new Author(authorName);
+            //if (result == DialogResult.Cancel)
+            //{
+            //    return;
+            //}
 
-            _authorRepository.Insert(author);
+            //var authorName = authorForm.textBoxName.Text;
+            //var author = new Author(authorName);
 
-            comboBoxAuthor.DataSource = _authorRepository.GetAll().ToList();
-            comboBoxAuthor.DisplayMember = "Name";
+            //_authorRepository.Insert(author);
 
-            int index = comboBoxAuthor.FindString(authorName);
-            comboBoxAuthor.SelectedIndex = index;
+            //comboBoxAuthor.DataSource = _authorRepository.GetAll().ToList();
+            //comboBoxAuthor.DisplayMember = "Name";
+
+            //int index = comboBoxAuthor.FindString(authorName);
+            //comboBoxAuthor.SelectedIndex = index;
+            #endregion
         }
 
         private void pictureBoxGenre_Click(object sender, EventArgs e)
         {
-            var genreForm = new GenreForm();
-            DialogResult result = genreForm.ShowDialog();
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            var genreName = genreForm.textBoxName.Text;
-            var genre = new Genre(genreName);
-
-            _genreRepository.Insert(genre);
-
-            comboBoxGenre.DataSource = _genreRepository.GetAll().ToList();
-            comboBoxGenre.DisplayMember = "Name";
-            int index = comboBoxGenre.FindString(genreName);
-            comboBoxGenre.SelectedIndex = index;
+            pictureBox_Click<GenreForm, Genre>
+            (
+                f => f.textBoxName.Text, 
+                _genreRepository, 
+                name => new Genre(name), 
+                comboBoxGenre
+            );
         }
 
-        private void pictureBoxGenre_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox) 
+        private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox) 
             where TForm : LibrarryBooksForm, new() 
             where TEntity : Entity<int>, new()
         {
