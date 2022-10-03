@@ -1,11 +1,7 @@
-﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Repositories.Users;
+﻿using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Extentions;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms

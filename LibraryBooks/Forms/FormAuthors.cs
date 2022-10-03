@@ -23,6 +23,7 @@ namespace LibraryBooks.Forms
         public FormAuthors()
         {
             InitializeComponent(); // initializing all components
+
             _authorRepository = Resolve<IRepository<Author, int>>();
 
             RefrashTable();
@@ -30,10 +31,7 @@ namespace LibraryBooks.Forms
             dataGridViewAuthors.Columns["Name"].HeaderText = "Имя автора";
         }
 
-        private void RefrashTable()
-        {
-            dataGridViewAuthors.DataSource = _authorRepository.GetAll().ToList();
-        }
+        private void RefrashTable() => dataGridViewAuthors.DataSource = _authorRepository.GetAll().ToList();
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {

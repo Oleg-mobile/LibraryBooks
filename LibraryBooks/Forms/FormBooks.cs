@@ -1,7 +1,9 @@
 ﻿using LibraryBooks.Core;
 using LibraryBooks.Core.Models;
+using LibraryBooks.Core.Repositories;
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,19 +17,28 @@ namespace LibraryBooks.Forms
 {
     public partial class FormBooks : LibrarryBooksForm
     {
-        private readonly LibraryBooksContext _context;
+        //private readonly LibraryBooksContext _context;
+        private readonly IRepository<Book, int> _bookRepository;
+        private readonly IRepository<Genre, int> _genreRepository;
+        private readonly IRepository<Author, int> _authorRepository;
+        private readonly IRepository<Core.Models.User, int> _userRepository;
 
         public FormBooks()
         {
             InitializeComponent();
 
-            _context = new LibraryBooksContext();
-            _context.Books.Load();
-            _context.Genres.Load();
-            _context.Authors.Load();
-            _context.Users.Load();
+            //_context = new LibraryBooksContext();
+            //_context.Books.Load();
+            //_context.Genres.Load();
+            //_context.Authors.Load();
+            //_context.Users.Load();
+            _bookRepository = Resolve<IRepository<Book, int>>();
+            _genreRepository = Resolve<IRepository<Genre, int>>();
+            _authorRepository = Resolve<IRepository<Author, int>>();
+            _userRepository = Resolve<IRepository<Core.Models.User, int>>();
 
-            dataGridViewBooks.DataSource = _context.Books.Local.ToBindingList();
+            //dataGridViewBooks.DataSource = _context.Books.Local.ToBindingList();
+            RefrashTable();
             // TODO ограничение отображения колонок
             dataGridViewBooks.Columns["Id"].Visible = false;
             dataGridViewBooks.Columns["UserId"].Visible = false;
@@ -35,6 +46,9 @@ namespace LibraryBooks.Forms
             dataGridViewBooks.Columns["IsLiked"].Visible = false;
             dataGridViewBooks.Columns["IsFinished"].Visible = false;
         }
+
+        // TODO повторяется
+        private void RefrashTable() => dataGridViewBooks.DataSource = _bookRepository.GetAll().ToList();
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -83,12 +97,13 @@ namespace LibraryBooks.Forms
                     Mark = mark,
 
                     // TODO отображать не класс, а имя (Переопределить ToString?)
-                    Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
-
+                    //Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
+                    Genre = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text),
                     // TODO юзер
-                    //User = _context.Users.First(u => u.Login == bookForm.comboBoxUser.Text),
-                    User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text),
-                    Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
+                    //User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text),
+                    User = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text),
+                    //Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
+                    Author = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text),
                     PathToBook = bookForm.textBoxPathToBook.Text,
                     IsLiked = bookForm.checkBoxIsLiked.Checked,
                     IsFinished = bookForm.checkBoxIsFinished.Checked
@@ -96,8 +111,10 @@ namespace LibraryBooks.Forms
 
                 //MessageBox.Show(authorizeForm.textBoxLogin.Text);
 
-                _context.Books.Add(book);
-                _context.SaveChanges();
+                //_context.Books.Add(book);
+                //_context.SaveChanges();
+                _bookRepository.Insert(book);
+                RefrashTable();
             }
             catch (FormatException ex)
             {
@@ -112,10 +129,12 @@ namespace LibraryBooks.Forms
 
             foreach (var book in books)
             {
-                _context.Remove(book);
+                //_context.Remove(book);
+                _bookRepository.Delete(book);
             }
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
+            RefrashTable();
         }
 
         private IEnumerable<Book> SelectedRowsMapToBooks()
@@ -178,15 +197,20 @@ namespace LibraryBooks.Forms
                     book.Year = year;
                     book.PageCount = pageCount;
                     book.Mark = mark;
-                    book.Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text);
-                    book.User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text);
-                    book.Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text);
+                    //book.Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text);
+                    //book.User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text);
+                    //book.Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text);
+                    book.Genre = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text);
+                    book.User = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text);
+                    book.Author = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text);
                     book.PathToBook = bookForm.textBoxPathToBook.Text;
                     book.IsLiked = bookForm.checkBoxIsLiked.Checked;
                     book.IsFinished = bookForm.checkBoxIsFinished.Checked;
 
-                    _context.SaveChanges();
-                    dataGridViewBooks.Refresh();
+                    //_context.SaveChanges();
+                    //dataGridViewBooks.Refresh();
+                    _bookRepository.Update(book);
+                    RefrashTable();
                 }
                 catch (FormatException ex)
                 {

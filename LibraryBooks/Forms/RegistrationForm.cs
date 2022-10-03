@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Core;
 using LibraryBooks.Core.Models;
+using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,18 +9,22 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class RegistrationForm : Form
+    public partial class RegistrationForm : LibrarryBooksForm  // Not Form
     {
-        private readonly LibraryBooksContext _context;
+        //private readonly LibraryBooksContext _context;
+        private readonly IUserRepository _userRepository;
 
         public RegistrationForm()
         {
             InitializeComponent();
+
             ActiveControl = textBoxName;
             AcceptButton = buttonAdd;
 
-            _context = new LibraryBooksContext();
-            _context.Users.Load();
+            _userRepository = Resolve<IUserRepository>();
+
+            //_context = new LibraryBooksContext();
+            //_context.Users.Load();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -48,7 +53,8 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Login == login);
+            // TODO вынес в репозиторий
+            var user = _userRepository.GetAll().FirstOrDefault(u => u.Login == login);
             if (user is not null)
             {
                 MessageBoxExtention.ErrorInput("Существующий пользователь");
@@ -56,10 +62,7 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            // TODO вынести в репозиторий
-
-            _context.Users.Add(new User { Login = login, Password = password});
-            _context.SaveChanges();
+            _userRepository.Insert(new User { Login = login, Password = password});
 
             MessageBox.Show("Пользователь добавлен");
 

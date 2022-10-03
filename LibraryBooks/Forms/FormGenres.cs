@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Core;
 using LibraryBooks.Core.Models;
+using LibraryBooks.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,20 @@ namespace LibraryBooks.Forms
 {
     public partial class FormGenres : LibrarryBooksForm
     {
-        private readonly LibraryBooksContext _context;
+        //private readonly LibraryBooksContext _context;
+        private readonly IRepository<Genre, int> _genreRepository;
 
         public FormGenres()
         {
             InitializeComponent();
 
-            _context = new LibraryBooksContext();
-            _context.Genres.Load();
+            //_context = new LibraryBooksContext();
+            //_context.Genres.Load();
+            _genreRepository = Resolve<IRepository<Genre, int>>();
 
-            dataGridViewGenres.DataSource = _context.Genres.Local.ToBindingList();
+            RefrashTable();
+
+            //dataGridViewGenres.DataSource = _context.Genres.Local.ToBindingList();
             dataGridViewGenres.Columns["Id"].Visible = false;
             dataGridViewGenres.Columns["Name"].HeaderText = "Жанр";
         }
@@ -41,8 +46,10 @@ namespace LibraryBooks.Forms
 
             var genre = new Genre(genreForm.textBoxName.Text);
 
-            _context.Genres.Add(genre);
-            _context.SaveChanges();
+            //_context.Genres.Add(genre);
+            //_context.SaveChanges();
+            _genreRepository.Insert(genre);
+            RefrashTable();
         }
 
         private void buttonDel_Click(object sender, EventArgs e)
@@ -51,10 +58,12 @@ namespace LibraryBooks.Forms
 
             foreach (var genre in genres)
             {
-                _context.Remove(genre);
+                //_context.Remove(genre);
+                _genreRepository.Delete(genre);
             }
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
+            RefrashTable();
         }
 
         private IEnumerable<Genre> SelectedRowsMapToGenres()
@@ -84,9 +93,15 @@ namespace LibraryBooks.Forms
                 }
 
                 genre.Name = genreForm.textBoxName.Text;
-                _context.SaveChanges();
-                dataGridViewGenres.Refresh();
+
+                //_context.SaveChanges();
+                //dataGridViewGenres.Refresh();
+                _genreRepository.Update(genre);
+                RefrashTable();
             }
         }
+
+        // TODO повторяется
+        private void RefrashTable() => dataGridViewGenres.DataSource = _genreRepository.GetAll().ToList();
     }
 }

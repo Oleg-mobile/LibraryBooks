@@ -16,6 +16,7 @@ namespace LibraryBooks.Forms
         public GenreForm()
         {
             InitializeComponent();
+
             ActiveControl = textBoxName;
             AcceptButton = buttonSave;
         }
