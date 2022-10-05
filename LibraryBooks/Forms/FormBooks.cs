@@ -17,7 +17,6 @@ namespace LibraryBooks.Forms
 {
     public partial class FormBooks : LibrarryBooksForm
     {
-        //private readonly LibraryBooksContext _context;
         private readonly IRepository<Book, int> _bookRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Author, int> _authorRepository;
@@ -27,17 +26,11 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
-            //_context = new LibraryBooksContext();
-            //_context.Books.Load();
-            //_context.Genres.Load();
-            //_context.Authors.Load();
-            //_context.Users.Load();
             _bookRepository = Resolve<IRepository<Book, int>>();
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _authorRepository = Resolve<IRepository<Author, int>>();
             _userRepository = Resolve<IRepository<Core.Models.User, int>>();
 
-            //dataGridViewBooks.DataSource = _context.Books.Local.ToBindingList();
             RefrashTable();
             // TODO ограничение отображения колонок
             dataGridViewBooks.Columns["Id"].Visible = false;
@@ -47,8 +40,12 @@ namespace LibraryBooks.Forms
             dataGridViewBooks.Columns["IsFinished"].Visible = false;
         }
 
-        // TODO повторяется
-        private void RefrashTable() => dataGridViewBooks.DataSource = _bookRepository.GetAll().ToList();
+        private void RefrashTable() => dataGridViewBooks.DataSource = _bookRepository
+            .GetAll()
+            .Include(b => b.Genre)
+            .Include(b => b.Author)
+            .Include(b => b.User)
+            .ToList();
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -64,6 +61,7 @@ namespace LibraryBooks.Forms
 
             try
             {
+                // TODO вынести в валидатор
                 if (!int.TryParse(bookForm.textBoxYear.Text, out int year))
                 {
                     throw new FormatException("Не верный формат года");
@@ -89,31 +87,9 @@ namespace LibraryBooks.Forms
                     throw new FormatException("Автор не выбран");
                 }
 
-                var book = new Book {
-                    Name = bookForm.textBoxName.Text,
-                    Publication = bookForm.textBoxPublication.Text,
-                    Year = year,
-                    PageCount = pageCount,
-                    Mark = mark,
-
-                    // TODO отображать не класс, а имя (Переопределить ToString?)
-                    //Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text),
-                    Genre = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text),
-                    // TODO юзер
-                    //User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text),
-                    User = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text),
-                    //Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text),
-                    Author = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text),
-                    PathToBook = bookForm.textBoxPathToBook.Text,
-                    IsLiked = bookForm.checkBoxIsLiked.Checked,
-                    IsFinished = bookForm.checkBoxIsFinished.Checked
-                };
-
-                //MessageBox.Show(authorizeForm.textBoxLogin.Text);
-
-                //_context.Books.Add(book);
-                //_context.SaveChanges();
+                Book book = GetBook(bookForm, year, pageCount, mark);
                 _bookRepository.Insert(book);
+
                 RefrashTable();
             }
             catch (FormatException ex)
@@ -123,17 +99,33 @@ namespace LibraryBooks.Forms
             }
         }
 
+        private Book GetBook(BookForm bookForm, int year, int pageCount, int mark)
+        {
+            return new Book
+            {
+                Name = bookForm.textBoxName.Text,
+                Publication = bookForm.textBoxPublication.Text,
+                Year = year,
+                PageCount = pageCount,
+                Mark = mark,
+                GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
+                UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id,
+                AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
+                PathToBook = bookForm.textBoxPathToBook.Text,
+                IsLiked = bookForm.checkBoxIsLiked.Checked,
+                IsFinished = bookForm.checkBoxIsFinished.Checked
+            };
+        }
+
         private void buttonDel_Click(object sender, EventArgs e)
         {
             var books = SelectedRowsMapToBooks();
 
             foreach (var book in books)
             {
-                //_context.Remove(book);
                 _bookRepository.Delete(book);
             }
 
-            //_context.SaveChanges();
             RefrashTable();
         }
 
@@ -167,6 +159,7 @@ namespace LibraryBooks.Forms
 
                 try
                 {
+                    // TODO вынести в валидатор
                     if (!int.TryParse(bookForm.textBoxYear.Text, out int year))
                     {
                         throw new FormatException("Не верный формат года");
@@ -192,24 +185,9 @@ namespace LibraryBooks.Forms
                         throw new FormatException("Автор не выбран");
                     }
 
-                    book.Name = bookForm.textBoxName.Text;
-                    book.Publication = bookForm.textBoxPublication.Text;
-                    book.Year = year;
-                    book.PageCount = pageCount;
-                    book.Mark = mark;
-                    //book.Genre = _context.Genres.First(g => g.Name == bookForm.comboBoxGenre.Text);
-                    //book.User = _context.Users.First(u => u.Login == Program.AuthForm.textBoxLogin.Text);
-                    //book.Author = _context.Authors.First(a => a.Name == bookForm.comboBoxAuthor.Text);
-                    book.Genre = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text);
-                    book.User = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text);
-                    book.Author = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text);
-                    book.PathToBook = bookForm.textBoxPathToBook.Text;
-                    book.IsLiked = bookForm.checkBoxIsLiked.Checked;
-                    book.IsFinished = bookForm.checkBoxIsFinished.Checked;
-
-                    //_context.SaveChanges();
-                    //dataGridViewBooks.Refresh();
+                    EditBook(book, bookForm, year, pageCount, mark);
                     _bookRepository.Update(book);
+
                     RefrashTable();
                 }
                 catch (FormatException ex)
@@ -218,6 +196,21 @@ namespace LibraryBooks.Forms
                     goto lableShow;
                 }
             }
+        }
+
+        private void EditBook(Book book, BookForm bookForm, int year, int pageCount, int mark)
+        {
+            book.Name = bookForm.textBoxName.Text;
+            book.Publication = bookForm.textBoxPublication.Text;
+            book.Year = year;
+            book.PageCount = pageCount;
+            book.Mark = mark;
+            book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
+            book.UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id;
+            book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;
+            book.PathToBook = bookForm.textBoxPathToBook.Text;
+            book.IsLiked = bookForm.checkBoxIsLiked.Checked;
+            book.IsFinished = bookForm.checkBoxIsFinished.Checked;
         }
     }
 }

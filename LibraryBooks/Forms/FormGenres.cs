@@ -1,35 +1,24 @@
-﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
     public partial class FormGenres : LibrarryBooksForm
     {
-        //private readonly LibraryBooksContext _context;
         private readonly IRepository<Genre, int> _genreRepository;
 
         public FormGenres()
         {
             InitializeComponent();
 
-            //_context = new LibraryBooksContext();
-            //_context.Genres.Load();
             _genreRepository = Resolve<IRepository<Genre, int>>();
 
             RefrashTable();
 
-            //dataGridViewGenres.DataSource = _context.Genres.Local.ToBindingList();
             dataGridViewGenres.Columns["Id"].Visible = false;
             dataGridViewGenres.Columns["Name"].HeaderText = "Жанр";
         }
@@ -45,10 +34,8 @@ namespace LibraryBooks.Forms
             }
 
             var genre = new Genre(genreForm.textBoxName.Text);
-
-            //_context.Genres.Add(genre);
-            //_context.SaveChanges();
             _genreRepository.Insert(genre);
+
             RefrashTable();
         }
 
@@ -58,11 +45,9 @@ namespace LibraryBooks.Forms
 
             foreach (var genre in genres)
             {
-                //_context.Remove(genre);
                 _genreRepository.Delete(genre);
             }
 
-            //_context.SaveChanges();
             RefrashTable();
         }
 
@@ -93,15 +78,12 @@ namespace LibraryBooks.Forms
                 }
 
                 genre.Name = genreForm.textBoxName.Text;
-
-                //_context.SaveChanges();
-                //dataGridViewGenres.Refresh();
                 _genreRepository.Update(genre);
+
                 RefrashTable();
             }
         }
 
-        // TODO повторяется
         private void RefrashTable() => dataGridViewGenres.DataSource = _genreRepository.GetAll().ToList();
     }
 }
