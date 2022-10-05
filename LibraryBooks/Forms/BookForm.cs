@@ -34,6 +34,7 @@ namespace LibraryBooks.Forms
             comboBoxGenre.DataSource = _genreRepository.GetAll().ToList();
             comboBoxGenre.DisplayMember = "Name";
 
+            // TODO временный
             label9.Text = Program.AuthForm.textBoxLogin.Text;
         }
 

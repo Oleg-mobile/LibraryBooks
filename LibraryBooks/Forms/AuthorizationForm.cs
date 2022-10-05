@@ -42,7 +42,7 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            new FormMain().Show();
+            new FormMain().Show();  // stack variable is not needed
             Hide();
         }
 
