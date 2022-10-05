@@ -1,10 +1,5 @@
 ﻿using LibraryBooks.Core.Common;
 using LibraryBooks.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryBooks.Core.Repositories
 {
@@ -40,6 +35,5 @@ namespace LibraryBooks.Core.Repositories
 
     public abstract class RepositoryBase<TEntity> : RepositoryBase<TEntity, int> where TEntity : Entity<int>
     {
-
     }
 }

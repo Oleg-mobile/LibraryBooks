@@ -1,8 +1,6 @@
-﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Extentions;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,7 +9,6 @@ namespace LibraryBooks.Forms
 {
     public partial class RegistrationForm : LibrarryBooksForm  // Not Form
     {
-        //private readonly LibraryBooksContext _context;
         private readonly IUserRepository _userRepository;
 
         public RegistrationForm()
@@ -22,9 +19,6 @@ namespace LibraryBooks.Forms
             AcceptButton = buttonAdd;
 
             _userRepository = Resolve<IUserRepository>();
-
-            //_context = new LibraryBooksContext();
-            //_context.Users.Load();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -62,7 +56,7 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            _userRepository.Insert(new User { Login = login, Password = password});
+            _userRepository.Insert(new User { Login = login, Password = password });
 
             MessageBox.Show("Пользователь добавлен");
 

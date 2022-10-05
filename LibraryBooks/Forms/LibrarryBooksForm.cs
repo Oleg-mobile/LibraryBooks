@@ -4,14 +4,6 @@ using LibraryBooks.Core;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
 using LibraryBooks.Core.Repositories.Users;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -23,7 +15,7 @@ namespace LibraryBooks.Forms
         // Singleton
         protected static IWindsorContainer IocContainer  // protected - only for heirs
         {
-            get 
+            get
             {
                 if (_iocContainer is null)
                 {
@@ -45,9 +37,6 @@ namespace LibraryBooks.Forms
             _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
         }
 
-        protected TService Resolve<TService>()
-        {
-            return IocContainer.Resolve<TService>();
-        }
+        protected TService Resolve<TService>() => IocContainer.Resolve<TService>();
     }
 }

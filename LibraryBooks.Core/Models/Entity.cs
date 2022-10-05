@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibraryBooks.Core.Models
+﻿namespace LibraryBooks.Core.Models
 {
     /// <summary>
     /// Abstract entity with generic ID

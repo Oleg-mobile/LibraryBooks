@@ -44,7 +44,7 @@ namespace LibraryBooks.Forms
 
             panelContent.Controls.Add(activeForm);             // add to the main form panel
 
-            activeForm.Show(); 
+            activeForm.Show();
         }
 
         private void buttonExit_Click(object sender, EventArgs e) => Exit();

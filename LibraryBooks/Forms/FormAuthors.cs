@@ -1,23 +1,16 @@
-﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using LibraryBooks.Core.Models;
+using LibraryBooks.Core.Repositories;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Linq;
-using LibraryBooks.Core.Repositories;
-using LibraryBooks.Core.Repositories.EntityFrameworkCore;
+using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
     public partial class FormAuthors : LibrarryBooksForm
     {
         //private readonly LibraryBooksContext _context;  // Database model. Private - only in this class. Readonly - immutable database connection.
-        
+
         private readonly IRepository<Author, int> _authorRepository;
 
         public FormAuthors()

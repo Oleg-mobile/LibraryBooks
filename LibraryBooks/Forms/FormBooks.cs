@@ -1,16 +1,10 @@
-﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -20,6 +14,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Book, int> _bookRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Author, int> _authorRepository;
+        //  TDOD есть друугой User
         private readonly IRepository<Core.Models.User, int> _userRepository;
 
         public FormBooks()
@@ -50,8 +45,8 @@ namespace LibraryBooks.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var bookForm = new BookForm();
-            // a label so that the window does not close when an exception occurs
-            lableShow:
+        // a label so that the window does not close when an exception occurs
+        lableShow:
             DialogResult result = bookForm.ShowDialog();
 
             if (result == DialogResult.Cancel)
@@ -148,7 +143,7 @@ namespace LibraryBooks.Forms
             {
                 var book = (Book)dataGridViewBooks.SelectedRows[0].DataBoundItem;
                 var bookForm = new BookForm(book);
-                lableShow:
+            lableShow:
 
                 DialogResult result = bookForm.ShowDialog();
 

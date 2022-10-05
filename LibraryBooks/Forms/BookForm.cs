@@ -1,15 +1,7 @@
-﻿using LibraryBooks.Core;
-using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -72,9 +64,9 @@ namespace LibraryBooks.Forms
         {
             pictureBox_Click<AuthorForm, Author>
             (
-                f => f.textBoxName.Text, 
-                _authorRepository, 
-                name => new Author(name), 
+                f => f.textBoxName.Text,
+                _authorRepository,
+                name => new Author(name),
                 comboBoxAuthor
             );
 
@@ -104,15 +96,15 @@ namespace LibraryBooks.Forms
         {
             pictureBox_Click<GenreForm, Genre>
             (
-                f => f.textBoxName.Text, 
-                _genreRepository, 
-                name => new Genre(name), 
+                f => f.textBoxName.Text,
+                _genreRepository,
+                name => new Genre(name),
                 comboBoxGenre
             );
         }
 
-        private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox) 
-            where TForm : LibrarryBooksForm, new() 
+        private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox)
+            where TForm : LibrarryBooksForm, new()
             where TEntity : Entity<int>, new()
         {
             var form = new TForm();
