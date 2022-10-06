@@ -37,9 +37,9 @@ namespace LibraryBooks.Forms
 
         private void RefrashTable() => dataGridViewBooks.DataSource = _bookRepository
             .GetAll()
-            .Include(b => b.Genre)
-            .Include(b => b.Author)
-            .Include(b => b.User)
+            .Include(b => b.Genre)   //  Join
+            .Include(b => b.Author)  //  Join
+            .Include(b => b.User)    //  Join
             .ToList();
 
         private void buttonAdd_Click(object sender, EventArgs e)
