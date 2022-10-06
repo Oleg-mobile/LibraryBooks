@@ -66,7 +66,7 @@ namespace LibraryBooks.Forms
             (
                 f => f.textBoxName.Text,
                 _authorRepository,
-                name => new Author(name),
+                name => new Author(name),  // Generics cannot be manipulated by a constructor => need an empty (default) constructor and it can be called
                 comboBoxAuthor
             );
 
@@ -104,10 +104,11 @@ namespace LibraryBooks.Forms
         }
 
         private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox)
-            where TForm : LibrarryBooksForm, new()
-            where TEntity : Entity<int>, new()
+            // TODO есть конструктор?
+            where TForm : LibrarryBooksForm, new()  // new() - there is an empty (default) constructor
+            where TEntity : Entity<int>, new()      // new() - there is an empty (default) constructor
         {
-            var form = new TForm();
+            var form = new TForm();  // generics cannot use a constructor with parameters
             DialogResult result = form.ShowDialog();
 
             if (result == DialogResult.Cancel)

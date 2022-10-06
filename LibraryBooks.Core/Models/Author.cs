@@ -7,7 +7,7 @@
     {
         public string Name { get; set; }
 
-        public Author()
+        public Author()  //  for use in generics
         {
         }
 
