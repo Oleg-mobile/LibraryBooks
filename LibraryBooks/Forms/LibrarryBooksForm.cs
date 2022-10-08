@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using AutoMapper;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using LibraryBooks.Core;
 using LibraryBooks.Core.Repositories;
@@ -35,6 +36,9 @@ namespace LibraryBooks.Forms
             // if you want a IRepository<,>, you will get its implementation like this - EfCoreRepositoryBase<,>
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
             _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
+
+            var config = new MapperConfiguration(c => { });
+            _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
         }
 
         protected TService Resolve<TService>() => IocContainer.Resolve<TService>();

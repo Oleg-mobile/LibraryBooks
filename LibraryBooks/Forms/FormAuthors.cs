@@ -1,5 +1,7 @@
-﻿using LibraryBooks.Core.Models;
+﻿using AutoMapper;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
+using LibraryBooks.Dto.Authors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace LibraryBooks.Forms
             InitializeComponent(); // initializing all components
 
             _authorRepository = Resolve<IRepository<Author, int>>();
+            var m = Resolve<IMapper>();
+            //var b = m.Map<IEnumerable<AuthorDto>>(_authorRepository.GetAll().ToList());
 
             RefrashTable();
             dataGridViewAuthors.Columns["Id"].Visible = false;

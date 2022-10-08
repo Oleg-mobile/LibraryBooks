@@ -70,7 +70,7 @@ namespace LibraryBooks.Forms
                 comboBoxAuthor
             );
 
-            #region Как было
+            #region Before generic
             //var authorForm = new AuthorForm();
             //DialogResult result = authorForm.ShowDialog();
 
