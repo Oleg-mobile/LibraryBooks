@@ -11,9 +11,10 @@ namespace LibraryBooks.Forms
 {
     public partial class FormAuthors : LibrarryBooksForm
     {
-        //private readonly LibraryBooksContext _context;  // Database model. Private - only in this class. Readonly - immutable database connection.
+        // LibraryBooksContext - database model
+        // DataSource - data source binding (takes columns only of the entity to which it is attached)
 
-        private readonly IRepository<Author, int> _authorRepository;
+        private readonly IRepository<Author, int> _authorRepository;  // Private - only in this class. Readonly - immutable database connection.
 
         public FormAuthors()
         {
@@ -21,14 +22,14 @@ namespace LibraryBooks.Forms
 
             _authorRepository = Resolve<IRepository<Author, int>>();
             var m = Resolve<IMapper>();
-            //var b = m.Map<IEnumerable<AuthorDto>>(_authorRepository.GetAll().ToList());
+            //var b = m.Map<IEnumerable<AuthorDto>>(_authorRepository.GetAll().ToList());  // mapping an array of types AuthorDto
 
             RefrashTable();
             dataGridViewAuthors.Columns["Id"].Visible = false;
             dataGridViewAuthors.Columns["Name"].HeaderText = "Имя автора";
         }
 
-        private void RefrashTable() => dataGridViewAuthors.DataSource = _authorRepository.GetAll().ToList();
+        private void RefrashTable() => dataGridViewAuthors.DataSource = _authorRepository.GetAll().ToList();  
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {

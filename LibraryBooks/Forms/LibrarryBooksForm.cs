@@ -37,7 +37,7 @@ namespace LibraryBooks.Forms
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
             _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
 
-            var config = new MapperConfiguration(c => { });
+            var config = new MapperConfiguration(c => { });  // profiles - describe how to map
             _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
         }
 
