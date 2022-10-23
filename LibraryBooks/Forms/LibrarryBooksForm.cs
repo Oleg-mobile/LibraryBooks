@@ -28,6 +28,13 @@ namespace LibraryBooks.Forms
             }
         }
 
+        protected IMapper Mapper { get; }
+
+        public LibrarryBooksForm()
+        {
+            Mapper = Resolve<IMapper>();
+        }
+
         // dependency registration
         private static void RegisterServices()
         {
@@ -37,10 +44,11 @@ namespace LibraryBooks.Forms
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
             _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
 
-            var config = new MapperConfiguration(c => { });  // profiles - describe how to map
+            var config = new MapperConfiguration(c => { c.AddMaps(typeof(Program)); });  // profiles - describe how to map
             _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
         }
 
         protected TService Resolve<TService>() => IocContainer.Resolve<TService>();
+
     }
 }

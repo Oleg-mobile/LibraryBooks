@@ -1,4 +1,6 @@
-﻿namespace LibraryBooks.Dto
+﻿using LibraryBooks.Attributes;
+
+namespace LibraryBooks.Dto
 {
     /// <summary>
     /// Abstract entity with generic ID
@@ -6,6 +8,7 @@
     /// <typeparam name="TPrimaryKey"></typeparam>
     public abstract class EntityDto<TPrimaryKey> // abstracting from the data type of the primary key
     {
+        [DgvColumn(DisplayName = "", IsVisible = false)]
         public TPrimaryKey Id { get; set; }
     }
 
