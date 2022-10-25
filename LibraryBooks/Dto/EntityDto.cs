@@ -2,6 +2,8 @@
 
 namespace LibraryBooks.Dto
 {
+    //  will be used to edit the names and visibility of the table columns
+
     /// <summary>
     /// Abstract entity with generic ID
     /// </summary>
