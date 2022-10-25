@@ -43,7 +43,7 @@ namespace LibraryBooks.Forms
             // if you want a IRepository<,>, you will get its implementation like this - EfCoreRepositoryBase<,>
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
             _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
-
+            // will add everything related to the mapping from the assembly with the file Program
             var config = new MapperConfiguration(c => { c.AddMaps(typeof(Program)); });  // profiles - describe how to map
             _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
         }
