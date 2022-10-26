@@ -25,6 +25,7 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
             Delete(entity);
         }
 
+        // TODO ловлю ошибку треккинга тут
         public override void Delete(TEntity entity)
         {
             Table.Remove(entity);

@@ -1,9 +1,11 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
+using LibraryBooks.Dto.Authors;
 using LibraryBooks.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,6 +18,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         //  TDOD есть друугой User
         private readonly IRepository<Core.Models.User, int> _userRepository;
+        private BindingList<BookDto> bindingList;
 
         public FormBooks()
         {
@@ -27,20 +30,21 @@ namespace LibraryBooks.Forms
             _userRepository = Resolve<IRepository<Core.Models.User, int>>();
 
             RefrashTable();
-            // TODO ограничение отображения колонок
-            dataGridViewBooks.Columns["Id"].Visible = false;
-            dataGridViewBooks.Columns["UserId"].Visible = false;
-            dataGridViewBooks.Columns["GenreId"].Visible = false;
-            dataGridViewBooks.Columns["IsLiked"].Visible = false;
-            dataGridViewBooks.Columns["IsFinished"].Visible = false;
+            InitDataGridViewColumns<BookDto>(dataGridViewBooks);
         }
 
-        private void RefrashTable() => dataGridViewBooks.DataSource = _bookRepository
+        private void RefrashTable()
+        {
+            var books = _bookRepository
             .GetAll()
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
             .Include(b => b.User)    //  Join
+            .AsNoTracking()
             .ToList();
+            bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));
+            dataGridViewBooks.DataSource = bindingList;
+        }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -126,22 +130,23 @@ namespace LibraryBooks.Forms
 
         private IEnumerable<Book> SelectedRowsMapToBooks()
         {
-            var books = new List<Book>();
+            var books = new List<BookDto>();
 
             for (int i = 0; i < dataGridViewBooks.SelectedRows.Count; i++)
             {
-                var book = (Book)dataGridViewBooks.SelectedRows[i].DataBoundItem;
+                var book = (BookDto)dataGridViewBooks.SelectedRows[i].DataBoundItem;
                 books.Add(book);
             }
 
-            return books;
+            return Mapper.Map<IEnumerable<Book>>(books);
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (dataGridViewBooks.SelectedRows.Count > 0)
             {
-                var book = (Book)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+                var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+                var book = Mapper.Map<Book>(bookDto);
                 var bookForm = new BookForm(book);
             lableShow:
 
