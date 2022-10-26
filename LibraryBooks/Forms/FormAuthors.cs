@@ -48,6 +48,7 @@ namespace LibraryBooks.Forms
             var author = new Author(authForm.textBoxName.Text);
 
             _authorRepository.Insert(author);
+
             RefrashTable();
         }
 
@@ -92,6 +93,7 @@ namespace LibraryBooks.Forms
 
                 author.Name = authorForm.textBoxName.Text;
                 _authorRepository.Update(author);
+
                 RefrashTable();
             }
         }
