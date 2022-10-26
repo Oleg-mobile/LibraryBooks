@@ -5,6 +5,7 @@ using LibraryBooks.Core;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
 using LibraryBooks.Core.Repositories.Users;
+using LibraryBooks.Utils;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -50,5 +51,14 @@ namespace LibraryBooks.Forms
 
         protected TService Resolve<TService>() => IocContainer.Resolve<TService>();
 
+        protected void InitDataGridViewColumns<TModel>(DataGridView table) where TModel : class
+        {
+            var columnSettings = AttributeUtils.GetDgvColumns<TModel>();
+            foreach (var column in columnSettings)
+            {
+                table.Columns[column.Key].HeaderText = column.Value.DisplayName;
+                table.Columns[column.Key].Visible = column.Value.IsVisible;
+            }
+        }
     }
 }

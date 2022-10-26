@@ -25,8 +25,7 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
 
             RefrashTable();
-            dataGridViewAuthors.Columns["Id"].Visible = false;
-            //dataGridViewAuthors.Columns["Name"].HeaderText = "Имя автора";
+            InitDataGridViewColumns<AuthorDto>(dataGridViewAuthors);
         }
 
         private void RefrashTable()
@@ -81,7 +80,8 @@ namespace LibraryBooks.Forms
         {
             if (dataGridViewAuthors.SelectedRows.Count > 0)
             {
-                var author = (Author)dataGridViewAuthors.SelectedRows[0].DataBoundItem;
+                var authorDto = (AuthorDto)dataGridViewAuthors.SelectedRows[0].DataBoundItem;
+                var author = Mapper.Map<Author>(authorDto);  // <type - what>(object - Of what)
                 var authorForm = new AuthorForm(author);
                 DialogResult dialogResult = authorForm.ShowDialog();
 
