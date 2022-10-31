@@ -2,7 +2,7 @@
 using LibraryBooks.Attributes;
 using LibraryBooks.Core.Models;
 
-namespace LibraryBooks.Dto.Authors
+namespace LibraryBooks.Dto
 {
     [AutoMap(typeof(Author), ReverseMap = true)]  // compare Author with AuthorDto
     public class AuthorDto : EntityDto

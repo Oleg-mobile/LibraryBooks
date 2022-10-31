@@ -25,7 +25,6 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
             Delete(entity);
         }
 
-        // TODO ловлю ошибку треккинга тут
         public override void Delete(TEntity entity)
         {
             Table.Remove(entity);
@@ -48,7 +47,11 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
             return result;
         }
 
-        public void SaveChanges() => Context.SaveChanges();
+        public void SaveChanges()
+        {
+            Context.SaveChanges();
+            Context.ChangeTracker.Clear();  // reset all tracked entities
+        }
 
     }
 

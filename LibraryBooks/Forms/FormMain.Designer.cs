@@ -167,14 +167,14 @@
             this.panelContent.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panelContent.Location = new System.Drawing.Point(260, 0);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(724, 611);
+            this.panelContent.Size = new System.Drawing.Size(1124, 611);
             this.panelContent.TabIndex = 1;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 611);
+            this.ClientSize = new System.Drawing.Size(1384, 611);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);

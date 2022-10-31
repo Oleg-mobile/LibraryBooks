@@ -1,6 +1,6 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
-using LibraryBooks.Dto.Authors;
+using LibraryBooks.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,6 @@ namespace LibraryBooks.Forms
             RefrashTable();
         }
 
-        // TODO ловлю ошибку с треккингом
 
         private void buttonDel_Click(object sender, EventArgs e)
         {

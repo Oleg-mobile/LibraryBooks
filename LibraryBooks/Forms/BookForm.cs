@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
+using LibraryBooks.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,7 +39,7 @@ namespace LibraryBooks.Forms
             textBoxYear.Text = book.Year.ToString();
             textBoxPageCount.Text = book.PageCount.ToString();
             comboBoxGenre.Text = book.Genre.Name;
-            label9.Text = book.User.Login;
+            label9.Text = Session.CurrentUser.Login;
             textBoxPathToBook.Text = book.PathToBook;
             textBoxMark.Text = book.Mark.ToString();
             checkBoxIsLiked.Checked = book.IsLiked;

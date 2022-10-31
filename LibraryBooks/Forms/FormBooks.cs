@@ -1,11 +1,13 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
-using LibraryBooks.Dto.Authors;
+using LibraryBooks.Dto;
 using LibraryBooks.Extentions;
+using LibraryBooks.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,8 +18,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Book, int> _bookRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Author, int> _authorRepository;
-        //  TDOD есть друугой User
-        private readonly IRepository<Core.Models.User, int> _userRepository;
+        private readonly IRepository<User, int> _userRepository;
         private BindingList<BookDto> bindingList;
 
         public FormBooks()
@@ -27,7 +28,7 @@ namespace LibraryBooks.Forms
             _bookRepository = Resolve<IRepository<Book, int>>();
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _authorRepository = Resolve<IRepository<Author, int>>();
-            _userRepository = Resolve<IRepository<Core.Models.User, int>>();
+            _userRepository = Resolve<IRepository<User, int>>();
 
             RefrashTable();
             InitDataGridViewColumns<BookDto>(dataGridViewBooks);
@@ -108,7 +109,8 @@ namespace LibraryBooks.Forms
                 PageCount = pageCount,
                 Mark = mark,
                 GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
-                UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id,
+                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
+                //UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id,
                 AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
                 PathToBook = bookForm.textBoxPathToBook.Text,
                 IsLiked = bookForm.checkBoxIsLiked.Checked,
@@ -148,6 +150,7 @@ namespace LibraryBooks.Forms
                 var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
                 var book = Mapper.Map<Book>(bookDto);
                 var bookForm = new BookForm(book);
+
             lableShow:
 
                 DialogResult result = bookForm.ShowDialog();
@@ -206,11 +209,24 @@ namespace LibraryBooks.Forms
             book.PageCount = pageCount;
             book.Mark = mark;
             book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
-            book.UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id;
+            book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
+            //book.UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;
             book.PathToBook = bookForm.textBoxPathToBook.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
+        }
+
+        private void buttonRead_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewBooks.SelectedRows.Count > 0)
+            {
+                var book = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+                var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
+
+                openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
+                Process.Start(openBookProcess);
+            }
         }
     }
 }

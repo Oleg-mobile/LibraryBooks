@@ -1,7 +1,10 @@
 ﻿using LibraryBooks.Core.Repositories.Users;
+using LibraryBooks.Dto;
 using LibraryBooks.Extentions;
+using LibraryBooks.Utils;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -42,6 +45,9 @@ namespace LibraryBooks.Forms
                 return;
             }
 
+            // TODO обсутить разницу & и &&
+            var user = _userRepository.GetAll().First(u => u.Login == login && u.Password == password);
+            Session.CurrentUser = Mapper.Map<UserDto>(user);
             new FormMain().Show();  // stack variable is not needed
             Hide();
         }

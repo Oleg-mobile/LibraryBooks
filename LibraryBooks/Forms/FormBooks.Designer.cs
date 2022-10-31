@@ -33,6 +33,8 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.dataGridViewBooks = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonRead = new System.Windows.Forms.Button();
+            this.buttonBookInfo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +79,7 @@
             this.dataGridViewBooks.ReadOnly = true;
             this.dataGridViewBooks.RowTemplate.Height = 25;
             this.dataGridViewBooks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewBooks.Size = new System.Drawing.Size(320, 370);
+            this.dataGridViewBooks.Size = new System.Drawing.Size(630, 380);
             this.dataGridViewBooks.TabIndex = 3;
             // 
             // label1
@@ -89,11 +91,32 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Книги";
             // 
+            // buttonRead
+            // 
+            this.buttonRead.Location = new System.Drawing.Point(30, 150);
+            this.buttonRead.Name = "buttonRead";
+            this.buttonRead.Size = new System.Drawing.Size(140, 30);
+            this.buttonRead.TabIndex = 5;
+            this.buttonRead.Text = "Читать";
+            this.buttonRead.UseVisualStyleBackColor = true;
+            this.buttonRead.Click += new System.EventHandler(this.buttonRead_Click);
+            // 
+            // buttonBookInfo
+            // 
+            this.buttonBookInfo.Location = new System.Drawing.Point(30, 190);
+            this.buttonBookInfo.Name = "buttonBookInfo";
+            this.buttonBookInfo.Size = new System.Drawing.Size(140, 30);
+            this.buttonBookInfo.TabIndex = 6;
+            this.buttonBookInfo.Text = "О книге";
+            this.buttonBookInfo.UseVisualStyleBackColor = true;
+            // 
             // FormBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 441);
+            this.ClientSize = new System.Drawing.Size(854, 441);
+            this.Controls.Add(this.buttonBookInfo);
+            this.Controls.Add(this.buttonRead);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewBooks);
             this.Controls.Add(this.buttonEdit);
@@ -114,5 +137,7 @@
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.DataGridView dataGridViewBooks;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonRead;
+        private System.Windows.Forms.Button buttonBookInfo;
     }
 }
