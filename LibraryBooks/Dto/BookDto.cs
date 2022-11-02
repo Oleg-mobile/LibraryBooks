@@ -4,7 +4,6 @@ using LibraryBooks.Core.Models;
 
 namespace LibraryBooks.Dto
 {
-    [AutoMap(typeof(Book), ReverseMap = true)]
     public class BookDto : EntityDto
     {
         [DgvColumn(DisplayName = "Название")]

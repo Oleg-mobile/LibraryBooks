@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
+using LibraryBooks.Dto;
 using LibraryBooks.Utils;
 using System;
 using System.Linq;
@@ -31,14 +32,14 @@ namespace LibraryBooks.Forms
             label9.Text = Program.AuthForm.textBoxLogin.Text;
         }
 
-        public BookForm(Book book) : this()
+        public BookForm(BookDto book) : this()
         {
             textBoxName.Text = book.Name;
-            comboBoxAuthor.Text = book.Author.Name;
+            comboBoxAuthor.Text = book.AuthorName;
             textBoxPublication.Text = book.Publication;
             textBoxYear.Text = book.Year.ToString();
             textBoxPageCount.Text = book.PageCount.ToString();
-            comboBoxGenre.Text = book.Genre.Name;
+            comboBoxGenre.Text = book.GenreName;
             label9.Text = Session.CurrentUser.Login;
             textBoxPathToBook.Text = book.PathToBook;
             textBoxMark.Text = book.Mark.ToString();

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -43,7 +44,7 @@ namespace LibraryBooks.Forms
             .Include(b => b.User)    //  Join
             .AsNoTracking()
             .ToList();
-            bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));
+            bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));  // mapping to DTO
             dataGridViewBooks.DataSource = bindingList;
         }
 
@@ -87,6 +88,11 @@ namespace LibraryBooks.Forms
                     throw new FormatException("Автор не выбран");
                 }
 
+                if (bookForm.textBoxPathToBook.Text.Contains('"') || bookForm.textBoxPathToBook.Text.Contains('\''))
+                {
+                    throw new FormatException("Путь к книге не должен содержать ковычки!");
+                }
+
                 Book book = GetBook(bookForm, year, pageCount, mark);
                 _bookRepository.Insert(book);
 
@@ -110,7 +116,6 @@ namespace LibraryBooks.Forms
                 Mark = mark,
                 GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
                 UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
-                //UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id,
                 AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
                 PathToBook = bookForm.textBoxPathToBook.Text,
                 IsLiked = bookForm.checkBoxIsLiked.Checked,
@@ -148,8 +153,7 @@ namespace LibraryBooks.Forms
             if (dataGridViewBooks.SelectedRows.Count > 0)
             {
                 var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
-                var book = Mapper.Map<Book>(bookDto);
-                var bookForm = new BookForm(book);
+                var bookForm = new BookForm(bookDto);
 
             lableShow:
 
@@ -188,6 +192,12 @@ namespace LibraryBooks.Forms
                         throw new FormatException("Автор не выбран");
                     }
 
+                    if (bookForm.textBoxPathToBook.Text.Contains('"') || bookForm.textBoxPathToBook.Text.Contains('\''))
+                    {
+                        throw new FormatException("Путь к книге не должен содержать ковычки!");
+                    }
+
+                    var book = Mapper.Map<Book>(bookDto);
                     EditBook(book, bookForm, year, pageCount, mark);
                     _bookRepository.Update(book);
 
@@ -210,7 +220,6 @@ namespace LibraryBooks.Forms
             book.Mark = mark;
             book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
             book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
-            //book.UserId = _userRepository.GetAll().First(u => u.Login == Program.AuthForm.textBoxLogin.Text).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;
             book.PathToBook = bookForm.textBoxPathToBook.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
@@ -222,6 +231,13 @@ namespace LibraryBooks.Forms
             if (dataGridViewBooks.SelectedRows.Count > 0)
             {
                 var book = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+
+                if (!File.Exists(book.PathToBook))
+                {
+                    MessageBoxExtention.WarningInput("Файл отсутствует!");
+                    return;
+                }
+
                 var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
 
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window

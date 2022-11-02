@@ -45,7 +45,6 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            // TODO обсутить разницу & и &&
             var user = _userRepository.GetAll().First(u => u.Login == login && u.Password == password);
             Session.CurrentUser = Mapper.Map<UserDto>(user);
             new FormMain().Show();  // stack variable is not needed
