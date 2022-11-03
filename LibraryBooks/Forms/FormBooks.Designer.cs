@@ -38,6 +38,8 @@
             this.buttonBookInfo = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.radioButtonIsFinished = new System.Windows.Forms.RadioButton();
+            this.radioButtonIsLiked = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -89,7 +91,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(200, 38);
+            this.label1.Location = new System.Drawing.Point(200, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 15);
             this.label1.TabIndex = 4;
@@ -131,11 +133,35 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
+            // radioButtonIsFinished
+            // 
+            this.radioButtonIsFinished.AutoSize = true;
+            this.radioButtonIsFinished.Location = new System.Drawing.Point(317, 35);
+            this.radioButtonIsFinished.Name = "radioButtonIsFinished";
+            this.radioButtonIsFinished.Size = new System.Drawing.Size(102, 19);
+            this.radioButtonIsFinished.TabIndex = 9;
+            this.radioButtonIsFinished.TabStop = true;
+            this.radioButtonIsFinished.Text = "Прочитанные";
+            this.radioButtonIsFinished.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonIsLiked
+            // 
+            this.radioButtonIsLiked.AutoSize = true;
+            this.radioButtonIsLiked.Location = new System.Drawing.Point(449, 35);
+            this.radioButtonIsLiked.Name = "radioButtonIsLiked";
+            this.radioButtonIsLiked.Size = new System.Drawing.Size(116, 19);
+            this.radioButtonIsLiked.TabIndex = 10;
+            this.radioButtonIsLiked.TabStop = true;
+            this.radioButtonIsLiked.Text = "Понравившиеся";
+            this.radioButtonIsLiked.UseVisualStyleBackColor = true;
+            // 
             // FormBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 441);
+            this.Controls.Add(this.radioButtonIsLiked);
+            this.Controls.Add(this.radioButtonIsFinished);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonBookInfo);
@@ -165,5 +191,7 @@
         private System.Windows.Forms.Button buttonBookInfo;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RadioButton radioButtonIsFinished;
+        private System.Windows.Forms.RadioButton radioButtonIsLiked;
     }
 }
