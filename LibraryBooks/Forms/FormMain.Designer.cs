@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelContent = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -46,6 +47,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonGenres);
             this.panel1.Controls.Add(this.buttonAuthors);
@@ -170,6 +172,24 @@
             this.panelContent.Size = new System.Drawing.Size(1124, 611);
             this.panelContent.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(0, 541);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(260, 70);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Настройки";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -203,5 +223,6 @@
         private System.Windows.Forms.Button buttonAuthors;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Button button1;
     }
 }

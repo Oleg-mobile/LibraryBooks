@@ -244,5 +244,15 @@ namespace LibraryBooks.Forms
                 Process.Start(openBookProcess);
             }
         }
+
+        private void buttonBookInfo_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewBooks.SelectedRows.Count > 0)
+            {
+                var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+
+                new AboutBookForm(bookDto).Show();
+            }
+        }
     }
 }
