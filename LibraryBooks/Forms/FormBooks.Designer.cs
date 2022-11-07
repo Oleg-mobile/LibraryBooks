@@ -33,15 +33,15 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.dataGridViewBooks = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonRead = new System.Windows.Forms.Button();
             this.buttonBookInfo = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBoxKeyword = new System.Windows.Forms.TextBox();
+            this.pictureBoxSearch = new System.Windows.Forms.PictureBox();
             this.radioButtonIsFinished = new System.Windows.Forms.RadioButton();
             this.radioButtonIsLiked = new System.Windows.Forms.RadioButton();
+            this.radioButtonClearFilter = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -88,15 +88,6 @@
             this.dataGridViewBooks.Size = new System.Drawing.Size(630, 340);
             this.dataGridViewBooks.TabIndex = 3;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(200, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Книги";
-            // 
             // buttonRead
             // 
             this.buttonRead.Location = new System.Drawing.Point(30, 150);
@@ -117,56 +108,72 @@
             this.buttonBookInfo.UseVisualStyleBackColor = true;
             this.buttonBookInfo.Click += new System.EventHandler(this.buttonBookInfo_Click);
             // 
-            // textBox1
+            // textBoxKeyword
             // 
-            this.textBox1.Location = new System.Drawing.Point(630, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 23);
-            this.textBox1.TabIndex = 7;
+            this.textBoxKeyword.Location = new System.Drawing.Point(630, 30);
+            this.textBoxKeyword.Name = "textBoxKeyword";
+            this.textBoxKeyword.Size = new System.Drawing.Size(200, 23);
+            this.textBoxKeyword.TabIndex = 7;
+            this.textBoxKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxKeyword_KeyDown);
             // 
-            // pictureBox1
+            // pictureBoxSearch
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(590, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxSearch.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSearch.Image")));
+            this.pictureBoxSearch.Location = new System.Drawing.Point(590, 27);
+            this.pictureBoxSearch.Name = "pictureBoxSearch";
+            this.pictureBoxSearch.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxSearch.TabIndex = 8;
+            this.pictureBoxSearch.TabStop = false;
+            this.pictureBoxSearch.Click += new System.EventHandler(this.pictureBoxSearch_Click);
             // 
             // radioButtonIsFinished
             // 
             this.radioButtonIsFinished.AutoSize = true;
-            this.radioButtonIsFinished.Location = new System.Drawing.Point(317, 35);
+            this.radioButtonIsFinished.Location = new System.Drawing.Point(341, 35);
             this.radioButtonIsFinished.Name = "radioButtonIsFinished";
             this.radioButtonIsFinished.Size = new System.Drawing.Size(102, 19);
             this.radioButtonIsFinished.TabIndex = 9;
             this.radioButtonIsFinished.TabStop = true;
             this.radioButtonIsFinished.Text = "Прочитанные";
             this.radioButtonIsFinished.UseVisualStyleBackColor = true;
+            this.radioButtonIsFinished.Click += new System.EventHandler(this.radioButtonIsFinished_Click);
             // 
             // radioButtonIsLiked
             // 
             this.radioButtonIsLiked.AutoSize = true;
-            this.radioButtonIsLiked.Location = new System.Drawing.Point(449, 35);
+            this.radioButtonIsLiked.Location = new System.Drawing.Point(461, 35);
             this.radioButtonIsLiked.Name = "radioButtonIsLiked";
             this.radioButtonIsLiked.Size = new System.Drawing.Size(116, 19);
             this.radioButtonIsLiked.TabIndex = 10;
             this.radioButtonIsLiked.TabStop = true;
             this.radioButtonIsLiked.Text = "Понравившиеся";
             this.radioButtonIsLiked.UseVisualStyleBackColor = true;
+            this.radioButtonIsLiked.Click += new System.EventHandler(this.radioButtonIsLiked_Click);
+            // 
+            // radioButtonClearFilter
+            // 
+            this.radioButtonClearFilter.AutoSize = true;
+            this.radioButtonClearFilter.Location = new System.Drawing.Point(200, 34);
+            this.radioButtonClearFilter.Name = "radioButtonClearFilter";
+            this.radioButtonClearFilter.Size = new System.Drawing.Size(122, 19);
+            this.radioButtonClearFilter.TabIndex = 11;
+            this.radioButtonClearFilter.TabStop = true;
+            this.radioButtonClearFilter.Text = "Сбросить фильтр";
+            this.radioButtonClearFilter.UseVisualStyleBackColor = true;
+            this.radioButtonClearFilter.Click += new System.EventHandler(this.radioButtonClearFilter_Click);
             // 
             // FormBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 441);
+            this.Controls.Add(this.radioButtonClearFilter);
             this.Controls.Add(this.radioButtonIsLiked);
             this.Controls.Add(this.radioButtonIsFinished);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pictureBoxSearch);
+            this.Controls.Add(this.textBoxKeyword);
             this.Controls.Add(this.buttonBookInfo);
             this.Controls.Add(this.buttonRead);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewBooks);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
@@ -174,7 +181,7 @@
             this.Name = "FormBooks";
             this.Text = "Книги";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,12 +193,12 @@
         private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.DataGridView dataGridViewBooks;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonRead;
         private System.Windows.Forms.Button buttonBookInfo;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox textBoxKeyword;
+        private System.Windows.Forms.PictureBox pictureBoxSearch;
         private System.Windows.Forms.RadioButton radioButtonIsFinished;
         private System.Windows.Forms.RadioButton radioButtonIsLiked;
+        private System.Windows.Forms.RadioButton radioButtonClearFilter;
     }
 }

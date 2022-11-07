@@ -4,6 +4,7 @@ using LibraryBooks.Dto;
 using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,17 +36,21 @@ namespace LibraryBooks.Forms
             InitDataGridViewColumns<BookDto>(dataGridViewBooks);
         }
 
-        private void RefrashTable()
+        private void RefrashTable(BookFilterDto input = null)  // = null - not a prerequisite
         {
             var books = _bookRepository
             .GetAll()
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
             .Include(b => b.User)    //  Join
+            .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
+            .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
+            .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
             .AsNoTracking()
             .ToList();
+
             bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));  // mapping to DTO
-            dataGridViewBooks.DataSource = bindingList;
+            dataGridViewBooks.DataSource = bindingList;  // table filling
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -253,6 +258,48 @@ namespace LibraryBooks.Forms
 
                 new AboutBookForm(bookDto).Show();
             }
+        }
+
+        private void pictureBoxSearch_Click(object sender, EventArgs e)
+        {
+            var keyword = textBoxKeyword.Text.Trim();
+            RefrashTable(new BookFilterDto
+            {
+                Keyword = keyword
+            });
+        }
+
+        private void textBoxKeyword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                pictureBoxSearch_Click(sender, e);
+            }
+        }
+
+        private void radioButtonClearFilter_Click(object sender, EventArgs e)
+        {
+            radioButtonIsFinished.Checked = false;
+            radioButtonIsLiked.Checked = false;
+            textBoxKeyword.Clear();
+
+            RefrashTable();
+        }
+
+        private void radioButtonIsFinished_Click(object sender, EventArgs e)
+        {
+            RefrashTable(new BookFilterDto
+            {
+                IsFinished = radioButtonIsFinished.Checked
+            });
+        }
+
+        private void radioButtonIsLiked_Click(object sender, EventArgs e)
+        {
+            RefrashTable(new BookFilterDto
+            {
+                IsLiked = radioButtonIsFinished.Checked
+            });
         }
     }
 }

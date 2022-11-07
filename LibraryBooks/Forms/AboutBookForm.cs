@@ -5,14 +5,30 @@ namespace LibraryBooks.Forms
 {
     public partial class AboutBookForm : LibrarryBooksForm
     {
-        private readonly BookDto _bookDto;
         public AboutBookForm(BookDto bookDto)
         {
             InitializeComponent();
 
-            this._bookDto = bookDto;
+            labelName.Text = bookDto.Name;
+            labelAuthor.Text = bookDto.AuthorName;
+            labelGenre.Text = bookDto.GenreName;
+            labelPublication.Text = bookDto.Publication;
+            labelYaer.Text = bookDto.Year.ToString();
+            labelMark.Text = bookDto.Mark.ToString();
+            labelPageCount.Text = bookDto.PageCount.ToString();
+            labelPath.Text = bookDto.PathToBook;
 
-            label1.Text = _bookDto.Name;
+            if (bookDto.IsLiked)
+            {
+                labelIsLiked.Text = "Книга понравилась";
+            }
+            else labelIsLiked.Text = "";
+
+            if (bookDto.IsFinished)
+            {
+                labelIsFinished.Text = "Книга прочитана";
+            }
+            else labelIsFinished.Text = "";
         }
     }
 }

@@ -13,6 +13,7 @@ namespace LibraryBooks.Forms
 
             ofd.Title = "Выберите программу";
             ofd.Filter = "Exe файлы (.exe)|*.exe";
+            textBoxFilePath.Text = "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe";
         }
 
         private void buttonGetPath_Click(object sender, EventArgs e)

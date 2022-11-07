@@ -28,26 +28,137 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.pictureBoxCover = new System.Windows.Forms.PictureBox();
+            this.labelAuthor = new System.Windows.Forms.Label();
+            this.labelGenre = new System.Windows.Forms.Label();
+            this.labelPublication = new System.Windows.Forms.Label();
+            this.labelYaer = new System.Windows.Forms.Label();
+            this.labelMark = new System.Windows.Forms.Label();
+            this.labelPageCount = new System.Windows.Forms.Label();
+            this.labelPath = new System.Windows.Forms.Label();
+            this.labelIsFinished = new System.Windows.Forms.Label();
+            this.labelIsLiked = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(234, 31);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(39, 15);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Name";
+            // 
+            // pictureBoxCover
+            // 
+            this.pictureBoxCover.Location = new System.Drawing.Point(12, 12);
+            this.pictureBoxCover.Name = "pictureBoxCover";
+            this.pictureBoxCover.Size = new System.Drawing.Size(181, 222);
+            this.pictureBoxCover.TabIndex = 1;
+            this.pictureBoxCover.TabStop = false;
+            // 
+            // labelAuthor
+            // 
+            this.labelAuthor.AutoSize = true;
+            this.labelAuthor.Location = new System.Drawing.Point(234, 71);
+            this.labelAuthor.Name = "labelAuthor";
+            this.labelAuthor.Size = new System.Drawing.Size(44, 15);
+            this.labelAuthor.TabIndex = 2;
+            this.labelAuthor.Text = "Author";
+            // 
+            // labelGenre
+            // 
+            this.labelGenre.AutoSize = true;
+            this.labelGenre.Location = new System.Drawing.Point(234, 108);
+            this.labelGenre.Name = "labelGenre";
+            this.labelGenre.Size = new System.Drawing.Size(38, 15);
+            this.labelGenre.TabIndex = 3;
+            this.labelGenre.Text = "Genre";
+            // 
+            // labelPublication
+            // 
+            this.labelPublication.AutoSize = true;
+            this.labelPublication.Location = new System.Drawing.Point(234, 144);
+            this.labelPublication.Name = "labelPublication";
+            this.labelPublication.Size = new System.Drawing.Size(67, 15);
+            this.labelPublication.TabIndex = 4;
+            this.labelPublication.Text = "Publication";
+            // 
+            // labelYaer
+            // 
+            this.labelYaer.AutoSize = true;
+            this.labelYaer.Location = new System.Drawing.Point(234, 184);
+            this.labelYaer.Name = "labelYaer";
+            this.labelYaer.Size = new System.Drawing.Size(29, 15);
+            this.labelYaer.TabIndex = 5;
+            this.labelYaer.Text = "Year";
+            // 
+            // labelMark
+            // 
+            this.labelMark.AutoSize = true;
+            this.labelMark.Location = new System.Drawing.Point(12, 266);
+            this.labelMark.Name = "labelMark";
+            this.labelMark.Size = new System.Drawing.Size(34, 15);
+            this.labelMark.TabIndex = 6;
+            this.labelMark.Text = "Mark";
+            // 
+            // labelPageCount
+            // 
+            this.labelPageCount.AutoSize = true;
+            this.labelPageCount.Location = new System.Drawing.Point(234, 219);
+            this.labelPageCount.Name = "labelPageCount";
+            this.labelPageCount.Size = new System.Drawing.Size(66, 15);
+            this.labelPageCount.TabIndex = 7;
+            this.labelPageCount.Text = "PageCount";
+            // 
+            // labelPath
+            // 
+            this.labelPath.AutoSize = true;
+            this.labelPath.Location = new System.Drawing.Point(12, 310);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(70, 15);
+            this.labelPath.TabIndex = 8;
+            this.labelPath.Text = "PathToBook";
+            // 
+            // labelIsFinished
+            // 
+            this.labelIsFinished.AutoSize = true;
+            this.labelIsFinished.Location = new System.Drawing.Point(12, 348);
+            this.labelIsFinished.Name = "labelIsFinished";
+            this.labelIsFinished.Size = new System.Drawing.Size(59, 15);
+            this.labelIsFinished.TabIndex = 9;
+            this.labelIsFinished.Text = "IsFinished";
+            // 
+            // labelIsLiked
+            // 
+            this.labelIsLiked.AutoSize = true;
+            this.labelIsLiked.Location = new System.Drawing.Point(12, 386);
+            this.labelIsLiked.Name = "labelIsLiked";
+            this.labelIsLiked.Size = new System.Drawing.Size(43, 15);
+            this.labelIsLiked.TabIndex = 10;
+            this.labelIsLiked.Text = "IsLiked";
             // 
             // AboutBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 441);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelIsLiked);
+            this.Controls.Add(this.labelIsFinished);
+            this.Controls.Add(this.labelPath);
+            this.Controls.Add(this.labelPageCount);
+            this.Controls.Add(this.labelMark);
+            this.Controls.Add(this.labelYaer);
+            this.Controls.Add(this.labelPublication);
+            this.Controls.Add(this.labelGenre);
+            this.Controls.Add(this.labelAuthor);
+            this.Controls.Add(this.pictureBoxCover);
+            this.Controls.Add(this.labelName);
             this.Name = "AboutBookForm";
             this.Text = "О книге";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -55,6 +166,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.PictureBox pictureBoxCover;
+        private System.Windows.Forms.Label labelAuthor;
+        private System.Windows.Forms.Label labelGenre;
+        private System.Windows.Forms.Label labelPublication;
+        private System.Windows.Forms.Label labelYaer;
+        private System.Windows.Forms.Label labelMark;
+        private System.Windows.Forms.Label labelPageCount;
+        private System.Windows.Forms.Label labelPath;
+        private System.Windows.Forms.Label labelIsFinished;
+        private System.Windows.Forms.Label labelIsLiked;
     }
 }
