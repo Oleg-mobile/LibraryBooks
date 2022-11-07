@@ -21,5 +21,10 @@ namespace LibraryBooks.Forms
             if (ofd.ShowDialog() != DialogResult.OK) return;
             textBoxFilePath.Text = ofd.FileName;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new PsswdChangeForm().Show();
+        }
     }
 }

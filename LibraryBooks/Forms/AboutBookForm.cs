@@ -9,14 +9,14 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
-            labelName.Text = bookDto.Name;
-            labelAuthor.Text = bookDto.AuthorName;
-            labelGenre.Text = bookDto.GenreName;
-            labelPublication.Text = bookDto.Publication;
-            labelYaer.Text = bookDto.Year.ToString();
-            labelMark.Text = bookDto.Mark.ToString();
-            labelPageCount.Text = bookDto.PageCount.ToString();
-            labelPath.Text = bookDto.PathToBook;
+            labelName.Text = "Название: " + bookDto.Name;
+            labelAuthor.Text = "Автор: " + bookDto.AuthorName;
+            labelGenre.Text = "Жанр: " + bookDto.GenreName;
+            labelPublication.Text = "Издание: " + bookDto.Publication;
+            labelYaer.Text = "Год выпуска: " + bookDto.Year.ToString();
+            labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
+            labelPageCount.Text = "Количество страниц: " + bookDto.PageCount.ToString();
+            labelPath.Text = "Путь до книги: " + bookDto.PathToBook;
 
             if (bookDto.IsLiked)
             {
