@@ -1,5 +1,6 @@
 ﻿using LibraryBooks.Dto;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -18,19 +19,33 @@ namespace LibraryBooks.Forms
             labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
             labelPageCount.Text = "Количество страниц: " + bookDto.PageCount.ToString();
             labelPath.Text = "Путь до книги: " + bookDto.PathToBook;
-            pictureBoxCover.Image = Image.FromFile(bookDto.PathToCover);
+
+            pictureBoxCover.SizeMode = PictureBoxSizeMode.Zoom;
+            if (File.Exists(bookDto.PathToCover))
+            {
+                pictureBoxCover.Image = Image.FromFile(bookDto.PathToCover);
+            }
+            else 
+                pictureBoxCover.Image = Image.FromFile(@"Images\no-paper.png");
 
             if (bookDto.IsLiked)
             {
                 labelIsLiked.Text = "Книга понравилась";
             }
-            else labelIsLiked.Text = "";
+            else 
+                labelIsLiked.Text = "";
 
             if (bookDto.IsFinished)
             {
                 labelIsFinished.Text = "Книга прочитана";
             }
-            else labelIsFinished.Text = "";
+            else
+                if (bookDto.Mark > 0)
+                {
+                    labelIsFinished.Text = $"Читаю на {bookDto.Mark} странице";
+                }
+                else
+                    labelIsFinished.Text = "";
         }
     }
 }

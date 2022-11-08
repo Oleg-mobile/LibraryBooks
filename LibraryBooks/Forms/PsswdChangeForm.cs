@@ -51,6 +51,14 @@ namespace LibraryBooks.Forms
                 return;
             }
 
+            if (textBoxOldPsswd.Text != textBoxNewPsswd.Text)
+            {
+                MessageBoxExtention.ErrorInput("Пароль не был изменён!");
+                textBoxNewPsswd.Clear();
+                textBoxNewPsswdRep.Clear();
+                return;
+            }
+
             var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login && u.Password == textBoxOldPsswd.Text);
             user.Password = textBoxNewPsswd.Text;
             _userRepository.Update(user);
