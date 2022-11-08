@@ -1,4 +1,5 @@
 ﻿using LibraryBooks.Dto;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -17,6 +18,7 @@ namespace LibraryBooks.Forms
             labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
             labelPageCount.Text = "Количество страниц: " + bookDto.PageCount.ToString();
             labelPath.Text = "Путь до книги: " + bookDto.PathToBook;
+            pictureBoxCover.Image = Image.FromFile(bookDto.PathToCover);
 
             if (bookDto.IsLiked)
             {

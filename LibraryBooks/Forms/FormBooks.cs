@@ -123,6 +123,7 @@ namespace LibraryBooks.Forms
                 UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
                 AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
                 PathToBook = bookForm.textBoxPathToBook.Text,
+                PathToCover = bookForm.textBoxPathToCover.Text,
                 IsLiked = bookForm.checkBoxIsLiked.Checked,
                 IsFinished = bookForm.checkBoxIsFinished.Checked
             };
@@ -227,6 +228,7 @@ namespace LibraryBooks.Forms
             book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;
             book.PathToBook = bookForm.textBoxPathToBook.Text;
+            book.PathToCover = bookForm.textBoxPathToCover.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
         }

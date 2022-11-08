@@ -12,6 +12,7 @@ namespace LibraryBooks.Forms
     {
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Genre, int> _genreRepository;
+        private OpenFileDialog ofd = new OpenFileDialog();
 
         public BookForm()
         {
@@ -125,6 +126,24 @@ namespace LibraryBooks.Forms
 
             int index = comboBox.FindString(getName(form));
             comboBox.SelectedIndex = index;
+        }
+
+        private void pictureBoxPathToBook_Click(object sender, EventArgs e)
+        {
+            ofd.Title = "Выберите путь до книги";
+            ofd.Filter = "Книги (.pdf)|*.pdf";
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            textBoxPathToBook.Text = ofd.FileName;
+        }
+
+        private void pictureBoxPathToCover_Click(object sender, EventArgs e)
+        {
+            ofd.Title = "Выберите путь до обложки";
+            ofd.Filter = "Обложки (.jpg)|*.jpg";
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            textBoxPathToCover.Text = ofd.FileName;
         }
     }
 }

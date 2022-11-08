@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBoxPathToCover = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPathToBook = new System.Windows.Forms.PictureBox();
+            this.textBoxPathToCover = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBoxGenre = new System.Windows.Forms.PictureBox();
             this.pictureBoxAuthor = new System.Windows.Forms.PictureBox();
@@ -54,12 +58,18 @@
             this.comboBoxAuthor = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToCover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthor)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBoxPathToCover);
+            this.groupBox1.Controls.Add(this.pictureBoxPathToBook);
+            this.groupBox1.Controls.Add(this.textBoxPathToCover);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.pictureBoxGenre);
             this.groupBox1.Controls.Add(this.pictureBoxAuthor);
@@ -90,10 +100,49 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Книга";
             // 
+            // pictureBoxPathToCover
+            // 
+            this.pictureBoxPathToCover.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPathToCover.Image")));
+            this.pictureBoxPathToCover.Location = new System.Drawing.Point(605, 160);
+            this.pictureBoxPathToCover.Name = "pictureBoxPathToCover";
+            this.pictureBoxPathToCover.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxPathToCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxPathToCover.TabIndex = 29;
+            this.pictureBoxPathToCover.TabStop = false;
+            this.pictureBoxPathToCover.Click += new System.EventHandler(this.pictureBoxPathToCover_Click);
+            // 
+            // pictureBoxPathToBook
+            // 
+            this.pictureBoxPathToBook.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPathToBook.Image")));
+            this.pictureBoxPathToBook.Location = new System.Drawing.Point(605, 110);
+            this.pictureBoxPathToBook.Name = "pictureBoxPathToBook";
+            this.pictureBoxPathToBook.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxPathToBook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxPathToBook.TabIndex = 28;
+            this.pictureBoxPathToBook.TabStop = false;
+            this.pictureBoxPathToBook.Click += new System.EventHandler(this.pictureBoxPathToBook_Click);
+            // 
+            // textBoxPathToCover
+            // 
+            this.textBoxPathToCover.Location = new System.Drawing.Point(410, 160);
+            this.textBoxPathToCover.Name = "textBoxPathToCover";
+            this.textBoxPathToCover.ReadOnly = true;
+            this.textBoxPathToCover.Size = new System.Drawing.Size(180, 23);
+            this.textBoxPathToCover.TabIndex = 27;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(410, 140);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 15);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Путь до обложки";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(410, 325);
+            this.label9.Location = new System.Drawing.Point(410, 384);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 15);
             this.label9.TabIndex = 25;
@@ -124,7 +173,7 @@
             // checkBoxIsFinished
             // 
             this.checkBoxIsFinished.AutoSize = true;
-            this.checkBoxIsFinished.Location = new System.Drawing.Point(410, 262);
+            this.checkBoxIsFinished.Location = new System.Drawing.Point(410, 317);
             this.checkBoxIsFinished.Name = "checkBoxIsFinished";
             this.checkBoxIsFinished.Size = new System.Drawing.Size(87, 19);
             this.checkBoxIsFinished.TabIndex = 22;
@@ -134,7 +183,7 @@
             // checkBoxIsLiked
             // 
             this.checkBoxIsLiked.AutoSize = true;
-            this.checkBoxIsLiked.Location = new System.Drawing.Point(410, 214);
+            this.checkBoxIsLiked.Location = new System.Drawing.Point(410, 264);
             this.checkBoxIsLiked.Name = "checkBoxIsLiked";
             this.checkBoxIsLiked.Size = new System.Drawing.Size(100, 19);
             this.checkBoxIsLiked.TabIndex = 21;
@@ -143,7 +192,7 @@
             // 
             // textBoxMark
             // 
-            this.textBoxMark.Location = new System.Drawing.Point(410, 160);
+            this.textBoxMark.Location = new System.Drawing.Point(410, 210);
             this.textBoxMark.Name = "textBoxMark";
             this.textBoxMark.Size = new System.Drawing.Size(180, 23);
             this.textBoxMark.TabIndex = 20;
@@ -153,6 +202,7 @@
             // 
             this.textBoxPathToBook.Location = new System.Drawing.Point(410, 110);
             this.textBoxPathToBook.Name = "textBoxPathToBook";
+            this.textBoxPathToBook.ReadOnly = true;
             this.textBoxPathToBook.Size = new System.Drawing.Size(180, 23);
             this.textBoxPathToBook.TabIndex = 19;
             // 
@@ -197,7 +247,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(410, 140);
+            this.label11.Location = new System.Drawing.Point(410, 190);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(57, 15);
             this.label11.TabIndex = 12;
@@ -215,7 +265,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(410, 300);
+            this.label7.Location = new System.Drawing.Point(410, 359);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 15);
             this.label7.TabIndex = 8;
@@ -303,6 +353,8 @@
             this.Text = "Книга";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToCover)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToBook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthor)).EndInit();
             this.ResumeLayout(false);
@@ -335,5 +387,9 @@
         private System.Windows.Forms.PictureBox pictureBoxGenre;
         private System.Windows.Forms.PictureBox pictureBoxAuthor;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBoxPathToCover;
+        private System.Windows.Forms.PictureBox pictureBoxPathToBook;
+        public System.Windows.Forms.TextBox textBoxPathToCover;
     }
 }
