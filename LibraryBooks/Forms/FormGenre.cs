@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class GenreForm : LibrarryBooksForm
+    public partial class FormGenre : FormLibrarryBooks
     {
-        public GenreForm()
+        public FormGenre()
         {
             InitializeComponent();
 
@@ -14,7 +14,7 @@ namespace LibraryBooks.Forms
             AcceptButton = buttonSave;
         }
 
-        public GenreForm(Genre genre) : this()
+        public FormGenre(Genre genre) : this()
         {
             textBoxName.Text = genre.Name;
         }

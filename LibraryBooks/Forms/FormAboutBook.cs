@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class AboutBookForm : LibrarryBooksForm
+    public partial class FormAboutBook : FormLibrarryBooks
     {
-        public AboutBookForm(BookDto bookDto)
+        public FormAboutBook(BookDto bookDto)
         {
             InitializeComponent();
 

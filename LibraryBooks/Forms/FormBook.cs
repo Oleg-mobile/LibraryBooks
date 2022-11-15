@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class BookForm : LibrarryBooksForm
+    public partial class FormBook : FormLibrarryBooks
     {
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private OpenFileDialog ofd = new OpenFileDialog();
 
-        public BookForm()
+        public FormBook()
         {
             InitializeComponent();
 
@@ -33,7 +33,7 @@ namespace LibraryBooks.Forms
             label9.Text = Program.AuthForm.textBoxLogin.Text;
         }
 
-        public BookForm(BookDto book) : this()
+        public FormBook(BookDto book) : this()
         {
             textBoxName.Text = book.Name;
             comboBoxAuthor.Text = book.AuthorName;
@@ -65,7 +65,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxAuthor_Click(object sender, EventArgs e)
         {
-            pictureBox_Click<AuthorForm, Author>
+            pictureBox_Click<FormAuthor, Author>
             (
                 f => f.textBoxName.Text,
                 _authorRepository,
@@ -97,7 +97,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxGenre_Click(object sender, EventArgs e)
         {
-            pictureBox_Click<GenreForm, Genre>
+            pictureBox_Click<FormGenre, Genre>
             (
                 f => f.textBoxName.Text,
                 _genreRepository,
@@ -108,7 +108,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox)
             // TODO есть конструктор?
-            where TForm : LibrarryBooksForm, new()  // new() - there is an empty (default) constructor
+            where TForm : FormLibrarryBooks, new()  // new() - there is an empty (default) constructor
             where TEntity : Entity<int>, new()      // new() - there is an empty (default) constructor
         {
             var form = new TForm();  // generics cannot use a constructor with parameters

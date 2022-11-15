@@ -1,6 +1,6 @@
 ﻿namespace LibraryBooks.Forms
 {
-    partial class PsswdChangeForm
+    partial class FormPasswordChange
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PsswdChangeForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPasswordChange));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,6 +73,7 @@
             this.textBoxOldPsswd.Name = "textBoxOldPsswd";
             this.textBoxOldPsswd.Size = new System.Drawing.Size(180, 23);
             this.textBoxOldPsswd.TabIndex = 3;
+            this.textBoxOldPsswd.UseSystemPasswordChar = true;
             // 
             // textBoxNewPsswd
             // 
@@ -80,6 +81,7 @@
             this.textBoxNewPsswd.Name = "textBoxNewPsswd";
             this.textBoxNewPsswd.Size = new System.Drawing.Size(180, 23);
             this.textBoxNewPsswd.TabIndex = 4;
+            this.textBoxNewPsswd.UseSystemPasswordChar = true;
             // 
             // textBoxNewPsswdRep
             // 
@@ -87,6 +89,7 @@
             this.textBoxNewPsswdRep.Name = "textBoxNewPsswdRep";
             this.textBoxNewPsswdRep.Size = new System.Drawing.Size(180, 23);
             this.textBoxNewPsswdRep.TabIndex = 5;
+            this.textBoxNewPsswdRep.UseSystemPasswordChar = true;
             // 
             // buttonSave
             // 
@@ -109,7 +112,7 @@
             this.pictureBoxVis.TabStop = false;
             this.pictureBoxVis.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // PsswdChangeForm
+            // FormPasswordChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,7 +125,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "PsswdChangeForm";
+            this.Name = "FormPasswordChange";
             this.Text = "Смена пароля";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVis)).EndInit();
             this.ResumeLayout(false);

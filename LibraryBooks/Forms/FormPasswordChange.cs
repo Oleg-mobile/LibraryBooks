@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class PsswdChangeForm : LibrarryBooksForm
+    public partial class FormPasswordChange : FormLibrarryBooks
     {
         private readonly IUserRepository _userRepository;
-        public PsswdChangeForm()
+        public FormPasswordChange()
         {
             InitializeComponent();
 
@@ -68,7 +68,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            AuthorizationForm.ToggleVisiblePassword(pictureBoxVis, textBoxOldPsswd, textBoxNewPsswd, textBoxNewPsswdRep);
+            FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPsswd, textBoxNewPsswd, textBoxNewPsswdRep);
         }
     }
 }

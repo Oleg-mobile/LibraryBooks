@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormSettings : LibrarryBooksForm
+    public partial class FormSettings : FormLibrarryBooks
     {
         private OpenFileDialog ofd = new OpenFileDialog();
 
@@ -24,7 +24,7 @@ namespace LibraryBooks.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new PsswdChangeForm().Show();
+            new FormPasswordChange().Show();
         }
     }
 }

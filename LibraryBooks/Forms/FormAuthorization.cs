@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class AuthorizationForm : LibrarryBooksForm
+    public partial class FormAuthorization : FormLibrarryBooks
     {
         private readonly IUserRepository _userRepository;
-        public AuthorizationForm()
+        public FormAuthorization()
         {
             InitializeComponent();
 
@@ -55,7 +55,7 @@ namespace LibraryBooks.Forms
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
-            new RegistrationForm().Show();
+            new FormRegistration().Show();
             Hide();
         }
 

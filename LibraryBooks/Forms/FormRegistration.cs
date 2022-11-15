@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class RegistrationForm : LibrarryBooksForm  // Not Form
+    public partial class FormRegistration : FormLibrarryBooks  // Not Form
     {
         private readonly IUserRepository _userRepository;
 
-        public RegistrationForm()
+        public FormRegistration()
         {
             InitializeComponent();
 
@@ -60,7 +60,7 @@ namespace LibraryBooks.Forms
 
             MessageBox.Show("Пользователь добавлен");
 
-            var authorizeForm = new AuthorizationForm();
+            var authorizeForm = new FormAuthorization();
             authorizeForm.Show();
             authorizeForm.textBoxLogin.Text = login;
 
@@ -81,7 +81,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxPassVis_Click(object sender, EventArgs e)
         {
-            AuthorizationForm.ToggleVisiblePassword(pictureBoxPassVis, textBoxPassword, textBoxPasswordRepeat);
+            FormAuthorization.ToggleVisiblePassword(pictureBoxPassVis, textBoxPassword, textBoxPasswordRepeat);
         }
     }
 }

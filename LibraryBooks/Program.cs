@@ -10,7 +10,7 @@ namespace LibraryBooks
     internal static class Program
     {
         // to save form data
-        public static AuthorizationForm AuthForm = new AuthorizationForm();
+        public static FormAuthorization AuthForm = new FormAuthorization();
 
         /// <summary>
         ///  The main entry point for the application.

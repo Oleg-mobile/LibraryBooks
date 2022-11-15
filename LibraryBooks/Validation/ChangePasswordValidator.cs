@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LibraryBooks.Validation
 {
-    public class ChangePasswordValidator : AbstractValidator<PsswdChangeForm>
+    public class ChangePasswordValidator : AbstractValidator<FormPasswordChange>
     {
         public ChangePasswordValidator()
         {

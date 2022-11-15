@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormGenres : LibrarryBooksForm
+    public partial class FormGenres : FormLibrarryBooks
     {
         private readonly IRepository<Genre, int> _genreRepository;
         private BindingList<GenreDto> bindingList;
@@ -27,7 +27,7 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var genreForm = new GenreForm();
+            var genreForm = new FormGenre();
             DialogResult result = genreForm.ShowDialog();
 
             if (result == DialogResult.Cancel)
@@ -73,7 +73,7 @@ namespace LibraryBooks.Forms
             {
                 var genreDto = (GenreDto)dataGridViewGenres.SelectedRows[0].DataBoundItem;
                 var genre = Mapper.Map<Genre>(genreDto);
-                var genreForm = new GenreForm(genre);
+                var genreForm = new FormGenre(genre);
                 DialogResult dialogResult = genreForm.ShowDialog();
 
                 if (dialogResult == DialogResult.Cancel)

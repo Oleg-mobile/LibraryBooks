@@ -1,6 +1,6 @@
 ﻿namespace LibraryBooks.Forms
 {
-    partial class BookForm
+    partial class FormBook
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBook));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBoxPathToCover = new System.Windows.Forms.PictureBox();
             this.pictureBoxPathToBook = new System.Windows.Forms.PictureBox();

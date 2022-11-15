@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public class LibrarryBooksForm : Form   // not abstract
+    public class FormLibrarryBooks : Form   // not abstract
     {
         // container for dependency registration (reference to an object instance)
         private static IWindsorContainer _iocContainer;  // static - for the entire program, without reference to an object
@@ -31,7 +31,7 @@ namespace LibraryBooks.Forms
 
         protected IMapper Mapper { get; }
 
-        public LibrarryBooksForm()
+        public FormLibrarryBooks()
         {
             Mapper = Resolve<IMapper>();
         }

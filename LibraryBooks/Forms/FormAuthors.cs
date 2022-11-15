@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormAuthors : LibrarryBooksForm
+    public partial class FormAuthors : FormLibrarryBooks
     {
         // LibraryBooksContext - database model
         // DataSource - data source binding (takes columns only of the entity to which it is attached)
@@ -37,7 +37,7 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var authForm = new AuthorForm();  // var - use when it is clear exactly what type of data
+            var authForm = new FormAuthor();  // var - use when it is clear exactly what type of data
             DialogResult result = authForm.ShowDialog();
 
             if (result == DialogResult.Cancel)
@@ -83,7 +83,7 @@ namespace LibraryBooks.Forms
             {
                 var authorDto = (AuthorDto)dataGridViewAuthors.SelectedRows[0].DataBoundItem;
                 var author = Mapper.Map<Author>(authorDto);  // <type - what>(object - Of what)
-                var authorForm = new AuthorForm(author);
+                var authorForm = new FormAuthor(author);
                 DialogResult dialogResult = authorForm.ShowDialog();
 
                 if (dialogResult == DialogResult.Cancel)

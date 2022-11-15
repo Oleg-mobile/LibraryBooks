@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class AuthorForm : LibrarryBooksForm
+    public partial class FormAuthor : FormLibrarryBooks
     {
-        public AuthorForm()
+        public FormAuthor()
         {
             InitializeComponent();
 
@@ -15,7 +15,7 @@ namespace LibraryBooks.Forms
         }
 
         // to fill in all the input fields on the form
-        public AuthorForm(Author author) : this()  // :this() - calling the default constructor
+        public FormAuthor(Author author) : this()  // :this() - calling the default constructor
         {
             textBoxName.Text = author.Name;
         }

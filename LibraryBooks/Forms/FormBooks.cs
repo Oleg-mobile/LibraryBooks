@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormBooks : LibrarryBooksForm
+    public partial class FormBooks : FormLibrarryBooks
     {
         private readonly IRepository<Book, int> _bookRepository;
         private readonly IRepository<Genre, int> _genreRepository;
@@ -55,7 +55,7 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var bookForm = new BookForm();
+            var bookForm = new FormBook();
         // a label so that the window does not close when an exception occurs
         lableShow:
             DialogResult result = bookForm.ShowDialog();
@@ -110,7 +110,7 @@ namespace LibraryBooks.Forms
             }
         }
 
-        private Book GetBook(BookForm bookForm, int year, int pageCount, int mark)
+        private Book GetBook(FormBook bookForm, int year, int pageCount, int mark)
         {
             return new Book
             {
@@ -159,7 +159,7 @@ namespace LibraryBooks.Forms
             if (dataGridViewBooks.SelectedRows.Count > 0)
             {
                 var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
-                var bookForm = new BookForm(bookDto);
+                var bookForm = new FormBook(bookDto);
 
             lableShow:
 
@@ -217,7 +217,7 @@ namespace LibraryBooks.Forms
             }
         }
 
-        private void EditBook(Book book, BookForm bookForm, int year, int pageCount, int mark)
+        private void EditBook(Book book, FormBook bookForm, int year, int pageCount, int mark)
         {
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
@@ -258,7 +258,7 @@ namespace LibraryBooks.Forms
             {
                 var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
 
-                new AboutBookForm(bookDto).Show();
+                new FormAboutBook(bookDto).Show();
             }
         }
 
