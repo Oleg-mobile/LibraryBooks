@@ -3,7 +3,6 @@ using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
 using System;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
@@ -26,7 +25,8 @@ namespace LibraryBooks.Forms
         {
             if (string.IsNullOrWhiteSpace(textBoxOldPassword.Text))
             {
-                MessageBoxExtention.ErrorInput("Введите текущий пароль");
+                //MessageBoxExtention.ErrorInput("Введите текущий пароль");
+                Notification.ShowWarning("Введите текущий пароль!");
                 return;
             }
 

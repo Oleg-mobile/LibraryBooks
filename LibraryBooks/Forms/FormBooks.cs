@@ -4,7 +4,6 @@ using LibraryBooks.Dto;
 using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -244,7 +243,7 @@ namespace LibraryBooks.Forms
                     MessageBoxExtention.WarningInput("Файл отсутствует!");
                     return;
                 }
-
+                // TODO где-то хранить строку с путём до читалки
                 var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
 
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window

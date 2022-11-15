@@ -131,7 +131,7 @@ namespace LibraryBooks.Forms
         private void pictureBoxPathToBook_Click(object sender, EventArgs e)
         {
             ofd.Title = "Выберите путь до книги";
-            ofd.Filter = "Книги (.pdf)|*.pdf";
+            ofd.Filter = "Книги|*.doc;*.docx;*.pdf";
 
             if (ofd.ShowDialog() != DialogResult.OK) return;
             textBoxPathToBook.Text = ofd.FileName;
@@ -140,7 +140,7 @@ namespace LibraryBooks.Forms
         private void pictureBoxPathToCover_Click(object sender, EventArgs e)
         {
             ofd.Title = "Выберите путь до обложки";
-            ofd.Filter = "Обложки (.jpg)|*.jpg";
+            ofd.Filter = "Картинки|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
 
             if (ofd.ShowDialog() != DialogResult.OK) return;
             textBoxPathToCover.Text = ofd.FileName;

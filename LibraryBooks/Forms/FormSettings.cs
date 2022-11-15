@@ -12,7 +12,7 @@ namespace LibraryBooks.Forms
             InitializeComponent();
 
             ofd.Title = "Выберите программу";
-            ofd.Filter = "Exe файлы (.exe)|*.exe";
+            ofd.Filter = "Программы|*.exe";
             textBoxFilePath.Text = "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe";
         }
 

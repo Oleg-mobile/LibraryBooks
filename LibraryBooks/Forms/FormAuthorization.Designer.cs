@@ -43,7 +43,7 @@
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(45, 201);
+            this.buttonLogin.Location = new System.Drawing.Point(88, 204);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(100, 30);
             this.buttonLogin.TabIndex = 0;
@@ -53,14 +53,14 @@
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(55, 96);
+            this.textBoxLogin.Location = new System.Drawing.Point(98, 99);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(180, 23);
             this.textBoxLogin.TabIndex = 1;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(55, 146);
+            this.textBoxPassword.Location = new System.Drawing.Point(98, 149);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(180, 23);
             this.textBoxPassword.TabIndex = 2;
@@ -68,7 +68,7 @@
             // 
             // buttonRegistration
             // 
-            this.buttonRegistration.Location = new System.Drawing.Point(145, 201);
+            this.buttonRegistration.Location = new System.Drawing.Point(188, 204);
             this.buttonRegistration.Name = "buttonRegistration";
             this.buttonRegistration.Size = new System.Drawing.Size(100, 30);
             this.buttonRegistration.TabIndex = 3;
@@ -79,7 +79,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(94, 18);
+            this.pictureBox1.Location = new System.Drawing.Point(137, 21);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -89,7 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 78);
+            this.label1.Location = new System.Drawing.Point(98, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 5;
@@ -98,7 +98,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 128);
+            this.label2.Location = new System.Drawing.Point(98, 131);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 15);
             this.label2.TabIndex = 6;
@@ -107,7 +107,7 @@
             // pictureBoxClose
             // 
             this.pictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxClose.Image")));
-            this.pictureBoxClose.Location = new System.Drawing.Point(249, 146);
+            this.pictureBoxClose.Location = new System.Drawing.Point(292, 149);
             this.pictureBoxClose.Name = "pictureBoxClose";
             this.pictureBoxClose.Size = new System.Drawing.Size(23, 23);
             this.pictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -119,7 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this.pictureBoxClose);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

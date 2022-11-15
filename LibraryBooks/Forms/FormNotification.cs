@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public partial class FormNotification : Form
+    public partial class FormNotification : FormLibrarryBooks
     {
-        public FormNotification()
+        public FormNotification(string pathToImage, string messageCaption, string messageText)
         {
             InitializeComponent();
+
+            pictureBoxNotification.Image = Image.FromFile(pathToImage);
+            labelNotificationCaption.Text = messageCaption;
+            labelNotificationText.Text = messageText;
+            labelNotificationText.Left = (Width - labelNotificationText.Size.Width - labelNotificationText.Text.Length) / 2;
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

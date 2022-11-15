@@ -42,7 +42,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(54, 200);
+            this.buttonAdd.Location = new System.Drawing.Point(104, 198);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(180, 30);
             this.buttonAdd.TabIndex = 0;
@@ -52,14 +52,14 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(54, 50);
+            this.textBoxName.Location = new System.Drawing.Point(104, 48);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(180, 23);
             this.textBoxName.TabIndex = 1;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(54, 100);
+            this.textBoxPassword.Location = new System.Drawing.Point(104, 98);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(180, 23);
             this.textBoxPassword.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // textBoxPasswordRepeat
             // 
-            this.textBoxPasswordRepeat.Location = new System.Drawing.Point(54, 150);
+            this.textBoxPasswordRepeat.Location = new System.Drawing.Point(104, 148);
             this.textBoxPasswordRepeat.Name = "textBoxPasswordRepeat";
             this.textBoxPasswordRepeat.Size = new System.Drawing.Size(180, 23);
             this.textBoxPasswordRepeat.TabIndex = 3;
@@ -76,7 +76,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 30);
+            this.label1.Location = new System.Drawing.Point(104, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 15);
             this.label1.TabIndex = 4;
@@ -85,7 +85,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 80);
+            this.label2.Location = new System.Drawing.Point(104, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 15);
             this.label2.TabIndex = 5;
@@ -94,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 130);
+            this.label3.Location = new System.Drawing.Point(104, 128);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 15);
             this.label3.TabIndex = 6;
@@ -103,7 +103,7 @@
             // pictureBoxPassVis
             // 
             this.pictureBoxPassVis.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPassVis.Image")));
-            this.pictureBoxPassVis.Location = new System.Drawing.Point(248, 100);
+            this.pictureBoxPassVis.Location = new System.Drawing.Point(298, 98);
             this.pictureBoxPassVis.Name = "pictureBoxPassVis";
             this.pictureBoxPassVis.Size = new System.Drawing.Size(23, 23);
             this.pictureBoxPassVis.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -115,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this.pictureBoxPassVis);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
