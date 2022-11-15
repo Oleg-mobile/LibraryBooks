@@ -126,7 +126,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRegistration";
-            this.Text = "Регистрация";
+            this.Text = "Библиотека  / Регистрация";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPassVis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

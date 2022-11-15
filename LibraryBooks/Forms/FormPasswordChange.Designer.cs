@@ -43,7 +43,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 30);
+            this.label1.Location = new System.Drawing.Point(97, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(136, 15);
             this.label1.TabIndex = 0;
@@ -52,7 +52,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 80);
+            this.label2.Location = new System.Drawing.Point(97, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 15);
             this.label2.TabIndex = 1;
@@ -61,7 +61,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 130);
+            this.label3.Location = new System.Drawing.Point(97, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(148, 15);
             this.label3.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             // textBoxOldPsswd
             // 
-            this.textBoxOldPsswd.Location = new System.Drawing.Point(54, 50);
+            this.textBoxOldPsswd.Location = new System.Drawing.Point(97, 50);
             this.textBoxOldPsswd.Name = "textBoxOldPsswd";
             this.textBoxOldPsswd.Size = new System.Drawing.Size(180, 23);
             this.textBoxOldPsswd.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // textBoxNewPsswd
             // 
-            this.textBoxNewPsswd.Location = new System.Drawing.Point(54, 100);
+            this.textBoxNewPsswd.Location = new System.Drawing.Point(97, 100);
             this.textBoxNewPsswd.Name = "textBoxNewPsswd";
             this.textBoxNewPsswd.Size = new System.Drawing.Size(180, 23);
             this.textBoxNewPsswd.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             // textBoxNewPsswdRep
             // 
-            this.textBoxNewPsswdRep.Location = new System.Drawing.Point(54, 150);
+            this.textBoxNewPsswdRep.Location = new System.Drawing.Point(97, 150);
             this.textBoxNewPsswdRep.Name = "textBoxNewPsswdRep";
             this.textBoxNewPsswdRep.Size = new System.Drawing.Size(180, 23);
             this.textBoxNewPsswdRep.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(54, 200);
+            this.buttonSave.Location = new System.Drawing.Point(97, 200);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(180, 30);
             this.buttonSave.TabIndex = 6;
@@ -104,7 +104,7 @@
             // pictureBoxVis
             // 
             this.pictureBoxVis.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxVis.Image")));
-            this.pictureBoxVis.Location = new System.Drawing.Point(246, 50);
+            this.pictureBoxVis.Location = new System.Drawing.Point(289, 50);
             this.pictureBoxVis.Name = "pictureBoxVis";
             this.pictureBoxVis.Size = new System.Drawing.Size(23, 23);
             this.pictureBoxVis.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -116,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this.pictureBoxVis);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxNewPsswdRep);
@@ -127,7 +127,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormPasswordChange";
-            this.Text = "Смена пароля";
+            this.Text = "Библиотека  / Смена пароля";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

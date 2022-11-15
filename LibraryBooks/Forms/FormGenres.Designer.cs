@@ -102,7 +102,7 @@
             this.Controls.Add(this.dataGridViewGenres);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormGenres";
-            this.Text = "Жанры";
+            this.Text = "Библиотека  / Жанры";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenres)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

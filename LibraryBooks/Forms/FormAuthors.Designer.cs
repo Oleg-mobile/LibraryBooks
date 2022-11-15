@@ -101,7 +101,7 @@
             this.Controls.Add(this.dataGridViewAuthors);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAuthors";
-            this.Text = "Авторы";
+            this.Text = "Библиотека  / Авторы";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuthors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -77,7 +77,7 @@
             this.Controls.Add(this.buttonGetPath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSettings";
-            this.Text = "Настройки";
+            this.Text = "Библиотека  / Настройки";
             this.ResumeLayout(false);
             this.PerformLayout();
 

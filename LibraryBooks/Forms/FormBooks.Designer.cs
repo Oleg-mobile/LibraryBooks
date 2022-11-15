@@ -181,7 +181,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormBooks";
-            this.Text = "Книги";
+            this.Text = "Библиотека  / Книги";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSearch)).EndInit();
             this.ResumeLayout(false);

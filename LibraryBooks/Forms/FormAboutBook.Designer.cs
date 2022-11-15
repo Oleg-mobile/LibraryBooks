@@ -159,7 +159,7 @@
             this.Controls.Add(this.labelName);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAboutBook";
-            this.Text = "О книге";
+            this.Text = "Библиотека  / О книге";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

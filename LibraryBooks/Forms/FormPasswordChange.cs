@@ -19,7 +19,7 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IUserRepository>();
 
-            this.Text = "Изменить пароль: " + Session.CurrentUser.Login;
+            this.Text = "Библиотека  / Изменить пароль: " + Session.CurrentUser.Login;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
