@@ -24,38 +24,33 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxOldPsswd.Text))
+            if (string.IsNullOrWhiteSpace(textBoxOldPsswd.Text))
             {
-                MessageBoxExtention.ErrorInput("Введите старый пароль");
+                MessageBoxExtention.ErrorInput("Введите текущий пароль");
                 return;
             }
 
             if (!_userRepository.IsExist(Session.CurrentUser.Login, textBoxOldPsswd.Text))
             {
-                MessageBoxExtention.Error("Не верный логин или пароль", "Ошибка авторизации!");
-                textBoxOldPsswd.Clear();
+                MessageBoxExtention.WarningInput("Текущий пароль введён не верно!");
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBoxNewPsswd.Text))
+            if (string.IsNullOrWhiteSpace(textBoxNewPsswd.Text))
             {
-                MessageBoxExtention.ErrorInput("Пароль не может быть пустой!");
+                MessageBoxExtention.WarningInput("Пароль не может быть пустой!");
                 return;
             }
 
             if (textBoxNewPsswd.Text != textBoxNewPsswdRep.Text)
             {
-                MessageBoxExtention.ErrorInput("Пароли не совпадают");
-                textBoxNewPsswd.Clear();
-                textBoxNewPsswdRep.Clear();
+                MessageBoxExtention.WarningInput("Пароли не совпадают!");
                 return;
             }
 
-            if (textBoxOldPsswd.Text != textBoxNewPsswd.Text)
+            if (textBoxOldPsswd.Text == textBoxNewPsswd.Text)
             {
-                MessageBoxExtention.ErrorInput("Пароль не был изменён!");
-                textBoxNewPsswd.Clear();
-                textBoxNewPsswdRep.Clear();
+                MessageBoxExtention.WarningInput("Новый пароль совпадает с текущим!");
                 return;
             }
 

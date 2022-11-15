@@ -31,5 +31,15 @@ namespace LibraryBooks.Extentions
 
         public static DialogResult WarningInput(string text) => Warning(text, "Внимание");
 
+        public static DialogResult Success(string text, string caption)
+        {
+            return MessageBox.Show(
+                text,
+                caption,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
     }
 }

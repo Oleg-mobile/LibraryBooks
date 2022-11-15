@@ -135,9 +135,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxOldPsswd;
-        private System.Windows.Forms.TextBox textBoxNewPsswd;
-        private System.Windows.Forms.TextBox textBoxNewPsswdRep;
+        public System.Windows.Forms.TextBox textBoxOldPsswd;
+        public System.Windows.Forms.TextBox textBoxNewPsswd;
+        public System.Windows.Forms.TextBox textBoxNewPsswdRep;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.PictureBox pictureBoxVis;
     }
