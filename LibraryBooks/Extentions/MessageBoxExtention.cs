@@ -41,5 +41,7 @@ namespace LibraryBooks.Extentions
             );
         }
 
+        public static DialogResult SuccessInput(string text) => Success(text, "Успех");
+
     }
 }

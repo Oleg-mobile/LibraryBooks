@@ -58,7 +58,7 @@ namespace LibraryBooks.Forms
             user.Password = textBoxNewPassword.Text;
             _userRepository.Update(user);
 
-            MessageBox.Show("Пароль изменён");
+            MessageBoxExtention.SuccessInput("Пароль изменён");
 
             var formSettingsm = new FormSettings();
             formSettingsm.Show();
