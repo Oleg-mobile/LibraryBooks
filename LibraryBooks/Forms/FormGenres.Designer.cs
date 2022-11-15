@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGenres));
             this.dataGridViewGenres = new System.Windows.Forms.DataGridView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
@@ -99,6 +100,7 @@
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridViewGenres);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormGenres";
             this.Text = "Жанры";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGenres)).EndInit();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAuthor));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -73,13 +74,14 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Название";
             // 
-            // AuthorForm
+            // FormAuthor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 211);
             this.Controls.Add(this.groupBox1);
-            this.Name = "AuthorForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormAuthor";
             this.Text = "Автор";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

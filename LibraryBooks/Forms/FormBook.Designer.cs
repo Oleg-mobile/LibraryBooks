@@ -343,13 +343,14 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // BookForm
+            // FormBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 481);
             this.Controls.Add(this.groupBox1);
-            this.Name = "BookForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormBook";
             this.Text = "Книга";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

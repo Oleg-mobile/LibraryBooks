@@ -179,6 +179,7 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormBooks";
             this.Text = "Книги";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).EndInit();

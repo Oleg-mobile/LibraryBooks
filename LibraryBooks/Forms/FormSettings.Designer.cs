@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.buttonGetPath = new System.Windows.Forms.Button();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -74,6 +75,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxFilePath);
             this.Controls.Add(this.buttonGetPath);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSettings";
             this.Text = "Настройки";
             this.ResumeLayout(false);

@@ -60,5 +60,19 @@ namespace LibraryBooks.Forms
                 table.Columns[column.Key].Visible = column.Value.IsVisible;
             }
         }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLibrarryBooks));
+            this.SuspendLayout();
+            // 
+            // FormLibrarryBooks
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormLibrarryBooks";
+            this.ResumeLayout(false);
+
+        }
     }
 }

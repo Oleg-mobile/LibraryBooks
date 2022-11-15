@@ -111,7 +111,7 @@
             this.pictureBoxPassVis.TabStop = false;
             this.pictureBoxPassVis.Click += new System.EventHandler(this.pictureBoxPassVis_Click);
             // 
-            // RegistrationForm
+            // FormRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,7 +124,8 @@
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.buttonAdd);
-            this.Name = "RegistrationForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormRegistration";
             this.Text = "Регистрация";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPassVis)).EndInit();
             this.ResumeLayout(false);

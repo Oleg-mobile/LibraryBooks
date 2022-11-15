@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAboutBook));
             this.labelName = new System.Windows.Forms.Label();
             this.pictureBoxCover = new System.Windows.Forms.PictureBox();
             this.labelAuthor = new System.Windows.Forms.Label();
@@ -140,7 +141,7 @@
             this.labelIsLiked.TabIndex = 10;
             this.labelIsLiked.Text = "IsLiked";
             // 
-            // AboutBookForm
+            // FormAboutBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -156,7 +157,8 @@
             this.Controls.Add(this.labelAuthor);
             this.Controls.Add(this.pictureBoxCover);
             this.Controls.Add(this.labelName);
-            this.Name = "AboutBookForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormAboutBook";
             this.Text = "О книге";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
             this.ResumeLayout(false);
