@@ -43,7 +43,6 @@ namespace LibraryBooks.Forms
             if (textBoxPassword.Text != textBoxPasswordRepeat.Text)
             {
                 MessageBoxExtention.ErrorInput("Пароли не совпадают");
-                ResetPassword();
                 return;
             }
 
@@ -52,7 +51,6 @@ namespace LibraryBooks.Forms
             if (user is not null)
             {
                 MessageBoxExtention.ErrorInput("Существующий пользователь");
-                ResetForm();
                 return;
             }
 
@@ -65,18 +63,6 @@ namespace LibraryBooks.Forms
             authorizeForm.textBoxLogin.Text = login;
 
             Close();
-        }
-
-        private void ResetForm()
-        {
-            textBoxName.Text = "";
-            ResetPassword();
-        }
-
-        private void ResetPassword()
-        {
-            textBoxPassword.Text = "";
-            textBoxPasswordRepeat.Text = "";
         }
 
         private void pictureBoxPassVis_Click(object sender, EventArgs e)
