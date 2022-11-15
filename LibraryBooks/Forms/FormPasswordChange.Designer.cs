@@ -32,9 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxOldPsswd = new System.Windows.Forms.TextBox();
-            this.textBoxNewPsswd = new System.Windows.Forms.TextBox();
-            this.textBoxNewPsswdRep = new System.Windows.Forms.TextBox();
+            this.textBoxOldPassword = new System.Windows.Forms.TextBox();
+            this.textBoxNewPassword = new System.Windows.Forms.TextBox();
+            this.textBoxNewPasswordRepeat = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.pictureBoxVis = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVis)).BeginInit();
@@ -67,29 +67,29 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Повторите новый пароль";
             // 
-            // textBoxOldPsswd
+            // textBoxOldPassword
             // 
-            this.textBoxOldPsswd.Location = new System.Drawing.Point(97, 50);
-            this.textBoxOldPsswd.Name = "textBoxOldPsswd";
-            this.textBoxOldPsswd.Size = new System.Drawing.Size(180, 23);
-            this.textBoxOldPsswd.TabIndex = 3;
-            this.textBoxOldPsswd.UseSystemPasswordChar = true;
+            this.textBoxOldPassword.Location = new System.Drawing.Point(97, 50);
+            this.textBoxOldPassword.Name = "textBoxOldPassword";
+            this.textBoxOldPassword.Size = new System.Drawing.Size(180, 23);
+            this.textBoxOldPassword.TabIndex = 3;
+            this.textBoxOldPassword.UseSystemPasswordChar = true;
             // 
-            // textBoxNewPsswd
+            // textBoxNewPassword
             // 
-            this.textBoxNewPsswd.Location = new System.Drawing.Point(97, 100);
-            this.textBoxNewPsswd.Name = "textBoxNewPsswd";
-            this.textBoxNewPsswd.Size = new System.Drawing.Size(180, 23);
-            this.textBoxNewPsswd.TabIndex = 4;
-            this.textBoxNewPsswd.UseSystemPasswordChar = true;
+            this.textBoxNewPassword.Location = new System.Drawing.Point(97, 100);
+            this.textBoxNewPassword.Name = "textBoxNewPassword";
+            this.textBoxNewPassword.Size = new System.Drawing.Size(180, 23);
+            this.textBoxNewPassword.TabIndex = 4;
+            this.textBoxNewPassword.UseSystemPasswordChar = true;
             // 
-            // textBoxNewPsswdRep
+            // textBoxNewPasswordRepeat
             // 
-            this.textBoxNewPsswdRep.Location = new System.Drawing.Point(97, 150);
-            this.textBoxNewPsswdRep.Name = "textBoxNewPsswdRep";
-            this.textBoxNewPsswdRep.Size = new System.Drawing.Size(180, 23);
-            this.textBoxNewPsswdRep.TabIndex = 5;
-            this.textBoxNewPsswdRep.UseSystemPasswordChar = true;
+            this.textBoxNewPasswordRepeat.Location = new System.Drawing.Point(97, 150);
+            this.textBoxNewPasswordRepeat.Name = "textBoxNewPasswordRepeat";
+            this.textBoxNewPasswordRepeat.Size = new System.Drawing.Size(180, 23);
+            this.textBoxNewPasswordRepeat.TabIndex = 5;
+            this.textBoxNewPasswordRepeat.UseSystemPasswordChar = true;
             // 
             // buttonSave
             // 
@@ -119,9 +119,9 @@
             this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this.pictureBoxVis);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.textBoxNewPsswdRep);
-            this.Controls.Add(this.textBoxNewPsswd);
-            this.Controls.Add(this.textBoxOldPsswd);
+            this.Controls.Add(this.textBoxNewPasswordRepeat);
+            this.Controls.Add(this.textBoxNewPassword);
+            this.Controls.Add(this.textBoxOldPassword);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -139,9 +139,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox textBoxOldPsswd;
-        public System.Windows.Forms.TextBox textBoxNewPsswd;
-        public System.Windows.Forms.TextBox textBoxNewPsswdRep;
+        public System.Windows.Forms.TextBox textBoxOldPassword;
+        public System.Windows.Forms.TextBox textBoxNewPassword;
+        public System.Windows.Forms.TextBox textBoxNewPasswordRepeat;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.PictureBox pictureBoxVis;
     }

@@ -14,10 +14,10 @@ namespace LibraryBooks.Validation
     {
         public ChangePasswordValidator()
         {
-            RuleFor(r => r.textBoxOldPsswd.Text).NotNull().NotEmpty().WithMessage("Введите текущий пароль");
-            RuleFor(r => r.textBoxNewPsswd.Text).NotNull().NotEmpty().WithMessage("Пароль не может быть пустой!");
-            RuleFor(r => r.textBoxNewPsswd.Text).Equal(r => r.textBoxNewPsswdRep.Text).WithMessage("Пароли не совпадают!");
-            RuleFor(r => r.textBoxOldPsswd.Text).NotEqual(r => r.textBoxNewPsswdRep.Text).WithMessage("Новый пароль совпадает с текущим!");
+            RuleFor(r => r.textBoxOldPassword.Text).NotNull().NotEmpty().WithMessage("Введите текущий пароль");
+            RuleFor(r => r.textBoxNewPassword.Text).NotNull().NotEmpty().WithMessage("Пароль не может быть пустой!");
+            RuleFor(r => r.textBoxNewPassword.Text).Equal(r => r.textBoxNewPasswordRepeat.Text).WithMessage("Пароли не совпадают!");
+            RuleFor(r => r.textBoxOldPassword.Text).NotEqual(r => r.textBoxNewPasswordRepeat.Text).WithMessage("Новый пароль совпадает с текущим!");
 
             //if (!_userRepository.IsExist(Session.CurrentUser.Login, textBoxOldPsswd.Text))
             //{

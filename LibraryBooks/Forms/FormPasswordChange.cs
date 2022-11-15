@@ -14,7 +14,7 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
-            ActiveControl = textBoxOldPsswd;
+            ActiveControl = textBoxOldPassword;
             AcceptButton = buttonSave;
 
             _userRepository = Resolve<IUserRepository>();
@@ -24,38 +24,38 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxOldPsswd.Text))
+            if (string.IsNullOrWhiteSpace(textBoxOldPassword.Text))
             {
                 MessageBoxExtention.ErrorInput("Введите текущий пароль");
                 return;
             }
 
-            if (!_userRepository.IsExist(Session.CurrentUser.Login, textBoxOldPsswd.Text))
+            if (!_userRepository.IsExist(Session.CurrentUser.Login, textBoxOldPassword.Text))
             {
                 MessageBoxExtention.WarningInput("Текущий пароль введён не верно!");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(textBoxNewPsswd.Text))
+            if (string.IsNullOrWhiteSpace(textBoxNewPassword.Text))
             {
                 MessageBoxExtention.WarningInput("Пароль не может быть пустой!");
                 return;
             }
 
-            if (textBoxNewPsswd.Text != textBoxNewPsswdRep.Text)
+            if (textBoxNewPassword.Text != textBoxNewPasswordRepeat.Text)
             {
                 MessageBoxExtention.WarningInput("Пароли не совпадают!");
                 return;
             }
 
-            if (textBoxOldPsswd.Text == textBoxNewPsswd.Text)
+            if (textBoxOldPassword.Text == textBoxNewPassword.Text)
             {
                 MessageBoxExtention.WarningInput("Новый пароль совпадает с текущим!");
                 return;
             }
 
-            var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login && u.Password == textBoxOldPsswd.Text);
-            user.Password = textBoxNewPsswd.Text;
+            var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login && u.Password == textBoxOldPassword.Text);
+            user.Password = textBoxNewPassword.Text;
             _userRepository.Update(user);
 
             MessageBox.Show("Пароль изменён");
@@ -68,7 +68,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPsswd, textBoxNewPsswd, textBoxNewPsswdRep);
+            FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat);
         }
     }
 }
