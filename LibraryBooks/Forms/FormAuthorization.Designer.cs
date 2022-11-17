@@ -1,6 +1,6 @@
 ﻿namespace LibraryBooks.Forms
 {
-    partial class FormAuthorization
+    partial class FormAuthorization : FormLibrarryBooks
     {
         /// <summary>
         /// Required designer variable.
@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAuthorization));
             this.buttonLogin = new System.Windows.Forms.Button();
