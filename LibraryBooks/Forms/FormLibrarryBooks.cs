@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public class FormLibrarryBooks : Form   // not abstract
+    public partial class FormLibrarryBooks : Form   // not abstract
     {
         // container for dependency registration (reference to an object instance)
         private static IWindsorContainer _iocContainer;  // static - for the entire program, without reference to an object
@@ -62,18 +62,17 @@ namespace LibraryBooks.Forms
             }
         }
 
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLibrarryBooks));
-            this.SuspendLayout();
-            // 
-            // FormLibrarryBooks
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormLibrarryBooks";
-            this.ResumeLayout(false);
-
-        }
+        //private void InitializeComponent()
+        //{
+        //    System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLibrarryBooks));
+        //    this.SuspendLayout();
+        //    // 
+        //    // FormLibrarryBooks
+        //    // 
+        //    this.ClientSize = new System.Drawing.Size(384, 261);
+        //    this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+        //    this.Name = "FormLibrarryBooks";
+        //    this.ResumeLayout(false);
+        //}
     }
 }
