@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using LibraryBooks.Common;
 using LibraryBooks.Core;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace LibraryBooks.Forms
             {
                 if (_iocContainer is null)
                 {
-                    _iocContainer = new WindsorContainer();
+                    _iocContainer = IocManager.IocContainer;
                     RegisterServices();
                 }
 
