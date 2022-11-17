@@ -1,6 +1,6 @@
 ﻿namespace LibraryBooks.Forms.Temp
 {
-    partial class Form2 : Form1
+    partial class Form2
     {
         /// <summary>
         /// Required designer variable.
