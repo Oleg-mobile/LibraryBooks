@@ -1,6 +1,6 @@
 ﻿namespace LibraryBooks.Forms
 {
-    partial class FormAuthorization
+    partial class FormAuthorization : FormLibrarryBooks
     {
         /// <summary>
         /// Required designer variable.

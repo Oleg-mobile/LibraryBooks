@@ -34,8 +34,6 @@ namespace LibraryBooks.Forms
 
         public FormLibrarryBooks()
         {
-            InitializeComponent();
-
             Mapper = Resolve<IMapper>();
         }
 
