@@ -1,8 +1,10 @@
-﻿using LibraryBooks.Core.Models;
+﻿using FluentValidation;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
 using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
+using LibraryBooks.Validation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,58 +68,30 @@ namespace LibraryBooks.Forms
 
             try
             {
-                // TODO вынести в валидатор
-                if (!int.TryParse(bookForm.textBoxYear.Text, out int year))
-                {
-                    throw new FormatException("Не верный формат года");
-                }
+                var validator = new FormBookValidator();
+                validator.ValidateAndThrow(bookForm);
 
-                if (!int.TryParse(bookForm.textBoxPageCount.Text, out int pageCount))
-                {
-                    throw new FormatException("Не верный формат количества страниц");
-                }
-
-                if (!int.TryParse(bookForm.textBoxMark.Text, out int mark))
-                {
-                    throw new FormatException("Не верный формат закладки");
-                }
-
-                if (bookForm.comboBoxGenre.SelectedItem is null)
-                {
-                    throw new FormatException("Жанр не выбран");
-                }
-
-                if (bookForm.comboBoxAuthor.SelectedItem is null)
-                {
-                    throw new FormatException("Автор не выбран");
-                }
-
-                if (bookForm.textBoxPathToBook.Text.Contains('"') || bookForm.textBoxPathToBook.Text.Contains('\''))
-                {
-                    throw new FormatException("Путь к книге не должен содержать ковычки!");
-                }
-
-                Book book = GetBook(bookForm, year, pageCount, mark);
+                Book book = GetBook(bookForm);
                 _bookRepository.Insert(book);
 
                 RefrashTable();
             }
-            catch (FormatException ex)
+            catch (ValidationException ex)
             {
                 MessageBoxExtention.WarningInput(ex.Message);
                 goto lableShow;
             }
         }
 
-        private Book GetBook(FormBook bookForm, int year, int pageCount, int mark)
+        private Book GetBook(FormBook bookForm)
         {
             return new Book
             {
                 Name = bookForm.textBoxName.Text,
                 Publication = bookForm.textBoxPublication.Text,
-                Year = year,
-                PageCount = pageCount,
-                Mark = mark,
+                Year = bookForm.textBoxYear.Text.ToInt(),
+                PageCount = bookForm.textBoxPageCount.Text.ToInt(),
+                Mark = bookForm.textBoxMark.Text.ToInt(),
                 GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
                 UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
                 AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
