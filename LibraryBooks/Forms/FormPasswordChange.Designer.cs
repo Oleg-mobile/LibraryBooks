@@ -110,7 +110,7 @@
             this.pictureBoxVis.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxVis.TabIndex = 7;
             this.pictureBoxVis.TabStop = false;
-            this.pictureBoxVis.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBoxVis.Click += new System.EventHandler(this.pictureBoxVis_Click);
             // 
             // FormPasswordChange
             // 

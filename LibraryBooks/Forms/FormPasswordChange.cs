@@ -12,6 +12,7 @@ namespace LibraryBooks.Forms
     {
         private readonly IUserRepository _userRepository;
         private readonly ChangePasswordValidator _changePasswordValidator;
+
         public FormPasswordChange()
         {
             InitializeComponent();
@@ -31,61 +32,22 @@ namespace LibraryBooks.Forms
             try
             {
                 _changePasswordValidator.ValidateAndThrow(this);  // immediately throw an exception
+
+                var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login && u.Password == textBoxOldPassword.Text);
+                user.Password = textBoxNewPassword.Text;
+                _userRepository.Update(user);
+
+                Notification.ShowSuccess("Пароль изменён!");
+                Close();
             }
             catch (ValidationException ex)
             {
-                Notification.ShowError(ex.Message);
+                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
+                Notification.ShowWarning(message);
             }
-
-            if (string.IsNullOrWhiteSpace(textBoxOldPassword.Text))
-            {
-                //MessageBoxExtention.ErrorInput("Введите текущий пароль!");
-                Notification.ShowWarning("Введите текущий пароль!");
-                return;
-            }
-
-            if (!_userRepository.IsExist(Session.CurrentUser.Login, textBoxOldPassword.Text))
-            {
-                //MessageBoxExtention.WarningInput("Текущий пароль введён не верно!");
-                Notification.ShowWarning("Текущий пароль введён не верно!");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(textBoxNewPassword.Text))
-            {
-                //MessageBoxExtention.WarningInput("Пароль не может быть пустой!");
-                Notification.ShowWarning("Пароль не может быть пустой!");
-                return;
-            }
-
-            if (textBoxNewPassword.Text != textBoxNewPasswordRepeat.Text)
-            {
-                //MessageBoxExtention.WarningInput("Пароли не совпадают!");
-                Notification.ShowWarning("Пароли не совпадают!");
-                return;
-            }
-
-            if (textBoxOldPassword.Text == textBoxNewPassword.Text)
-            {
-                //MessageBoxExtention.WarningInput("Новый пароль совпадает с текущим!");
-                Notification.ShowWarning("Новый пароль совпадает с текущим!");
-                return;
-            }
-
-            var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login && u.Password == textBoxOldPassword.Text);
-            user.Password = textBoxNewPassword.Text;
-            _userRepository.Update(user);
-
-            //MessageBoxExtention.SuccessInput("Пароль изменён!");
-            Notification.ShowSuccess("Пароль изменён!");
-
-            var formSettingsm = new FormSettings();
-            formSettingsm.Show();
-
-            Close();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBoxVis_Click(object sender, EventArgs e)
         {
             FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat);
         }

@@ -11,41 +11,44 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
-            labelName.Text = "Название: " + bookDto.Name;
-            labelAuthor.Text = "Автор: " + bookDto.AuthorName;
-            labelGenre.Text = "Жанр: " + bookDto.GenreName;
-            labelPublication.Text = "Издание: " + bookDto.Publication;
-            labelYaer.Text = "Год выпуска: " + bookDto.Year.ToString();
-            labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
-            labelPageCount.Text = "Количество страниц: " + bookDto.PageCount.ToString();
-            labelPath.Text = "Путь до книги: " + bookDto.PathToBook;
+            labelName.Text += bookDto.Name;
+            labelAuthor.Text += bookDto.AuthorName;
+            labelGenre.Text += bookDto.GenreName;
+            labelPublication.Text += bookDto.Publication;
+            labelYaer.Text += bookDto.Year;
+            labelMark.Text += bookDto.Mark;
+            labelPageCount.Text += bookDto.PageCount;
+            labelPath.Text += bookDto.PathToBook;
 
-            pictureBoxCover.SizeMode = PictureBoxSizeMode.Zoom;
             if (File.Exists(bookDto.PathToCover))
             {
                 pictureBoxCover.Image = Image.FromFile(bookDto.PathToCover);
             }
-            else 
-                pictureBoxCover.Image = Image.FromFile(@"Images\no-paper.png");
 
             if (bookDto.IsLiked)
             {
-                labelIsLiked.Text = "Книга понравилась";
+                labelIsLiked.Visible = true;
+                labelIsLiked.Text += "Понравилась";
             }
-            else 
-                labelIsLiked.Text = "";
 
+            SetState(bookDto);
+        }
+
+        private void SetState(BookDto bookDto)
+        {
             if (bookDto.IsFinished)
             {
-                labelIsFinished.Text = "Книга прочитана";
+                labelIsFinished.Text += "Прочитана";
+                return;
             }
-            else
-                if (bookDto.Mark > 0)
-                {
-                    labelIsFinished.Text = $"Читаю на {bookDto.Mark} странице";
-                }
-                else
-                    labelIsFinished.Text = "";
+
+            if (bookDto.Mark > 0)
+            {
+                labelIsFinished.Text += $"Читаю на {bookDto.Mark} странице";
+                return;
+            }
+
+            labelIsFinished.Text += "Не читали";
         }
     }
 }

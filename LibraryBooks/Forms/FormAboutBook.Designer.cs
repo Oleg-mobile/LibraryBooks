@@ -48,15 +48,17 @@
             this.labelName.AutoSize = true;
             this.labelName.Location = new System.Drawing.Point(234, 31);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(39, 15);
+            this.labelName.Size = new System.Drawing.Size(65, 15);
             this.labelName.TabIndex = 0;
-            this.labelName.Text = "Name";
+            this.labelName.Text = "Название: ";
             // 
             // pictureBoxCover
             // 
+            this.pictureBoxCover.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCover.Image")));
             this.pictureBoxCover.Location = new System.Drawing.Point(12, 12);
             this.pictureBoxCover.Name = "pictureBoxCover";
             this.pictureBoxCover.Size = new System.Drawing.Size(181, 222);
+            this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCover.TabIndex = 1;
             this.pictureBoxCover.TabStop = false;
             // 
@@ -65,81 +67,82 @@
             this.labelAuthor.AutoSize = true;
             this.labelAuthor.Location = new System.Drawing.Point(234, 71);
             this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(44, 15);
+            this.labelAuthor.Size = new System.Drawing.Size(46, 15);
             this.labelAuthor.TabIndex = 2;
-            this.labelAuthor.Text = "Author";
+            this.labelAuthor.Text = "Автор: ";
             // 
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
             this.labelGenre.Location = new System.Drawing.Point(234, 108);
             this.labelGenre.Name = "labelGenre";
-            this.labelGenre.Size = new System.Drawing.Size(38, 15);
+            this.labelGenre.Size = new System.Drawing.Size(44, 15);
             this.labelGenre.TabIndex = 3;
-            this.labelGenre.Text = "Genre";
+            this.labelGenre.Text = "Жанр: ";
             // 
             // labelPublication
             // 
             this.labelPublication.AutoSize = true;
             this.labelPublication.Location = new System.Drawing.Point(234, 144);
             this.labelPublication.Name = "labelPublication";
-            this.labelPublication.Size = new System.Drawing.Size(67, 15);
+            this.labelPublication.Size = new System.Drawing.Size(59, 15);
             this.labelPublication.TabIndex = 4;
-            this.labelPublication.Text = "Publication";
+            this.labelPublication.Text = "Издание: ";
             // 
             // labelYaer
             // 
             this.labelYaer.AutoSize = true;
             this.labelYaer.Location = new System.Drawing.Point(234, 184);
             this.labelYaer.Name = "labelYaer";
-            this.labelYaer.Size = new System.Drawing.Size(29, 15);
+            this.labelYaer.Size = new System.Drawing.Size(81, 15);
             this.labelYaer.TabIndex = 5;
-            this.labelYaer.Text = "Year";
+            this.labelYaer.Text = "Год выпуска: ";
             // 
             // labelMark
             // 
             this.labelMark.AutoSize = true;
             this.labelMark.Location = new System.Drawing.Point(12, 266);
             this.labelMark.Name = "labelMark";
-            this.labelMark.Size = new System.Drawing.Size(34, 15);
+            this.labelMark.Size = new System.Drawing.Size(133, 15);
             this.labelMark.TabIndex = 6;
-            this.labelMark.Text = "Mark";
+            this.labelMark.Text = "Закладка на странице: ";
             // 
             // labelPageCount
             // 
             this.labelPageCount.AutoSize = true;
             this.labelPageCount.Location = new System.Drawing.Point(234, 219);
             this.labelPageCount.Name = "labelPageCount";
-            this.labelPageCount.Size = new System.Drawing.Size(66, 15);
+            this.labelPageCount.Size = new System.Drawing.Size(126, 15);
             this.labelPageCount.TabIndex = 7;
-            this.labelPageCount.Text = "PageCount";
+            this.labelPageCount.Text = "Количество страниц: ";
             // 
             // labelPath
             // 
             this.labelPath.AutoSize = true;
             this.labelPath.Location = new System.Drawing.Point(12, 310);
             this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(70, 15);
+            this.labelPath.Size = new System.Drawing.Size(55, 15);
             this.labelPath.TabIndex = 8;
-            this.labelPath.Text = "PathToBook";
+            this.labelPath.Text = "Ссылка: ";
             // 
             // labelIsFinished
             // 
             this.labelIsFinished.AutoSize = true;
             this.labelIsFinished.Location = new System.Drawing.Point(12, 348);
             this.labelIsFinished.Name = "labelIsFinished";
-            this.labelIsFinished.Size = new System.Drawing.Size(59, 15);
+            this.labelIsFinished.Size = new System.Drawing.Size(49, 15);
             this.labelIsFinished.TabIndex = 9;
-            this.labelIsFinished.Text = "IsFinished";
+            this.labelIsFinished.Text = "Статус: ";
             // 
             // labelIsLiked
             // 
             this.labelIsLiked.AutoSize = true;
             this.labelIsLiked.Location = new System.Drawing.Point(12, 386);
             this.labelIsLiked.Name = "labelIsLiked";
-            this.labelIsLiked.Size = new System.Drawing.Size(43, 15);
+            this.labelIsLiked.Size = new System.Drawing.Size(54, 15);
             this.labelIsLiked.TabIndex = 10;
-            this.labelIsLiked.Text = "IsLiked";
+            this.labelIsLiked.Text = "Оценка: ";
+            this.labelIsLiked.Visible = false;
             // 
             // FormAboutBook
             // 
