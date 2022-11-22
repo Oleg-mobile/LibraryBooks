@@ -1,6 +1,5 @@
 ﻿using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Dto;
-using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
 using System;
 using System.Drawing;
@@ -27,21 +26,22 @@ namespace LibraryBooks.Forms
             string login = textBoxLogin.Text;
             string password = textBoxPassword.Text;
 
+            // TODO в валидацию
             if (string.IsNullOrEmpty(login))
             {
-                MessageBoxExtention.ErrorInput("Введите логин");
+                Notification.ShowWarning("Введите логин");
                 return;
             }
 
             if (string.IsNullOrEmpty(password))
             {
-                MessageBoxExtention.ErrorInput("Введите пароль");
+                Notification.ShowWarning("Введите пароль");
                 return;
             }
 
             if (!_userRepository.IsExist(login, password))
             {
-                MessageBoxExtention.Error("Не верный логин или пароль", "Ошибка авторизации!");
+                Notification.ShowWarning("Не верный логин или пароль\", \"Ошибка авторизации!");
                 return;
             }
 

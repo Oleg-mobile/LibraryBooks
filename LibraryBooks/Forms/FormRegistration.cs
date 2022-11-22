@@ -1,9 +1,8 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
-using LibraryBooks.Extentions;
+using LibraryBooks.Utils;
 using System;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
@@ -30,19 +29,19 @@ namespace LibraryBooks.Forms
 
             if (string.IsNullOrEmpty(login))  // checking for empty and null
             {
-                MessageBoxExtention.ErrorInput("Введите логин");
+                Notification.ShowWarning("Введите логин");
                 return;
             }
 
             if (string.IsNullOrEmpty(password))
             {
-                MessageBoxExtention.ErrorInput("Введите пароль");
+                Notification.ShowWarning("Введите пароль");
                 return;
             }
 
             if (textBoxPassword.Text != textBoxPasswordRepeat.Text)
             {
-                MessageBoxExtention.ErrorInput("Пароли не совпадают");
+                Notification.ShowWarning("Пароли не совпадают");
                 return;
             }
 
@@ -50,13 +49,13 @@ namespace LibraryBooks.Forms
             var user = _userRepository.GetAll().FirstOrDefault(u => u.Login == login);
             if (user is not null)
             {
-                MessageBoxExtention.ErrorInput("Существующий пользователь");
+                Notification.ShowWarning("Существующий пользователь");
                 return;
             }
 
             _userRepository.Insert(new User { Login = login, Password = password });
 
-            MessageBox.Show("Пользователь добавлен");
+            Notification.ShowSuccess("Пользователь добавлен");
 
             var authorizeForm = new FormAuthorization();
             authorizeForm.Show();

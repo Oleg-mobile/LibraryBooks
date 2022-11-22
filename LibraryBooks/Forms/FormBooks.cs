@@ -68,6 +68,7 @@ namespace LibraryBooks.Forms
 
             try
             {
+                // TODO вынести переменную?
                 var validator = new FormBookValidator();
                 validator.ValidateAndThrow(bookForm);
 
@@ -78,7 +79,9 @@ namespace LibraryBooks.Forms
             }
             catch (ValidationException ex)
             {
-                MessageBoxExtention.WarningInput(ex.Message);
+                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
+                Notification.ShowWarning(message);
+
                 goto lableShow;
             }
         }
@@ -184,6 +187,7 @@ namespace LibraryBooks.Forms
                 }
                 catch (FormatException ex)
                 {
+                    //  Notification.ShowWarning(ex.Message);
                     MessageBoxExtention.WarningInput(ex.Message);
                     goto lableShow;
                 }
@@ -214,7 +218,7 @@ namespace LibraryBooks.Forms
 
                 if (!File.Exists(book.PathToBook))
                 {
-                    MessageBoxExtention.WarningInput("Файл отсутствует!");
+                    Notification.ShowWarning("Файл отсутствует!");
                     return;
                 }
                 // TODO где-то хранить строку с путём до читалки
