@@ -11,6 +11,7 @@ namespace LibraryBooks.Forms
 
             pictureBoxNotification.Image = Image.FromFile(pathToImage);
             labelNotificationCaption.Text = messageCaption;
+            labelNotificationCaption.Left = (Width - labelNotificationCaption.Size.Width - labelNotificationCaption.Text.Length) / 2;
             labelNotificationText.Text = messageText;
             labelNotificationText.Left = (Width - labelNotificationText.Size.Width - labelNotificationText.Text.Length) / 2;
         }

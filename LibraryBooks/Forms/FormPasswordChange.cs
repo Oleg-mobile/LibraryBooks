@@ -42,10 +42,10 @@ namespace LibraryBooks.Forms
             }
             catch (ValidationException ex)
             {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
-        }
+                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;  // ? - defence from NullReferenceException
+                Notification.ShowWarning(message);                            // if ex.Errors not null, method First() will be called
+            }                                                                 // ?? - if left is not null, use left
+        }                                                                     // otherwise, use ex.Message
 
         private void pictureBoxVis_Click(object sender, EventArgs e)
         {

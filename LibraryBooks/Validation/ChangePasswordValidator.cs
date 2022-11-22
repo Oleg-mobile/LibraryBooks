@@ -12,8 +12,8 @@ namespace LibraryBooks.Validation
         {
             RuleFor(r => r.textBoxOldPassword.Text).NotNull().NotEmpty().WithMessage("Введите текущий пароль");
             RuleFor(r => r.textBoxOldPassword.Text).Must(CheckCurrentPassword).WithMessage("Текущий пароль введён не верно!");
-            RuleFor(r => r.textBoxNewPassword.Text).NotNull().NotEmpty().WithMessage("Пароль не может быть пустой!");
-            RuleFor(r => r.textBoxNewPassword.Text).Equal(r => r.textBoxNewPasswordRepeat.Text).WithMessage("Пароли не совпадают!");
+            RuleFor(r => r.textBoxNewPassword.Text).NotNull().NotEmpty().WithMessage("Новый пароль не может быть пустой!");
+            RuleFor(r => r.textBoxNewPassword.Text).Equal(r => r.textBoxNewPasswordRepeat.Text).WithMessage("Новые пароли не совпадают!");
             RuleFor(r => r.textBoxOldPassword.Text).NotEqual(r => r.textBoxNewPasswordRepeat.Text).WithMessage("Новый пароль совпадает с текущим!");
         }
 
