@@ -89,7 +89,7 @@ namespace LibraryBooks.Forms
             {
                 Name = bookForm.textBoxName.Text,
                 Publication = bookForm.textBoxPublication.Text,
-                Year = bookForm.textBoxYear.Text.ToInt(),
+                Year = bookForm.textBoxYear.Text.ToInt(),  // int checked during validation, on line 72, so we parse without checks
                 PageCount = bookForm.textBoxPageCount.Text.ToInt(),
                 Mark = bookForm.textBoxMark.Text.ToInt(),
                 GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,

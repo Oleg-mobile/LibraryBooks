@@ -8,7 +8,7 @@ namespace LibraryBooks.Validation
     {
         public FormBookValidator()
         {
-            Transform(from: r => r.textBoxYear.Text, to: v => int.TryParse(v, out int year) ? (int?)year : null)
+            Transform(from: r => r.textBoxYear.Text, to: v => int.TryParse(v, out int year) ? (int?)year : null)  // !int.TryParse()
                 .NotNull()
                 .WithMessage("Не верный формат года");
 
@@ -23,7 +23,8 @@ namespace LibraryBooks.Validation
             RuleFor(r => r.comboBoxGenre.SelectedItem).NotNull().WithMessage("Жанр не выбран");
             RuleFor(r => r.comboBoxAuthor.SelectedItem).NotNull().WithMessage("Автор не выбран");
 
-            var regex = new Regex(@"(^"")|(\w*"")|(^')|(\w*')");
+            var regex = new Regex(@"(^"")|(\w*"")|(^')|(\w*')");  // regular expression
+                                                                  // ^ - begin with ..., * - any sequence, \w - any character
             RuleFor(r => r.textBoxPathToBook.Text).Must(r => regex.IsMatch(r)).WithMessage("Путь к книге не должен содержать ковычки!");
         }
     }
