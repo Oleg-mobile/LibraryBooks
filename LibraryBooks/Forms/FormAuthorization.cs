@@ -1,6 +1,8 @@
-﻿using LibraryBooks.Core.Repositories.Users;
+﻿using FluentValidation;
+using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Dto;
 using LibraryBooks.Utils;
+using LibraryBooks.Validation;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -27,28 +29,39 @@ namespace LibraryBooks.Forms
             string password = textBoxPassword.Text;
 
             // TODO в валидацию
-            if (string.IsNullOrEmpty(login))
-            {
-                Notification.ShowWarning("Введите логин");
-                return;
-            }
+            //if (string.IsNullOrEmpty(login))
+            //{
+            //    Notification.ShowWarning("Введите логин");
+            //    return;
+            //}
 
-            if (string.IsNullOrEmpty(password))
-            {
-                Notification.ShowWarning("Введите пароль");
-                return;
-            }
+            //if (string.IsNullOrEmpty(password))
+            //{
+            //    Notification.ShowWarning("Введите пароль");
+            //    return;
+            //}
 
-            if (!_userRepository.IsExist(login, password))
-            {
-                Notification.ShowWarning("Не верный логин или пароль\", \"Ошибка авторизации!");
-                return;
-            }
+            //if (!_userRepository.IsExist(login, password))
+            //{
+            //    Notification.ShowWarning("Не верный логин или пароль");
+            //    return;
+            //}
 
-            var user = _userRepository.GetAll().First(u => u.Login == login && u.Password == password);
-            Session.CurrentUser = Mapper.Map<UserDto>(user);
-            new FormMain().Show();  // stack variable is not needed
-            Hide();
+            try
+            {
+                var validator = new AuthorizationValidator();
+                validator.ValidateAndThrow(this);
+
+                var user = _userRepository.GetAll().First(u => u.Login == login && u.Password == password);
+                Session.CurrentUser = Mapper.Map<UserDto>(user);
+                new FormMain().Show();  // stack variable is not needed
+                Hide();
+            }
+            catch (ValidationException ex)
+            {
+                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
+                Notification.ShowWarning(message);
+            }
         }
 
         private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();

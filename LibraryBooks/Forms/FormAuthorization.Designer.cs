@@ -143,7 +143,7 @@
 
         private System.Windows.Forms.Button buttonLogin;
         public System.Windows.Forms.TextBox textBoxLogin;
-        private System.Windows.Forms.TextBox textBoxPassword;
+        public System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Button buttonRegistration;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
