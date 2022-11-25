@@ -25,7 +25,7 @@ namespace LibraryBooks.Validation
 
             var regex = new Regex(@"(^"")|(\w*"")|(^')|(\w*')");  // regular expression
                                                                   // ^ - begin with ..., * - any sequence, \w - any character
-            RuleFor(r => r.textBoxPathToBook.Text).Must(r => regex.IsMatch(r)).WithMessage("Путь к книге не должен содержать ковычки!");
+            RuleFor(r => r.textBoxPathToBook.Text).Must(r => !regex.IsMatch(r)).WithMessage("Путь к книге не должен \n содержать ковычки!");
         }
     }
 }

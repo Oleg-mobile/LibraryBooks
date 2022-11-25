@@ -61,5 +61,10 @@ namespace LibraryBooks.Forms
         {
             OpenChildForm(new FormSettings());
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            buttonBooks.PerformClick();  // when opening the main form, open the books form
+        }
     }
 }
