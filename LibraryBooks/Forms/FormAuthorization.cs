@@ -25,34 +25,13 @@ namespace LibraryBooks.Forms
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            string login = textBoxLogin.Text;
-            string password = textBoxPassword.Text;
-
-            // TODO в валидацию
-            //if (string.IsNullOrEmpty(login))
-            //{
-            //    Notification.ShowWarning("Введите логин");
-            //    return;
-            //}
-
-            //if (string.IsNullOrEmpty(password))
-            //{
-            //    Notification.ShowWarning("Введите пароль");
-            //    return;
-            //}
-
-            //if (!_userRepository.IsExist(login, password))
-            //{
-            //    Notification.ShowWarning("Не верный логин или пароль");
-            //    return;
-            //}
-
             try
             {
+                // TODO вынес в валидатор
                 var validator = new AuthorizationValidator();
                 validator.ValidateAndThrow(this);
 
-                var user = _userRepository.GetAll().First(u => u.Login == login && u.Password == password);
+                var user = _userRepository.GetAll().First(u => u.Login == textBoxLogin.Text && u.Password == textBoxPassword.Text);
                 Session.CurrentUser = Mapper.Map<UserDto>(user);
                 new FormMain().Show();  // stack variable is not needed
                 Hide();

@@ -17,7 +17,6 @@ namespace LibraryBooks.Validation
             RuleFor(r => r.textBoxOldPassword.Text).NotEqual(r => r.textBoxNewPasswordRepeat.Text).WithMessage("Новый пароль совпадает с текущим!");
         }
 
-
         private bool CheckCurrentPassword(string currentPassword)
         {
             var userRepository = IocManager.Resolve<IUserRepository>();

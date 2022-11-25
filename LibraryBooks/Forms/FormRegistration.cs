@@ -1,6 +1,8 @@
-﻿using LibraryBooks.Core.Models;
+﻿using FluentValidation;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Utils;
+using LibraryBooks.Validation;
 using System;
 using System.Linq;
 
@@ -23,45 +25,37 @@ namespace LibraryBooks.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             string login = textBoxName.Text;
-            string password = textBoxPassword.Text;
 
-            // TODO вынести валидацию в класс вадидатор
-
-            if (string.IsNullOrEmpty(login))  // checking for empty and null
+            try
             {
-                Notification.ShowWarning("Введите логин");
-                return;
-            }
+                // TODO вынес в вадидатор
+                var validator = new RegistrationValidator();
+                validator.ValidateAndThrow(this);
 
-            if (string.IsNullOrEmpty(password))
+                // TODO вынес в репозиторий
+                var user = _userRepository.GetAll().FirstOrDefault(u => u.Login == login);
+                if (user is not null)
+                {
+                    Notification.ShowWarning("Существующий пользователь");
+                    return;
+                }
+
+                _userRepository.Insert(new User { Login = login, Password = textBoxPassword.Text});
+
+                Notification.ShowSuccess("Пользователь добавлен");
+
+                var authorizeForm = new FormAuthorization();
+                authorizeForm.Show();
+                authorizeForm.textBoxLogin.Text = login;
+
+                Close();
+            }
+            catch (ValidationException ex)
             {
-                Notification.ShowWarning("Введите пароль");
-                return;
+                // TODO код повторяется
+                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
+                Notification.ShowWarning(message);
             }
-
-            if (textBoxPassword.Text != textBoxPasswordRepeat.Text)
-            {
-                Notification.ShowWarning("Пароли не совпадают");
-                return;
-            }
-
-            // TODO вынес в репозиторий
-            var user = _userRepository.GetAll().FirstOrDefault(u => u.Login == login);
-            if (user is not null)
-            {
-                Notification.ShowWarning("Существующий пользователь");
-                return;
-            }
-
-            _userRepository.Insert(new User { Login = login, Password = password });
-
-            Notification.ShowSuccess("Пользователь добавлен");
-
-            var authorizeForm = new FormAuthorization();
-            authorizeForm.Show();
-            authorizeForm.textBoxLogin.Text = login;
-
-            Close();
         }
 
         private void pictureBoxPassVis_Click(object sender, EventArgs e)

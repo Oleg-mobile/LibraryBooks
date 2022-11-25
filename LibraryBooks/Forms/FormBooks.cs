@@ -68,7 +68,6 @@ namespace LibraryBooks.Forms
 
             try
             {
-                // TODO вынести переменную?
                 var validator = new FormBookValidator();
                 validator.ValidateAndThrow(bookForm);
 
@@ -148,59 +147,33 @@ namespace LibraryBooks.Forms
 
                 try
                 {
-                    // TODO вынести в валидатор
-                    if (!int.TryParse(bookForm.textBoxYear.Text, out int year))
-                    {
-                        throw new FormatException("Не верный формат года");
-                    }
-
-                    if (!int.TryParse(bookForm.textBoxPageCount.Text, out int pageCount))
-                    {
-                        throw new FormatException("Не верный формат количества страниц");
-                    }
-
-                    if (!int.TryParse(bookForm.textBoxMark.Text, out int mark))
-                    {
-                        throw new FormatException("Не верный формат закладки");
-                    }
-
-                    if (bookForm.comboBoxGenre.SelectedItem is null)
-                    {
-                        throw new FormatException("Жанр не выбран");
-                    }
-
-                    if (bookForm.comboBoxAuthor.SelectedItem is null)
-                    {
-                        throw new FormatException("Автор не выбран");
-                    }
-
-                    if (bookForm.textBoxPathToBook.Text.Contains('"') || bookForm.textBoxPathToBook.Text.Contains('\''))
-                    {
-                        throw new FormatException("Путь к книге не должен содержать ковычки!");
-                    }
+                    // TODO вынес в валидатор. Нужна ли новая переменная?
+                    var validator = new FormBookValidator();
+                    validator.ValidateAndThrow(bookForm);
 
                     var book = Mapper.Map<Book>(bookDto);
-                    EditBook(book, bookForm, year, pageCount, mark);
+                    EditBook(book, bookForm);
                     _bookRepository.Update(book);
 
                     RefrashTable();
                 }
-                catch (FormatException ex)
+                catch (ValidationException ex)
                 {
-                    //  Notification.ShowWarning(ex.Message);
-                    MessageBoxExtention.WarningInput(ex.Message);
+                    // TODO одинаковый код
+                    var message = ex.Errors.First().ErrorMessage ?? ex.Message;
+                    Notification.ShowWarning(message);
                     goto lableShow;
                 }
             }
         }
 
-        private void EditBook(Book book, FormBook bookForm, int year, int pageCount, int mark)
+        private void EditBook(Book book, FormBook bookForm)
         {
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
-            book.Year = year;
-            book.PageCount = pageCount;
-            book.Mark = mark;
+            book.Year = bookForm.textBoxYear.Text.ToInt();
+            book.PageCount = bookForm.textBoxPageCount.Text.ToInt();
+            book.Mark = bookForm.textBoxMark.Text.ToInt();
             book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
             book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;
