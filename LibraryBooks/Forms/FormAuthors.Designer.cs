@@ -46,7 +46,7 @@
             this.dataGridViewAuthors.Name = "dataGridViewAuthors";
             this.dataGridViewAuthors.RowTemplate.Height = 25;
             this.dataGridViewAuthors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAuthors.Size = new System.Drawing.Size(320, 370);
+            this.dataGridViewAuthors.Size = new System.Drawing.Size(630, 340);
             this.dataGridViewAuthors.TabIndex = 1;
             // 
             // buttonAdd
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 441);
+            this.ClientSize = new System.Drawing.Size(854, 441);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);

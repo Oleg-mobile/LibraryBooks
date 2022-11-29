@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 441);
+            this.ClientSize = new System.Drawing.Size(854, 441);
             this.Controls.Add(this.labelIsLiked);
             this.Controls.Add(this.labelIsFinished);
             this.Controls.Add(this.labelPath);

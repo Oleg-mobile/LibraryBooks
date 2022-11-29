@@ -48,7 +48,7 @@
             this.dataGridViewGenres.ReadOnly = true;
             this.dataGridViewGenres.RowTemplate.Height = 25;
             this.dataGridViewGenres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewGenres.Size = new System.Drawing.Size(320, 370);
+            this.dataGridViewGenres.Size = new System.Drawing.Size(630, 340);
             this.dataGridViewGenres.TabIndex = 0;
             // 
             // buttonAdd
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 441);
+            this.ClientSize = new System.Drawing.Size(854, 441);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDel);
