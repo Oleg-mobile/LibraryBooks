@@ -57,9 +57,9 @@
             this.labelNotificationCaption.ForeColor = System.Drawing.SystemColors.Control;
             this.labelNotificationCaption.Location = new System.Drawing.Point(123, 31);
             this.labelNotificationCaption.Name = "labelNotificationCaption";
-            this.labelNotificationCaption.Size = new System.Drawing.Size(90, 37);
+            this.labelNotificationCaption.Size = new System.Drawing.Size(145, 37);
             this.labelNotificationCaption.TabIndex = 3;
-            this.labelNotificationCaption.Text = "label1";
+            this.labelNotificationCaption.Text = "Заголовок";
             // 
             // pictureBoxNotification
             // 
@@ -97,11 +97,11 @@
             this.labelNotificationText.AutoSize = true;
             this.labelNotificationText.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.labelNotificationText.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelNotificationText.Location = new System.Drawing.Point(111, 116);
+            this.labelNotificationText.Location = new System.Drawing.Point(110, 110);
             this.labelNotificationText.Name = "labelNotificationText";
-            this.labelNotificationText.Size = new System.Drawing.Size(62, 25);
+            this.labelNotificationText.Size = new System.Drawing.Size(116, 25);
             this.labelNotificationText.TabIndex = 3;
-            this.labelNotificationText.Text = "label1";
+            this.labelNotificationText.Text = "Сообщение";
             // 
             // FormNotification
             // 
