@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LibraryBooks.Core.Extentions;
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
@@ -147,7 +148,7 @@ namespace LibraryBooks.Forms
 
                 try
                 {
-                    // TODO вынес в валидатор. Нужна ли новая переменная?
+                    // TODO Нужна новая переменная
                     var validator = new FormBookValidator();
                     validator.ValidateAndThrow(bookForm);
 

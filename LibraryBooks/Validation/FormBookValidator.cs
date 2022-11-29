@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace LibraryBooks.Validation
 {
-    public class FormBookValidator : AbstractValidator<FormBook>
+    public class FormBookValidator : BaseValidator<FormBook>
     {
         public FormBookValidator()
         {

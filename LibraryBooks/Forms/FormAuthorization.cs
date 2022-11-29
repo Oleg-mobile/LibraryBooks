@@ -27,7 +27,6 @@ namespace LibraryBooks.Forms
         {
             try
             {
-                // TODO вынес в валидатор
                 var validator = new AuthorizationValidator();
                 validator.ValidateAndThrow(this);
 

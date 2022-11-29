@@ -24,7 +24,7 @@ namespace LibraryBooks.Forms
             //TODO заменить на автоматическую валидацию
             _changePasswordValidator = new ChangePasswordValidator();
 
-            this.Text = "Библиотека  / Изменить пароль: " + Session.CurrentUser.Login;
+            Text = "Библиотека  / Изменить пароль: " + Session.CurrentUser.Login;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

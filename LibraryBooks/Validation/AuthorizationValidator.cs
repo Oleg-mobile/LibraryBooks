@@ -5,7 +5,7 @@ using LibraryBooks.Forms;
 
 namespace LibraryBooks.Validation
 {
-    public class AuthorizationValidator : AbstractValidator<FormAuthorization>
+    public class AuthorizationValidator : BaseValidator<FormAuthorization>
     {
         public AuthorizationValidator()
         {

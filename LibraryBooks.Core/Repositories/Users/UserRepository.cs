@@ -1,4 +1,5 @@
-﻿using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Core.Extentions;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
 
 namespace LibraryBooks.Core.Repositories.Users
@@ -10,9 +11,13 @@ namespace LibraryBooks.Core.Repositories.Users
         {
         }
 
-        public bool IsExist(string login, string password)
+        public bool IsExist(string login, string password = null)
         {
-            var user = Table.FirstOrDefault(u => u.Login == login && u.Password == password);  // Table = Context.Users  (EfCoreRepositoryBase)
+            var user = Table   // INFO: Table = Context.Users  (EfCoreRepositoryBase)
+                .Where(u => u.Login == login)
+                .WhereIf(!string.IsNullOrWhiteSpace(password), u => u.Password == password)
+                .FirstOrDefault();
+
             return user != null;  // true or false
         }
     }

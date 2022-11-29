@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace LibraryBooks.Extentions
+namespace LibraryBooks.Core.Extentions
 {
     public static class LinqExtention
     {

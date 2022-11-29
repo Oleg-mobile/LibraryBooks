@@ -2,7 +2,6 @@
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Utils;
-using LibraryBooks.Validation;
 using System;
 using System.Linq;
 
@@ -11,6 +10,7 @@ namespace LibraryBooks.Forms
     public partial class FormRegistration : FormLibrarryBooks  // Not Form
     {
         private readonly IUserRepository _userRepository;
+        private readonly IValidator<FormRegistration> _validator;
 
         public FormRegistration()
         {
@@ -20,6 +20,7 @@ namespace LibraryBooks.Forms
             AcceptButton = buttonAdd;
 
             _userRepository = Resolve<IUserRepository>();
+            _validator = Resolve<IValidator<FormRegistration>>();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -28,19 +29,15 @@ namespace LibraryBooks.Forms
 
             try
             {
-                // TODO вынес в вадидатор
-                var validator = new RegistrationValidator();
-                validator.ValidateAndThrow(this);
+                _validator.ValidateAndThrow(this);
 
-                // TODO вынес в репозиторий
-                var user = _userRepository.GetAll().FirstOrDefault(u => u.Login == login);
-                if (user is not null)
+                if (_userRepository.IsExist(login))
                 {
                     Notification.ShowWarning("Существующий пользователь");
                     return;
                 }
 
-                _userRepository.Insert(new User { Login = login, Password = textBoxPassword.Text});
+                _userRepository.Insert(new User { Login = login, Password = textBoxPassword.Text });
 
                 Notification.ShowSuccess("Пользователь добавлен");
 
@@ -52,7 +49,7 @@ namespace LibraryBooks.Forms
             }
             catch (ValidationException ex)
             {
-                // TODO код повторяется
+                // TODO код повторяется (inetceptor???)
                 var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
                 Notification.ShowWarning(message);
             }
