@@ -41,6 +41,7 @@ namespace LibraryBooks.Forms
 
                 Notification.ShowSuccess("Пользователь добавлен");
 
+                // TODO не открывать новую форму
                 var authorizeForm = new FormAuthorization();
                 authorizeForm.Show();
                 authorizeForm.textBoxLogin.Text = login;

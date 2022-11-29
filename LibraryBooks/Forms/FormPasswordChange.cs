@@ -1,17 +1,15 @@
 ﻿using FluentValidation;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Utils;
-using LibraryBooks.Validation;
 using System;
 using System.Linq;
-using ValidationException = FluentValidation.ValidationException;
 
 namespace LibraryBooks.Forms
 {
     public partial class FormPasswordChange : FormLibrarryBooks
     {
         private readonly IUserRepository _userRepository;
-        private readonly ChangePasswordValidator _changePasswordValidator;
+        private readonly IValidator<FormPasswordChange> _changePasswordValidator;
 
         public FormPasswordChange()
         {
@@ -21,8 +19,7 @@ namespace LibraryBooks.Forms
             AcceptButton = buttonSave;
 
             _userRepository = Resolve<IUserRepository>();
-            //TODO заменить на автоматическую валидацию
-            _changePasswordValidator = new ChangePasswordValidator();
+            _changePasswordValidator = Resolve<IValidator<FormPasswordChange>>();
 
             Text = "Библиотека  / Изменить пароль: " + Session.CurrentUser.Login;
         }

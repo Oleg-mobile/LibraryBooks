@@ -13,6 +13,8 @@ namespace LibraryBooks.Forms
     public partial class FormAuthorization : FormLibrarryBooks
     {
         private readonly IUserRepository _userRepository;
+        private readonly IValidator<FormAuthorization> _validator;
+
         public FormAuthorization()
         {
             InitializeComponent();
@@ -21,14 +23,14 @@ namespace LibraryBooks.Forms
             AcceptButton = buttonLogin;
 
             _userRepository = Resolve<IUserRepository>();
+            _validator = Resolve<IValidator<FormAuthorization>>();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             try
             {
-                var validator = new AuthorizationValidator();
-                validator.ValidateAndThrow(this);
+                _validator.ValidateAndThrow(this);
 
                 var user = _userRepository.GetAll().First(u => u.Login == textBoxLogin.Text && u.Password == textBoxPassword.Text);
                 Session.CurrentUser = Mapper.Map<UserDto>(user);
@@ -44,11 +46,7 @@ namespace LibraryBooks.Forms
 
         private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
 
-        private void buttonRegistration_Click(object sender, EventArgs e)
-        {
-            new FormRegistration().Show();
-            Hide();
-        }
+        private void buttonRegistration_Click(object sender, EventArgs e) => new FormRegistration().ShowDialog();
 
         private void pictureBoxClose_Click(object sender, EventArgs e) => ToggleVisiblePassword(pictureBoxClose, textBoxPassword);
 
