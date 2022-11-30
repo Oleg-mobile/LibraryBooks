@@ -13,7 +13,7 @@ namespace LibraryBooks.Core
         public DbSet<User> Users { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
-
+        public DbSet<Reader> Readers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // database connection string

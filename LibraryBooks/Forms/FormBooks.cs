@@ -23,6 +23,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<User, int> _userRepository;
+        private readonly IRepository<Reader, int> _readerRepository;
         private BindingList<BookDto> bindingList;
 
         public FormBooks()
@@ -33,6 +34,7 @@ namespace LibraryBooks.Forms
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _authorRepository = Resolve<IRepository<Author, int>>();
             _userRepository = Resolve<IRepository<User, int>>();
+            _readerRepository= Resolve<IRepository<Reader, int>>();
 
             RefrashTable();
             InitDataGridViewColumns<BookDto>(dataGridViewBooks);
@@ -45,6 +47,7 @@ namespace LibraryBooks.Forms
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
             .Include(b => b.User)    //  Join
+            //.Include(b => b.Reader)
             .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
             .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
             .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
@@ -102,6 +105,7 @@ namespace LibraryBooks.Forms
                 PathToCover = bookForm.textBoxPathToCover.Text,
                 IsLiked = bookForm.checkBoxIsLiked.Checked,
                 IsFinished = bookForm.checkBoxIsFinished.Checked
+                //ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id
             };
         }
 
@@ -182,6 +186,7 @@ namespace LibraryBooks.Forms
             book.PathToCover = bookForm.textBoxPathToCover.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
+            //book.ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id;
         }
 
         private void buttonRead_Click(object sender, EventArgs e)

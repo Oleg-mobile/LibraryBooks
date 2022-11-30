@@ -12,6 +12,7 @@ namespace LibraryBooks.Forms
     {
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Genre, int> _genreRepository;
+        private readonly IRepository<Reader, int> _readerRepository;
         private OpenFileDialog ofd = new OpenFileDialog();
 
         public FormBook()
@@ -20,6 +21,7 @@ namespace LibraryBooks.Forms
 
             _authorRepository = Resolve<IRepository<Author, int>>();
             _genreRepository = Resolve<IRepository<Genre, int>>();
+            _readerRepository = Resolve<IRepository<Reader, int>>();
 
             AcceptButton = buttonSave;
 
@@ -28,6 +30,9 @@ namespace LibraryBooks.Forms
 
             comboBoxGenre.DataSource = _genreRepository.GetAll().ToList();
             comboBoxGenre.DisplayMember = "Name";
+
+            comboBoxReader.DataSource = _readerRepository.GetAll().ToList();
+            comboBoxReader.DisplayMember = "Name";
 
             // TODO временный
             label9.Text = Program.AuthForm.textBoxLogin.Text;
@@ -46,6 +51,7 @@ namespace LibraryBooks.Forms
             textBoxMark.Text = book.Mark.ToString();
             checkBoxIsLiked.Checked = book.IsLiked;
             checkBoxIsFinished.Checked = book.IsFinished;
+            //comboBoxReader.Text = book.ReaderName;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

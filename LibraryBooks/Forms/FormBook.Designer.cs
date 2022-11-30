@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBook));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxReader = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.pictureBoxPathToCover = new System.Windows.Forms.PictureBox();
             this.pictureBoxPathToBook = new System.Windows.Forms.PictureBox();
             this.textBoxPathToCover = new System.Windows.Forms.TextBox();
@@ -57,8 +59,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxAuthor = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.comboBoxReader = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToCover)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToBook)).BeginInit();
@@ -103,6 +103,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Книга";
+            // 
+            // comboBoxReader
+            // 
+            this.comboBoxReader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxReader.FormattingEnabled = true;
+            this.comboBoxReader.Location = new System.Drawing.Point(45, 310);
+            this.comboBoxReader.Name = "comboBoxReader";
+            this.comboBoxReader.Size = new System.Drawing.Size(180, 23);
+            this.comboBoxReader.TabIndex = 32;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(45, 290);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(52, 15);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Читалка";
             // 
             // pictureBoxPathToCover
             // 
@@ -347,24 +365,6 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(45, 290);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(52, 15);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "Читалка";
-            // 
-            // comboBoxReader
-            // 
-            this.comboBoxReader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxReader.FormattingEnabled = true;
-            this.comboBoxReader.Location = new System.Drawing.Point(45, 310);
-            this.comboBoxReader.Name = "comboBoxReader";
-            this.comboBoxReader.Size = new System.Drawing.Size(180, 23);
-            this.comboBoxReader.TabIndex = 32;
-            // 
             // FormBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -414,7 +414,7 @@
         private System.Windows.Forms.PictureBox pictureBoxPathToCover;
         private System.Windows.Forms.PictureBox pictureBoxPathToBook;
         public System.Windows.Forms.TextBox textBoxPathToCover;
-        private System.Windows.Forms.ComboBox comboBoxReader;
+        public System.Windows.Forms.ComboBox comboBoxReader;
         private System.Windows.Forms.Label label12;
     }
 }
