@@ -37,11 +37,14 @@
             this.textBoxOpeningFormat = new System.Windows.Forms.TextBox();
             this.textBoxPathToReader = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
+            this.pictureBoxPathToReader = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToReader)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBoxPathToReader);
             this.groupBox1.Controls.Add(this.buttonSave);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -114,6 +117,17 @@
             this.textBoxName.Size = new System.Drawing.Size(180, 23);
             this.textBoxName.TabIndex = 0;
             // 
+            // pictureBoxPathToReader
+            // 
+            this.pictureBoxPathToReader.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPathToReader.Image")));
+            this.pictureBoxPathToReader.Location = new System.Drawing.Point(228, 100);
+            this.pictureBoxPathToReader.Name = "pictureBoxPathToReader";
+            this.pictureBoxPathToReader.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxPathToReader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxPathToReader.TabIndex = 7;
+            this.pictureBoxPathToReader.TabStop = false;
+            this.pictureBoxPathToReader.Click += new System.EventHandler(this.pictureBoxPathToReader_Click);
+            // 
             // FormReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -125,6 +139,7 @@
             this.Text = "Библиотека  / Читалка";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToReader)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -139,5 +154,6 @@
         public System.Windows.Forms.TextBox textBoxPathToReader;
         public System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.PictureBox pictureBoxPathToReader;
     }
 }

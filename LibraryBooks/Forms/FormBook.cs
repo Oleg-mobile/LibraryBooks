@@ -51,7 +51,7 @@ namespace LibraryBooks.Forms
             textBoxMark.Text = book.Mark.ToString();
             checkBoxIsLiked.Checked = book.IsLiked;
             checkBoxIsFinished.Checked = book.IsFinished;
-            //comboBoxReader.Text = book.ReaderName;
+            comboBoxReader.Text = book.ReaderName;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

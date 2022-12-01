@@ -37,5 +37,8 @@ namespace LibraryBooks.Dto
 
         [DgvColumn(DisplayName = "Прочитана")]
         public bool IsFinished { get; set; }
+
+        [DgvColumn(DisplayName = "Читалка")]
+        public string ReaderName { get; set; }
     }
 }

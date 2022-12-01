@@ -13,7 +13,8 @@ namespace LibraryBooks.Mapping
             CreateMap<Book, BookDto>();
             CreateMap<BookDto, Book>()
                 .ForMember(m => m.Author, n => n.Ignore())
-                .ForMember(m => m.Genre,  n => n.Ignore());
+                .ForMember(m => m.Genre,  n => n.Ignore())
+                .ForMember(m => m.Reader, n => n.Ignore());
         }
     }
 }

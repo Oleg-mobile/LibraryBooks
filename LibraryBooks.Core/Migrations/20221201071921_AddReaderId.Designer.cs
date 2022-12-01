@@ -3,6 +3,7 @@ using LibraryBooks.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryBooks.Core.Migrations
 {
     [DbContext(typeof(LibraryBooksContext))]
-    partial class LibraryBooksContextModelSnapshot : ModelSnapshot
+    [Migration("20221201071921_AddReaderId")]
+    partial class AddReaderId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
