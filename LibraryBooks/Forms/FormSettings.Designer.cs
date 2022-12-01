@@ -32,7 +32,7 @@
             this.buttonGetPath = new System.Windows.Forms.Button();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonChangePassword = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDell = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
@@ -62,15 +62,15 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button1
+            // buttonChangePassword
             // 
-            this.button1.Location = new System.Drawing.Point(682, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Сменить пароль";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonChangePassword.Location = new System.Drawing.Point(682, 25);
+            this.buttonChangePassword.Name = "buttonChangePassword";
+            this.buttonChangePassword.Size = new System.Drawing.Size(140, 30);
+            this.buttonChangePassword.TabIndex = 3;
+            this.buttonChangePassword.Text = "Сменить пароль";
+            this.buttonChangePassword.UseVisualStyleBackColor = true;
+            this.buttonChangePassword.Click += new System.EventHandler(this.buttonChangePassword_Click);
             // 
             // buttonAdd
             // 
@@ -125,7 +125,7 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDell);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonChangePassword);
             this.Controls.Add(this.textBoxFilePath);
             this.Controls.Add(this.buttonGetPath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -141,7 +141,7 @@
         private System.Windows.Forms.Button buttonGetPath;
         private System.Windows.Forms.TextBox textBoxFilePath;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonChangePassword;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDell;
         private System.Windows.Forms.Button buttonEdit;

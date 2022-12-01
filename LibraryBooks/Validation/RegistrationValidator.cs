@@ -3,7 +3,7 @@ using LibraryBooks.Forms;
 
 namespace LibraryBooks.Validation
 {
-    public class RegistrationValidator : BaseValidator<FormRegistration>
+    public class RegistrationValidator : AbstractValidator<FormRegistration>
     {
         public RegistrationValidator()
         {

@@ -46,8 +46,6 @@ namespace LibraryBooks.Forms
             .GetAll()
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
-            .Include(b => b.User)    //  Join
-            .Include(b => b.Reader)  //  Join
             .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
             .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
             .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
@@ -200,7 +198,7 @@ namespace LibraryBooks.Forms
                     Notification.ShowWarning("Файл отсутствует!");
                     return;
                 }
-                // TODO где-то хранить строку с путём до читалки
+                // TODO переделать под новую таблицу читалок
                 var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
 
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
@@ -213,8 +211,7 @@ namespace LibraryBooks.Forms
             if (dataGridViewBooks.SelectedRows.Count > 0)
             {
                 var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
-
-                new FormAboutBook(bookDto).Show();
+                new FormAboutBook(bookDto).ShowDialog();
             }
         }
 
@@ -256,7 +253,7 @@ namespace LibraryBooks.Forms
         {
             RefrashTable(new BookFilterDto
             {
-                IsLiked = radioButtonIsFinished.Checked
+                IsLiked = radioButtonIsLiked.Checked
             });
         }
     }

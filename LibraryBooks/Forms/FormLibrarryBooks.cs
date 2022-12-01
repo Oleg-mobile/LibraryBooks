@@ -50,10 +50,8 @@ namespace LibraryBooks.Forms
             // will add everything related to the mapping from the assembly with the file Program
             var config = new MapperConfiguration(c => { c.AddMaps(typeof(Program)); });  // profiles - describe how to map
             _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
-            _iocContainer.Register(Component.For(typeof(IValidator<FormRegistration>)).ImplementedBy(typeof(BaseValidator<FormRegistration>)).LifestyleTransient());
-            _iocContainer.Register(Component.For(typeof(IValidator<FormPasswordChange>)).ImplementedBy(typeof(BaseValidator<FormPasswordChange>)).LifestyleTransient());
-            _iocContainer.Register(Component.For(typeof(IValidator<FormAuthorization>)).ImplementedBy(typeof(BaseValidator<FormAuthorization>)).LifestyleTransient());
-            _iocContainer.Register(Component.For(typeof(IValidator<FormBook>)).ImplementedBy(typeof(BaseValidator<FormBook>)).LifestyleTransient());
+            _iocContainer.Register(Classes.FromAssembly(typeof(Program).Assembly).BasedOn(typeof(IValidator<>)).WithService.Base());
+
             //  Transient - the object lives only while the method is running (within class)
             //  Singleton - one object for the lifetime of the program
             //  Scoped - object lives within a single request (sites)

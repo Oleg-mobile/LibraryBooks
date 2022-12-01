@@ -12,8 +12,8 @@ namespace LibraryBooks.Core.Migrations
                 name: "ReaderId",
                 table: "Books",
                 type: "int",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true,
+                defaultValue: null);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_ReaderId",
@@ -26,7 +26,7 @@ namespace LibraryBooks.Core.Migrations
                 column: "ReaderId",
                 principalTable: "Readers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

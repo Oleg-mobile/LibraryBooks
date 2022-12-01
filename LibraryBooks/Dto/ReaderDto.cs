@@ -15,6 +15,5 @@ namespace LibraryBooks.Dto
 
         [DgvColumn(DisplayName = "Формат открытия", IsVisible = false)]
         public string OpeningFormat { get; set; }
-
     }
 }

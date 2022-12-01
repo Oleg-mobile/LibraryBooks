@@ -22,7 +22,7 @@ namespace LibraryBooks.Core.Models
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }  // navigation property for JOIN
 
-        public int ReaderId { get; set; }
+        public int? ReaderId { get; set; }
 
         [ForeignKey("ReaderId")]
         public Reader Reader { get; set; }  // navigation property for JOIN

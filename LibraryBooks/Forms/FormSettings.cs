@@ -39,17 +39,12 @@ namespace LibraryBooks.Forms
             textBoxFilePath.Text = ofd.FileName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new FormPasswordChange().Show();
-        }
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var readerForm = new FormReader();
-            DialogResult result= readerForm.ShowDialog();
+            DialogResult result = readerForm.ShowDialog();
 
-            if (result == DialogResult.Cancel) 
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -150,6 +145,11 @@ namespace LibraryBooks.Forms
 
             bindingList = new BindingList<ReaderDto>(Mapper.Map<IList<ReaderDto>>(readers));
             dataGridViewReaders.DataSource = bindingList;
+        }
+
+        private void buttonChangePassword_Click(object sender, EventArgs e)
+        {
+            new FormPasswordChange().ShowDialog();
         }
     }
 }

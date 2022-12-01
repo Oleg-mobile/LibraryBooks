@@ -6,7 +6,7 @@ using LibraryBooks.Utils;
 
 namespace LibraryBooks.Validation
 {
-    public class ChangePasswordValidator : BaseValidator<FormPasswordChange>
+    public class ChangePasswordValidator : AbstractValidator<FormPasswordChange>
     {
         public ChangePasswordValidator()
         {

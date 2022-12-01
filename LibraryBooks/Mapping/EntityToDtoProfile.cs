@@ -7,7 +7,6 @@ namespace LibraryBooks.Mapping
     //  mapping profile
     public class EntityToDtoProfile : Profile
     {
-        // TODO нужно ли создать профиль для ридера
         public EntityToDtoProfile()
         {
             CreateMap<Book, BookDto>();

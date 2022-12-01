@@ -11,8 +11,9 @@ namespace LibraryBooks.Forms
     {
         private readonly IUserRepository _userRepository;
         private readonly IValidator<FormRegistration> _validator;
+        private readonly FormAuthorization _formAuthorization;
 
-        public FormRegistration()
+        public FormRegistration(FormAuthorization formAuthorization)
         {
             InitializeComponent();
 
@@ -21,6 +22,7 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IUserRepository>();
             _validator = Resolve<IValidator<FormRegistration>>();
+            _formAuthorization = formAuthorization;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -41,10 +43,7 @@ namespace LibraryBooks.Forms
 
                 Notification.ShowSuccess("Пользователь добавлен");
 
-                // TODO не открывать новую форму
-                var authorizeForm = new FormAuthorization();
-                authorizeForm.Show();
-                authorizeForm.textBoxLogin.Text = login;
+                _formAuthorization.textBoxLogin.Text = login;
 
                 Close();
             }
