@@ -46,8 +46,8 @@ namespace LibraryBooks.Forms
 
         private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
 
-        private void buttonRegistration_Click(object sender, EventArgs e) => new FormRegistration(this).ShowDialog();
-
+        private void buttonRegistration_Click(object sender, EventArgs e) => new FormRegistration(this).ShowDialog();  // this - the one from whom this form is opened
+                                                                                                     //to access an element of this form from another through the constructor
         private void pictureBoxClose_Click(object sender, EventArgs e) => ToggleVisiblePassword(pictureBoxClose, textBoxPassword);
 
         public static void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)

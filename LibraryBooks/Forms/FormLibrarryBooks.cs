@@ -8,7 +8,6 @@ using LibraryBooks.Core.Repositories;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Utils;
-using LibraryBooks.Validation;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -50,6 +49,8 @@ namespace LibraryBooks.Forms
             // will add everything related to the mapping from the assembly with the file Program
             var config = new MapperConfiguration(c => { c.AddMaps(typeof(Program)); });  // profiles - describe how to map
             _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
+            // find all classes of assembly 1 that implement interface 2 and register them under this interface
+            // implementation of interfaces in the class, which in <>
             _iocContainer.Register(Classes.FromAssembly(typeof(Program).Assembly).BasedOn(typeof(IValidator<>)).WithService.Base());
 
             //  Transient - the object lives only while the method is running (within class)

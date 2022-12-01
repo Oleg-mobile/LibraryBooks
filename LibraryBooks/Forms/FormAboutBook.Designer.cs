@@ -40,6 +40,7 @@
             this.labelPath = new System.Windows.Forms.Label();
             this.labelIsFinished = new System.Windows.Forms.Label();
             this.labelIsLiked = new System.Windows.Forms.Label();
+            this.labelPathToReader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +102,7 @@
             // labelMark
             // 
             this.labelMark.AutoSize = true;
-            this.labelMark.Location = new System.Drawing.Point(12, 266);
+            this.labelMark.Location = new System.Drawing.Point(12, 251);
             this.labelMark.Name = "labelMark";
             this.labelMark.Size = new System.Drawing.Size(133, 15);
             this.labelMark.TabIndex = 6;
@@ -119,7 +120,7 @@
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(12, 310);
+            this.labelPath.Location = new System.Drawing.Point(12, 295);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(55, 15);
             this.labelPath.TabIndex = 8;
@@ -128,7 +129,7 @@
             // labelIsFinished
             // 
             this.labelIsFinished.AutoSize = true;
-            this.labelIsFinished.Location = new System.Drawing.Point(12, 348);
+            this.labelIsFinished.Location = new System.Drawing.Point(12, 333);
             this.labelIsFinished.Name = "labelIsFinished";
             this.labelIsFinished.Size = new System.Drawing.Size(49, 15);
             this.labelIsFinished.TabIndex = 9;
@@ -137,18 +138,28 @@
             // labelIsLiked
             // 
             this.labelIsLiked.AutoSize = true;
-            this.labelIsLiked.Location = new System.Drawing.Point(12, 386);
+            this.labelIsLiked.Location = new System.Drawing.Point(12, 371);
             this.labelIsLiked.Name = "labelIsLiked";
             this.labelIsLiked.Size = new System.Drawing.Size(54, 15);
             this.labelIsLiked.TabIndex = 10;
             this.labelIsLiked.Text = "Оценка: ";
             this.labelIsLiked.Visible = false;
             // 
+            // labelPathToReader
+            // 
+            this.labelPathToReader.AutoSize = true;
+            this.labelPathToReader.Location = new System.Drawing.Point(12, 407);
+            this.labelPathToReader.Name = "labelPathToReader";
+            this.labelPathToReader.Size = new System.Drawing.Size(111, 15);
+            this.labelPathToReader.TabIndex = 11;
+            this.labelPathToReader.Text = "Читалка: не задано";
+            // 
             // FormAboutBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 441);
+            this.Controls.Add(this.labelPathToReader);
             this.Controls.Add(this.labelIsLiked);
             this.Controls.Add(this.labelIsFinished);
             this.Controls.Add(this.labelPath);
@@ -182,5 +193,6 @@
         private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.Label labelIsFinished;
         private System.Windows.Forms.Label labelIsLiked;
+        private System.Windows.Forms.Label labelPathToReader;
     }
 }

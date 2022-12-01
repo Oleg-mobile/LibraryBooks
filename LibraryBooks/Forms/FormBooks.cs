@@ -42,6 +42,7 @@ namespace LibraryBooks.Forms
 
         private void RefrashTable(BookFilterDto input = null)  // = null - not a prerequisite
         {
+            // only what needs to be displayed in the table
             var books = _bookRepository
             .GetAll()
             .Include(b => b.Genre)   //  Join
@@ -70,6 +71,7 @@ namespace LibraryBooks.Forms
 
             try
             {
+                // TODO изменить валидацию
                 var validator = new FormBookValidator();
                 validator.ValidateAndThrow(bookForm);
 
@@ -199,6 +201,10 @@ namespace LibraryBooks.Forms
                     return;
                 }
                 // TODO переделать под новую таблицу читалок
+                // 1. По readerName определить есть ли читалка
+                // 2. Читалки нет, то в таблице и на форме "О книге" отображать вместо null "Не установлено"
+                // 3. Читалки нет - прерываем и уведомление "Невозможно прочитать"
+                // 4. Из таблицы Reader по имени находим читалку и заполняем данными оттуда строку ниже
                 var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
 
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window

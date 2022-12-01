@@ -80,7 +80,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 15);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Введите лигин:";
+            this.label1.Text = "Введите логин:";
             // 
             // label2
             // 

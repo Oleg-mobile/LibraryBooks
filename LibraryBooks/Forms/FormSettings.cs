@@ -31,6 +31,10 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+
+            // INFO: заполнение dataGridView при открытии формы
+            RefrashTable();
+            InitDataGridViewColumns<ReaderDto>(dataGridViewReaders);
         }
 
         private void buttonGetPath_Click(object sender, EventArgs e)
@@ -51,6 +55,7 @@ namespace LibraryBooks.Forms
 
             try
             {
+                // TODO изменить валидацию
                 var validator = new FormReaderValidator();
                 validator.ValidateAndThrow(readerForm);
 
