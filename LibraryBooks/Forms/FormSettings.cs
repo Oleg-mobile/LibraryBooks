@@ -19,6 +19,7 @@ namespace LibraryBooks.Forms
 
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly IValidator<FormReader> _validator;
         private BindingList<ReaderDto> bindingList;
 
         public FormSettings()
@@ -31,6 +32,7 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _validator = Resolve<IValidator<FormReader>>();
 
             // INFO: заполнение dataGridView при открытии формы
             RefrashTable();
@@ -55,9 +57,7 @@ namespace LibraryBooks.Forms
 
             try
             {
-                // TODO изменить валидацию
-                var validator = new FormReaderValidator();
-                validator.ValidateAndThrow(readerForm);
+                _validator.ValidateAndThrow(readerForm);
 
                 Reader reader = new Reader
                 {
@@ -96,6 +96,8 @@ namespace LibraryBooks.Forms
             {
                 var readerDto = (ReaderDto)dataGridViewReaders.SelectedRows[0].DataBoundItem;
                 var readerForm = new FormReader(readerDto);
+            // TODO метка
+            LabelShow1:
                 DialogResult dialogResult = readerForm.ShowDialog();
 
                 if (dialogResult == DialogResult.Cancel)
@@ -123,6 +125,8 @@ namespace LibraryBooks.Forms
                 {
                     var message = ex.Errors.First().ErrorMessage ?? ex.Message;
                     Notification.ShowWarning(message);
+
+                    goto LabelShow1;
                 }
             }
         }

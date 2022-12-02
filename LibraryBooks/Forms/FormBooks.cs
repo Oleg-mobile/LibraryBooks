@@ -24,6 +24,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly IValidator<FormBook> _validator;
         private BindingList<BookDto> bindingList;
 
         public FormBooks()
@@ -35,6 +36,7 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _validator = Resolve<IValidator<FormBook>>();
 
             RefrashTable();
             InitDataGridViewColumns<BookDto>(dataGridViewBooks);
@@ -60,6 +62,7 @@ namespace LibraryBooks.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var bookForm = new FormBook();
+        // TODO метка
         // a label so that the window does not close when an exception occurs
         lableShow:
             DialogResult result = bookForm.ShowDialog();
@@ -71,9 +74,7 @@ namespace LibraryBooks.Forms
 
             try
             {
-                // TODO изменить валидацию
-                var validator = new FormBookValidator();
-                validator.ValidateAndThrow(bookForm);
+                _validator.ValidateAndThrow(bookForm);
 
                 Book book = GetBook(bookForm);
                 _bookRepository.Insert(book);
@@ -152,9 +153,7 @@ namespace LibraryBooks.Forms
 
                 try
                 {
-                    // TODO Нужна новая переменная
-                    var validator = new FormBookValidator();
-                    validator.ValidateAndThrow(bookForm);
+                    _validator.ValidateAndThrow(bookForm);
 
                     var book = Mapper.Map<Book>(bookDto);
                     EditBook(book, bookForm);
