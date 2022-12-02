@@ -36,7 +36,6 @@
             this.pictureBoxPathToBook = new System.Windows.Forms.PictureBox();
             this.textBoxPathToCover = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.pictureBoxGenre = new System.Windows.Forms.PictureBox();
             this.pictureBoxAuthor = new System.Windows.Forms.PictureBox();
             this.checkBoxIsFinished = new System.Windows.Forms.CheckBox();
@@ -74,7 +73,6 @@
             this.groupBox1.Controls.Add(this.pictureBoxPathToBook);
             this.groupBox1.Controls.Add(this.textBoxPathToCover);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.pictureBoxGenre);
             this.groupBox1.Controls.Add(this.pictureBoxAuthor);
             this.groupBox1.Controls.Add(this.checkBoxIsFinished);
@@ -160,15 +158,6 @@
             this.label10.Size = new System.Drawing.Size(102, 15);
             this.label10.TabIndex = 26;
             this.label10.Text = "Путь до обложки";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(410, 384);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 15);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "label9";
             // 
             // pictureBoxGenre
             // 
@@ -409,7 +398,6 @@
         public System.Windows.Forms.CheckBox checkBoxIsLiked;
         private System.Windows.Forms.PictureBox pictureBoxGenre;
         private System.Windows.Forms.PictureBox pictureBoxAuthor;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBoxPathToCover;
         private System.Windows.Forms.PictureBox pictureBoxPathToBook;

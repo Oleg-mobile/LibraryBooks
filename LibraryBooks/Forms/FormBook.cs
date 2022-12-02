@@ -1,7 +1,6 @@
 ﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
-using LibraryBooks.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -33,9 +32,6 @@ namespace LibraryBooks.Forms
 
             comboBoxReader.DataSource = _readerRepository.GetAll().ToList();
             comboBoxReader.DisplayMember = "Name";
-
-            // TODO временный
-            label9.Text = Program.AuthForm.textBoxLogin.Text;
         }
 
         public FormBook(BookDto book) : this()
@@ -46,7 +42,6 @@ namespace LibraryBooks.Forms
             textBoxYear.Text = book.Year.ToString();
             textBoxPageCount.Text = book.PageCount.ToString();
             comboBoxGenre.Text = book.GenreName;
-            label9.Text = Session.CurrentUser.Login;
             textBoxPathToBook.Text = book.PathToBook;
             textBoxMark.Text = book.Mark.ToString();
             checkBoxIsLiked.Checked = book.IsLiked;

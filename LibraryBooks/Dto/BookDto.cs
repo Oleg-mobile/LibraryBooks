@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using LibraryBooks.Attributes;
-using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Attributes;
 
 namespace LibraryBooks.Dto
 {

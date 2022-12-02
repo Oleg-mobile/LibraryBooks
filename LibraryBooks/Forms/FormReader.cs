@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using LibraryBooks.Dto;
+﻿using LibraryBooks.Dto;
 using System;
 using System.Windows.Forms;
 

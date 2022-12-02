@@ -13,7 +13,7 @@ namespace LibraryBooks.Core.Repositories.Users
 
         public bool IsExist(string login, string password = null)
         {
-            var user = Table   // INFO: Table = Context.Users  (EfCoreRepositoryBase)
+            var user = Table   // Table = Context.Users  (EfCoreRepositoryBase)
                 .Where(u => u.Login == login)
                 .WhereIf(!string.IsNullOrWhiteSpace(password), u => u.Password == password)
                 .FirstOrDefault();

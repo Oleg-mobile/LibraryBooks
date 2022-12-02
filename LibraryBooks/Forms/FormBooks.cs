@@ -5,7 +5,6 @@ using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
 using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
-using LibraryBooks.Validation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -204,6 +203,9 @@ namespace LibraryBooks.Forms
                 // 2. Читалки нет, то в таблице и на форме "О книге" отображать вместо null "Не установлено"
                 // 3. Читалки нет - прерываем и уведомление "Невозможно прочитать"
                 // 4. Из таблицы Reader по имени находим читалку и заполняем данными оттуда строку ниже
+
+
+
                 var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
 
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
