@@ -49,6 +49,7 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
 
         public void SaveChanges()
         {
+            // TODO ошибка при удалении читалки
             Context.SaveChanges();
             Context.ChangeTracker.Clear();  // reset all tracked entities
         }

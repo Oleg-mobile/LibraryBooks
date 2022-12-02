@@ -32,7 +32,6 @@ namespace LibraryBooks.Forms
 
             SetState(bookDto);
 
-            // TODO проверить заполнение
             if (bookDto.ReaderName is not null)
             {
                 labelPathToReader.Text = $"Читалка: {bookDto.ReaderName}";

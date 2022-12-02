@@ -12,6 +12,9 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
+            ofd.Title = "Выберите программу";
+            ofd.Filter = "Программы|*.exe";
+
             ActiveControl = textBoxName;
             AcceptButton = buttonSave;
         }

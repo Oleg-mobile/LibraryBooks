@@ -48,9 +48,12 @@ namespace LibraryBooks.Forms
             .GetAll()
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
+            .Include(b => b.Reader)  //  Join
             .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
             .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
             .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
+            // TODO если читалки нет
+            //.Where(b => (b.ReaderId == null) ? b.Reader.Name == "Не задано" : b.Reader.Name == b.Reader.Name)
             .AsNoTracking()
             .ToList();
 
@@ -204,10 +207,20 @@ namespace LibraryBooks.Forms
                 // 3. Читалки нет - прерываем и уведомление "Невозможно прочитать"
                 // 4. Из таблицы Reader по имени находим читалку и заполняем данными оттуда строку ниже
 
+                if (book.ReaderName is null)
+                {
+                    Notification.ShowWarning("Читалка не задана!");
+                    return;
+                }
 
+                var reader = _readerRepository.GetAll().First(r => r.Name == book.ReaderName);
+                // TODO как пользователь введёт формат открытия?
+                // TODO сейчас поля ввода данных из списка не редактируемые и их нельзя задать пустыми. Правильно?
+                // Если данные были, их удаляю - в базе null?
+                string format = "/A page=" + book.Mark + " \"" + book.PathToBook + "\"";
 
-                var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
-
+                //var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
+                var openBookProcess = new ProcessStartInfo(reader.PathToReader, format);
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
                 Process.Start(openBookProcess);
             }

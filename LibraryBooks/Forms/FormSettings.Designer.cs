@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
-            this.buttonGetPath = new System.Windows.Forms.Button();
-            this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
@@ -39,24 +37,6 @@
             this.dataGridViewReaders = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReaders)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonGetPath
-            // 
-            this.buttonGetPath.Location = new System.Drawing.Point(25, 25);
-            this.buttonGetPath.Name = "buttonGetPath";
-            this.buttonGetPath.Size = new System.Drawing.Size(140, 30);
-            this.buttonGetPath.TabIndex = 1;
-            this.buttonGetPath.Text = "Выбрать читалку";
-            this.buttonGetPath.UseVisualStyleBackColor = true;
-            this.buttonGetPath.Click += new System.EventHandler(this.buttonGetPath_Click);
-            // 
-            // textBoxFilePath
-            // 
-            this.textBoxFilePath.Location = new System.Drawing.Point(25, 70);
-            this.textBoxFilePath.Name = "textBoxFilePath";
-            this.textBoxFilePath.ReadOnly = true;
-            this.textBoxFilePath.Size = new System.Drawing.Size(384, 23);
-            this.textBoxFilePath.TabIndex = 2;
             // 
             // openFileDialog1
             // 
@@ -74,7 +54,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(25, 120);
+            this.buttonAdd.Location = new System.Drawing.Point(20, 25);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(140, 30);
             this.buttonAdd.TabIndex = 4;
@@ -84,7 +64,7 @@
             // 
             // buttonDell
             // 
-            this.buttonDell.Location = new System.Drawing.Point(25, 170);
+            this.buttonDell.Location = new System.Drawing.Point(20, 75);
             this.buttonDell.Name = "buttonDell";
             this.buttonDell.Size = new System.Drawing.Size(140, 30);
             this.buttonDell.TabIndex = 5;
@@ -94,7 +74,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(25, 220);
+            this.buttonEdit.Location = new System.Drawing.Point(20, 125);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(140, 30);
             this.buttonEdit.TabIndex = 6;
@@ -108,12 +88,12 @@
             this.dataGridViewReaders.AllowUserToDeleteRows = false;
             this.dataGridViewReaders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewReaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReaders.Location = new System.Drawing.Point(188, 120);
+            this.dataGridViewReaders.Location = new System.Drawing.Point(183, 25);
             this.dataGridViewReaders.Name = "dataGridViewReaders";
             this.dataGridViewReaders.ReadOnly = true;
             this.dataGridViewReaders.RowTemplate.Height = 25;
             this.dataGridViewReaders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewReaders.Size = new System.Drawing.Size(221, 275);
+            this.dataGridViewReaders.Size = new System.Drawing.Size(221, 385);
             this.dataGridViewReaders.TabIndex = 7;
             // 
             // FormSettings
@@ -126,20 +106,15 @@
             this.Controls.Add(this.buttonDell);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonChangePassword);
-            this.Controls.Add(this.textBoxFilePath);
-            this.Controls.Add(this.buttonGetPath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSettings";
             this.Text = "Библиотека  / Настройки";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReaders)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonGetPath;
-        private System.Windows.Forms.TextBox textBoxFilePath;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button buttonChangePassword;
         private System.Windows.Forms.Button buttonAdd;

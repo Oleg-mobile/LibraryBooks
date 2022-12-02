@@ -15,8 +15,6 @@ namespace LibraryBooks.Forms
 {
     public partial class FormSettings : FormLibrarryBooks
     {
-        private OpenFileDialog ofd = new OpenFileDialog();
-
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
         private readonly IValidator<FormReader> _validator;
@@ -26,10 +24,6 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
-            ofd.Title = "Выберите программу";
-            ofd.Filter = "Программы|*.exe";
-            textBoxFilePath.Text = "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe";
-
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
             _validator = Resolve<IValidator<FormReader>>();
@@ -37,12 +31,6 @@ namespace LibraryBooks.Forms
             // INFO: заполнение dataGridView при открытии формы
             RefrashTable();
             InitDataGridViewColumns<ReaderDto>(dataGridViewReaders);
-        }
-
-        private void buttonGetPath_Click(object sender, EventArgs e)
-        {
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-            textBoxFilePath.Text = ofd.FileName;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -111,7 +99,6 @@ namespace LibraryBooks.Forms
                     validator.ValidateAndThrow(readerForm);
 
                     var reader = Mapper.Map<Reader>(readerDto);
-
                     reader.Name = readerForm.textBoxName.Text;
                     reader.PathToReader = readerForm.textBoxPathToReader.Text;
                     reader.OpeningFormat = readerForm.textBoxOpeningFormat.Text;
