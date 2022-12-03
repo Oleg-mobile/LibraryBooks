@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReader));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBoxPathToReader = new System.Windows.Forms.PictureBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,13 +39,13 @@
             this.textBoxOpeningFormat = new System.Windows.Forms.TextBox();
             this.textBoxPathToReader = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.pictureBoxPathToReader = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPathToReader)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.pictureBoxPathToReader);
             this.groupBox1.Controls.Add(this.buttonSave);
             this.groupBox1.Controls.Add(this.label3);
@@ -58,6 +60,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Читалка";
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(363, 150);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(254, 43);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Ключевые слова:  {page} - страница открытия и {path} - путь к книге";
+            // 
+            // pictureBoxPathToReader
+            // 
+            this.pictureBoxPathToReader.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPathToReader.Image")));
+            this.pictureBoxPathToReader.Location = new System.Drawing.Point(363, 100);
+            this.pictureBoxPathToReader.Name = "pictureBoxPathToReader";
+            this.pictureBoxPathToReader.Size = new System.Drawing.Size(23, 23);
+            this.pictureBoxPathToReader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxPathToReader.TabIndex = 7;
+            this.pictureBoxPathToReader.TabStop = false;
+            this.pictureBoxPathToReader.Click += new System.EventHandler(this.pictureBoxPathToReader_Click);
             // 
             // buttonSave
             // 
@@ -100,14 +121,14 @@
             // 
             this.textBoxOpeningFormat.Location = new System.Drawing.Point(30, 150);
             this.textBoxOpeningFormat.Name = "textBoxOpeningFormat";
-            this.textBoxOpeningFormat.Size = new System.Drawing.Size(180, 23);
+            this.textBoxOpeningFormat.Size = new System.Drawing.Size(313, 23);
             this.textBoxOpeningFormat.TabIndex = 2;
             // 
             // textBoxPathToReader
             // 
             this.textBoxPathToReader.Location = new System.Drawing.Point(30, 100);
             this.textBoxPathToReader.Name = "textBoxPathToReader";
-            this.textBoxPathToReader.Size = new System.Drawing.Size(180, 23);
+            this.textBoxPathToReader.Size = new System.Drawing.Size(313, 23);
             this.textBoxPathToReader.TabIndex = 1;
             // 
             // textBoxName
@@ -116,17 +137,6 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(180, 23);
             this.textBoxName.TabIndex = 0;
-            // 
-            // pictureBoxPathToReader
-            // 
-            this.pictureBoxPathToReader.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPathToReader.Image")));
-            this.pictureBoxPathToReader.Location = new System.Drawing.Point(228, 100);
-            this.pictureBoxPathToReader.Name = "pictureBoxPathToReader";
-            this.pictureBoxPathToReader.Size = new System.Drawing.Size(23, 23);
-            this.pictureBoxPathToReader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxPathToReader.TabIndex = 7;
-            this.pictureBoxPathToReader.TabStop = false;
-            this.pictureBoxPathToReader.Click += new System.EventHandler(this.pictureBoxPathToReader_Click);
             // 
             // FormReader
             // 
@@ -155,5 +165,6 @@
         public System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.PictureBox pictureBoxPathToReader;
+        private System.Windows.Forms.Label label4;
     }
 }

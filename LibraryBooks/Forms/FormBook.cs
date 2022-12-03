@@ -57,6 +57,8 @@ namespace LibraryBooks.Forms
         {
             try
             {
+                // TODO защита от null в закладке, чтобы пройти валидацию?
+
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;
@@ -86,27 +88,6 @@ namespace LibraryBooks.Forms
                 name => new Author(name),  // Generics cannot be manipulated by a constructor => need an empty (default) constructor and it can be called
                 comboBoxAuthor
             );
-
-            #region Before generic
-            //var authorForm = new AuthorForm();
-            //DialogResult result = authorForm.ShowDialog();
-
-            //if (result == DialogResult.Cancel)
-            //{
-            //    return;
-            //}
-
-            //var authorName = authorForm.textBoxName.Text;
-            //var author = new Author(authorName);
-
-            //_authorRepository.Insert(author);
-
-            //comboBoxAuthor.DataSource = _authorRepository.GetAll().ToList();
-            //comboBoxAuthor.DisplayMember = "Name";
-
-            //int index = comboBoxAuthor.FindString(authorName);
-            //comboBoxAuthor.SelectedIndex = index;
-            #endregion
         }
 
         private void pictureBoxGenre_Click(object sender, EventArgs e)

@@ -47,7 +47,7 @@ namespace LibraryBooks.Forms
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
             .Include(b => b.Reader)  //  Join
-            .Where(b => b.UserId == Session.CurrentUser.Id)
+            .Where(b => b.UserId == Session.CurrentUser.Id)  //  Where - weed out something. Binding to user
             .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
             .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
             .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
@@ -55,6 +55,7 @@ namespace LibraryBooks.Forms
             .ToList();
 
             bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));  // mapping to DTO
+            // INFO: Преобразование значения в таблице делается в DTO или в профиле маппера (в нашем случае)
             dataGridViewBooks.DataSource = bindingList;  // table filling
         }
 
@@ -155,7 +156,7 @@ namespace LibraryBooks.Forms
             book.PathToCover = bookForm.textBoxPathToCover.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
-            book.ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id;
+            book.ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id;  // TODO ошибка при удалении читалки
         }
 
         private void buttonRead_Click(object sender, EventArgs e)
@@ -169,11 +170,6 @@ namespace LibraryBooks.Forms
                     Notification.ShowWarning("Файл отсутствует!");
                     return;
                 }
-                // TODO переделать под новую таблицу читалок
-                // 1. По readerName определить есть ли читалка
-                // 2. Читалки нет, то в таблице и на форме "О книге" отображать вместо null "Не установлено"
-                // 3. Читалки нет - прерываем и уведомление "Невозможно прочитать"
-                // 4. Из таблицы Reader по имени находим читалку и заполняем данными оттуда строку ниже
 
                 if (book.ReaderName is null)
                 {
@@ -182,9 +178,16 @@ namespace LibraryBooks.Forms
                 }
 
                 var reader = _readerRepository.GetAll().First(r => r.Name == book.ReaderName);
-                string format = "/A page=" + book.Mark + " \"" + book.PathToBook + "\"";
 
-                //var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");
+                // TODO защита от нулевой страницы
+                if (book.Mark == 0)
+                {
+                    book.Mark = 1;
+                }
+
+                string format = reader.OpeningFormat.Replace("{page}",book.Mark.ToString()).Replace("{path}", book.PathToBook);
+                //PathToReader: $"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe"
+                //OpeningFormat: $@"/A page={book.Mark} ""{book.PathToBook}""");
                 var openBookProcess = new ProcessStartInfo(reader.PathToReader, format);
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
                 Process.Start(openBookProcess);

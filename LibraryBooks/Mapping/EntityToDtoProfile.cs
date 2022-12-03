@@ -9,7 +9,7 @@ namespace LibraryBooks.Mapping
     {
         public EntityToDtoProfile()
         {
-            CreateMap<Book, BookDto>().ForMember(m => m.ReaderName, m => m.MapFrom(n => n.Reader == null ? "Читалка не задана!" : n.Reader.Name));
+            CreateMap<Book, BookDto>().ForMember(m => m.ReaderName, m => m.MapFrom(n => n.Reader == null ? "Читалка не задана!" : n.Reader.Name));  // reaction to null in the table
             CreateMap<BookDto, Book>()
                 .ForMember(m => m.Author, n => n.Ignore())
                 .ForMember(m => m.Genre,  n => n.Ignore())

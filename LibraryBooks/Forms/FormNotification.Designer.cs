@@ -47,7 +47,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 100);
+            this.panel1.Size = new System.Drawing.Size(404, 100);
             this.panel1.TabIndex = 0;
             // 
             // labelNotificationCaption
@@ -76,16 +76,16 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 221);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(384, 40);
+            this.panel2.Size = new System.Drawing.Size(404, 40);
             this.panel2.TabIndex = 1;
             // 
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonOk.Location = new System.Drawing.Point(123, 164);
+            this.buttonOk.Location = new System.Drawing.Point(138, 164);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(140, 30);
+            this.buttonOk.Size = new System.Drawing.Size(120, 30);
             this.buttonOk.TabIndex = 2;
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             this.labelNotificationText.AutoSize = true;
             this.labelNotificationText.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.labelNotificationText.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelNotificationText.Location = new System.Drawing.Point(110, 110);
+            this.labelNotificationText.Location = new System.Drawing.Point(138, 114);
             this.labelNotificationText.Name = "labelNotificationText";
             this.labelNotificationText.Size = new System.Drawing.Size(116, 25);
             this.labelNotificationText.TabIndex = 3;
@@ -108,7 +108,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(384, 261);
+            this.ClientSize = new System.Drawing.Size(404, 261);
             this.Controls.Add(this.labelNotificationText);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.panel2);

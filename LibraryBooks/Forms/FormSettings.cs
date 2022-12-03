@@ -1,9 +1,7 @@
-﻿using FluentValidation;
-using LibraryBooks.Core.Models;
+﻿using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
 using LibraryBooks.Utils;
-using LibraryBooks.Validation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +15,6 @@ namespace LibraryBooks.Forms
     {
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
-        private readonly IValidator<FormReader> _validator;
         private BindingList<ReaderDto> bindingList;
 
         public FormSettings()
@@ -26,7 +23,6 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
-            _validator = Resolve<IValidator<FormReader>>();
 
             // INFO: заполнение dataGridView при открытии формы
             RefrashTable();
@@ -43,27 +39,17 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            try
+            Reader reader = new Reader
             {
-                _validator.ValidateAndThrow(readerForm);
+                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
+                Name = readerForm.textBoxName.Text,
+                PathToReader = readerForm.textBoxPathToReader.Text,
+                OpeningFormat = readerForm.textBoxOpeningFormat.Text
+            };
 
-                Reader reader = new Reader
-                {
-                    UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
-                    Name = readerForm.textBoxName.Text,
-                    PathToReader = readerForm.textBoxPathToReader.Text,
-                    OpeningFormat = readerForm.textBoxOpeningFormat.Text
-                };
+            _readerRepository.Insert(reader);
 
-                _readerRepository.Insert(reader);
-
-                RefrashTable();
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+            RefrashTable();
         }
 
         private void buttonDell_Click(object sender, EventArgs e)
@@ -84,8 +70,7 @@ namespace LibraryBooks.Forms
             {
                 var readerDto = (ReaderDto)dataGridViewReaders.SelectedRows[0].DataBoundItem;
                 var readerForm = new FormReader(readerDto);
-            // TODO метка
-            LabelShow1:
+
                 DialogResult dialogResult = readerForm.ShowDialog();
 
                 if (dialogResult == DialogResult.Cancel)
@@ -93,28 +78,15 @@ namespace LibraryBooks.Forms
                     return;
                 }
 
-                try
-                {
-                    var validator = new FormReaderValidator();
-                    validator.ValidateAndThrow(readerForm);
+                var reader = Mapper.Map<Reader>(readerDto);
+                reader.Name = readerForm.textBoxName.Text;
+                reader.PathToReader = readerForm.textBoxPathToReader.Text;
+                reader.OpeningFormat = readerForm.textBoxOpeningFormat.Text;
+                reader.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
 
-                    var reader = Mapper.Map<Reader>(readerDto);
-                    reader.Name = readerForm.textBoxName.Text;
-                    reader.PathToReader = readerForm.textBoxPathToReader.Text;
-                    reader.OpeningFormat = readerForm.textBoxOpeningFormat.Text;
-                    reader.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
+                _readerRepository.Update(reader);
 
-                    _readerRepository.Update(reader);
-
-                    RefrashTable();
-                }
-                catch (ValidationException ex)
-                {
-                    var message = ex.Errors.First().ErrorMessage ?? ex.Message;
-                    Notification.ShowWarning(message);
-
-                    goto LabelShow1;
-                }
+                RefrashTable();
             }
         }
 

@@ -104,9 +104,9 @@
             this.labelMark.AutoSize = true;
             this.labelMark.Location = new System.Drawing.Point(12, 251);
             this.labelMark.Name = "labelMark";
-            this.labelMark.Size = new System.Drawing.Size(133, 15);
+            this.labelMark.Size = new System.Drawing.Size(112, 15);
             this.labelMark.TabIndex = 6;
-            this.labelMark.Text = "Закладка на странице: ";
+            this.labelMark.Text = "Закладка не задана";
             // 
             // labelPageCount
             // 
@@ -138,7 +138,7 @@
             // labelIsLiked
             // 
             this.labelIsLiked.AutoSize = true;
-            this.labelIsLiked.Location = new System.Drawing.Point(12, 371);
+            this.labelIsLiked.Location = new System.Drawing.Point(13, 408);
             this.labelIsLiked.Name = "labelIsLiked";
             this.labelIsLiked.Size = new System.Drawing.Size(54, 15);
             this.labelIsLiked.TabIndex = 10;
@@ -148,7 +148,7 @@
             // labelPathToReader
             // 
             this.labelPathToReader.AutoSize = true;
-            this.labelPathToReader.Location = new System.Drawing.Point(12, 407);
+            this.labelPathToReader.Location = new System.Drawing.Point(12, 371);
             this.labelPathToReader.Name = "labelPathToReader";
             this.labelPathToReader.Size = new System.Drawing.Size(111, 15);
             this.labelPathToReader.TabIndex = 11;
