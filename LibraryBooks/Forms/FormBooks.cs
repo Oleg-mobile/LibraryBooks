@@ -23,7 +23,6 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
-        private readonly IValidator<FormBook> _validator;
         private BindingList<BookDto> bindingList;
 
         public FormBooks()
@@ -35,7 +34,6 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
-            _validator = Resolve<IValidator<FormBook>>();
 
             RefrashTable();
             InitDataGridViewColumns<BookDto>(dataGridViewBooks);

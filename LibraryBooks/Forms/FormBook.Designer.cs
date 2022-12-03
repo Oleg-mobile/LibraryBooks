@@ -49,7 +49,6 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -86,7 +85,6 @@
             this.groupBox1.Controls.Add(this.textBoxName);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -273,15 +271,6 @@
             this.label8.TabIndex = 9;
             this.label8.Text = "Путь до книги";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(410, 359);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 15);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Пользователь";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -380,7 +369,6 @@
         public System.Windows.Forms.ComboBox comboBoxAuthor;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
