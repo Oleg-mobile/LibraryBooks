@@ -49,11 +49,10 @@ namespace LibraryBooks.Forms
             .Include(b => b.Genre)   //  Join
             .Include(b => b.Author)  //  Join
             .Include(b => b.Reader)  //  Join
+            .Where(b => b.UserId == Session.CurrentUser.Id)
             .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
             .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
             .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
-            // TODO если читалки нет
-            //.Where(b => (b.ReaderId == null) ? b.Reader.Name == "Не задано" : b.Reader.Name == b.Reader.Name)
             .AsNoTracking()
             .ToList();
 
@@ -64,9 +63,6 @@ namespace LibraryBooks.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var bookForm = new FormBook();
-        // TODO метка
-        // a label so that the window does not close when an exception occurs
-        lableShow:
             DialogResult result = bookForm.ShowDialog();
 
             if (result == DialogResult.Cancel)
@@ -74,22 +70,10 @@ namespace LibraryBooks.Forms
                 return;
             }
 
-            try
-            {
-                _validator.ValidateAndThrow(bookForm);
+            Book book = GetBook(bookForm);
+            _bookRepository.Insert(book);
 
-                Book book = GetBook(bookForm);
-                _bookRepository.Insert(book);
-
-                RefrashTable();
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-
-                goto lableShow;
-            }
+            RefrashTable();
         }
 
         private Book GetBook(FormBook bookForm)
@@ -144,8 +128,6 @@ namespace LibraryBooks.Forms
                 var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
                 var bookForm = new FormBook(bookDto);
 
-            lableShow:
-
                 DialogResult result = bookForm.ShowDialog();
 
                 if (result == DialogResult.Cancel)
@@ -153,23 +135,11 @@ namespace LibraryBooks.Forms
                     return;
                 }
 
-                try
-                {
-                    _validator.ValidateAndThrow(bookForm);
+                var book = Mapper.Map<Book>(bookDto);
+                EditBook(book, bookForm);
+                _bookRepository.Update(book);
 
-                    var book = Mapper.Map<Book>(bookDto);
-                    EditBook(book, bookForm);
-                    _bookRepository.Update(book);
-
-                    RefrashTable();
-                }
-                catch (ValidationException ex)
-                {
-                    // TODO одинаковый код
-                    var message = ex.Errors.First().ErrorMessage ?? ex.Message;
-                    Notification.ShowWarning(message);
-                    goto lableShow;
-                }
+                RefrashTable();
             }
         }
 
@@ -214,9 +184,6 @@ namespace LibraryBooks.Forms
                 }
 
                 var reader = _readerRepository.GetAll().First(r => r.Name == book.ReaderName);
-                // TODO как пользователь введёт формат открытия?
-                // TODO сейчас поля ввода данных из списка не редактируемые и их нельзя задать пустыми. Правильно?
-                // Если данные были, их удаляю - в базе null?
                 string format = "/A page=" + book.Mark + " \"" + book.PathToBook + "\"";
 
                 //var openBookProcess = new ProcessStartInfo($"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe", $@"/A page={book.Mark} ""{book.PathToBook}""");

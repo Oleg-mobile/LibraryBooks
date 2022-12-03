@@ -1,6 +1,8 @@
-﻿using LibraryBooks.Core.Models;
+﻿using FluentValidation;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
+using LibraryBooks.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,6 +14,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly IValidator<FormBook> _validator;
         private OpenFileDialog ofd = new OpenFileDialog();
 
         public FormBook()
@@ -21,6 +24,7 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _validator = Resolve<IValidator<FormBook>>();
 
             AcceptButton = buttonSave;
 
@@ -51,8 +55,17 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Close();
-            DialogResult = DialogResult.OK;
+            try
+            {
+                _validator.ValidateAndThrow(this);
+                Close();
+                DialogResult = DialogResult.OK;
+            }
+            catch (ValidationException ex)
+            {
+                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
+                Notification.ShowWarning(message);
+            }
         }
 
         private void textBoxIntegerMask_KeyPress(object sender, KeyPressEventArgs e)
@@ -108,7 +121,6 @@ namespace LibraryBooks.Forms
         }
 
         private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox)
-            // TODO есть конструктор?
             where TForm : FormLibrarryBooks, new()  // new() - there is an empty (default) constructor
             where TEntity : Entity<int>, new()      // new() - there is an empty (default) constructor
         {
