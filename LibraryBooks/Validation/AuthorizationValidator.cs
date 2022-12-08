@@ -2,6 +2,8 @@
 using LibraryBooks.Common;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Forms;
+using LibraryBooks.Utils;
+using System.Linq;
 
 namespace LibraryBooks.Validation
 {
@@ -16,10 +18,16 @@ namespace LibraryBooks.Validation
                 .WithMessage("Не верный логин или пароль!");
         }
 
-        private bool CheckExistingUser(string user, string password)
+        private bool CheckExistingUser(string login, string password)
         {
             var userRepository = IocManager.Resolve<IUserRepository>();
-            return userRepository.IsExist(user, password);
+            var user = userRepository.GetAll().FirstOrDefault(u => u.Login == login);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return userRepository.IsExist(login, EncryptionUtils.EncodePasword(password, user.Salt));
         }
     }
 }

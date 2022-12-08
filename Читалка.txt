@@ -1,2 +1,7 @@
 $"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe"
 $@"/A page={book.Mark} ""{book.PathToBook}"""
+
+
+Acrobat DC
+C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe
+/A page={page} "{path}"

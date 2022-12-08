@@ -15,6 +15,7 @@ namespace LibraryBooks.Forms
     {
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly IRepository<Book, int> _bookRepository;
         private BindingList<ReaderDto> bindingList;
 
         public FormSettings()
@@ -23,6 +24,7 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _bookRepository= Resolve<IRepository<Book, int>>();
 
             // INFO: заполнение dataGridView при открытии формы
             RefrashTable();
@@ -58,6 +60,13 @@ namespace LibraryBooks.Forms
 
             foreach (var reader in readers)
             {
+                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Reader.Id ==  reader.Id).ToList();
+                foreach (var book in books)
+                {
+                    book.ReaderId = null;
+                    _bookRepository.Update(book);
+                }
+
                 _readerRepository.Delete(reader);
             }
 

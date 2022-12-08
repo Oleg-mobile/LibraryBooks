@@ -31,6 +31,7 @@ namespace LibraryBooks.Forms
             {
                 _validator.ValidateAndThrow(this);
 
+                // TODO добавить шифрование
                 var user = _userRepository.GetAll().First(u => u.Login == textBoxLogin.Text && u.Password == textBoxPassword.Text);
                 Session.CurrentUser = Mapper.Map<UserDto>(user);
                 new FormMain().Show();  // stack variable is not needed

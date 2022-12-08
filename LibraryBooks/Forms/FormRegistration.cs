@@ -27,22 +27,28 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            string login = textBoxName.Text;
-
             try
             {
                 _validator.ValidateAndThrow(this);
 
+                string login = textBoxName.Text;
                 if (_userRepository.IsExist(login))
                 {
                     Notification.ShowWarning("Существующий пользователь");
                     return;
                 }
 
-                _userRepository.Insert(new User { Login = login, Password = textBoxPassword.Text });
+                var salt = EncryptionUtils.GenerateSalt();
+                var password = textBoxPassword.Text;
+
+                _userRepository.Insert(new User
+                {
+                    Login = login,
+                    Password = EncryptionUtils.EncodePasword(password, salt),
+                    Salt = salt
+                });
 
                 Notification.ShowSuccess("Пользователь добавлен");
-
                 _formAuthorization.textBoxLogin.Text = login;
 
                 Close();
