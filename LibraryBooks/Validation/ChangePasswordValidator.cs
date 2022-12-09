@@ -3,6 +3,7 @@ using LibraryBooks.Common;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Forms;
 using LibraryBooks.Utils;
+using System.Linq;
 
 namespace LibraryBooks.Validation
 {
@@ -20,7 +21,9 @@ namespace LibraryBooks.Validation
         private bool CheckCurrentPassword(string currentPassword)
         {
             var userRepository = IocManager.Resolve<IUserRepository>();
-            return userRepository.IsExist(Session.CurrentUser.Login, currentPassword);
+            var user = userRepository.GetAll().FirstOrDefault(u => u.Login == Session.CurrentUser.Login);
+
+            return userRepository.IsExist(Session.CurrentUser.Login, EncryptionUtils.EncodePasword(currentPassword, user.Salt));
         }
     }
 }
