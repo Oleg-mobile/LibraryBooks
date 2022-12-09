@@ -24,7 +24,7 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
-            _bookRepository= Resolve<IRepository<Book, int>>();
+            _bookRepository = Resolve<IRepository<Book, int>>();
 
             // INFO: заполнение dataGridView при открытии формы
             RefrashTable();
@@ -60,7 +60,8 @@ namespace LibraryBooks.Forms
 
             foreach (var reader in readers)
             {
-                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Reader.Id ==  reader.Id).ToList();
+                // INFO: При удалении читалки в соответствующее поле таблицы книг подставлять null
+                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Reader.Id == reader.Id).ToList();
                 foreach (var book in books)
                 {
                     book.ReaderId = null;
