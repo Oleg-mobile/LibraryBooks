@@ -185,9 +185,7 @@ namespace LibraryBooks.Forms
                     book.Mark = 1;
                 }
 
-                string format = reader.OpeningFormat.Replace("{page}",book.Mark.ToString()).Replace("{path}", book.PathToBook);
-                //PathToReader: $"C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe"
-                //OpeningFormat: $@"/A page={book.Mark} ""{book.PathToBook}""");
+                string format = reader.OpeningFormat.Replace("{page}", book.Mark.ToString()).Replace("{path}", book.PathToBook);
                 var openBookProcess = new ProcessStartInfo(reader.PathToReader, format);
                 openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
                 Process.Start(openBookProcess);

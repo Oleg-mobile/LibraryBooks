@@ -47,6 +47,7 @@ namespace LibraryBooks.Forms
             textBoxPageCount.Text = book.PageCount.ToString();
             comboBoxGenre.Text = book.GenreName;
             textBoxPathToBook.Text = book.PathToBook;
+            textBoxPathToCover.Text = book.PathToCover;
             textBoxMark.Text = book.Mark.ToString();
             checkBoxIsLiked.Checked = book.IsLiked;
             checkBoxIsFinished.Checked = book.IsFinished;

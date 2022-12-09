@@ -1,6 +1,8 @@
-﻿using LibraryBooks.Core.Models;
+﻿using Castle.Core.Internal;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
+using LibraryBooks.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace LibraryBooks.Forms
         // DataSource - data source binding (takes columns only of the entity to which it is attached)
 
         private readonly IRepository<Author, int> _authorRepository;  // Private - only in this class. Readonly - immutable database connection.
+        private readonly IRepository<Book, int> _bookRepository;
         private BindingList<AuthorDto> bindingList;
 
         public FormAuthors()
@@ -23,6 +26,7 @@ namespace LibraryBooks.Forms
             InitializeComponent(); // initializing all components
 
             _authorRepository = Resolve<IRepository<Author, int>>();
+            _bookRepository = Resolve<IRepository<Book, int>>();
 
             RefrashTable();
             InitDataGridViewColumns<AuthorDto>(dataGridViewAuthors);
@@ -46,7 +50,6 @@ namespace LibraryBooks.Forms
             }
 
             var author = new Author(authForm.textBoxName.Text);
-
             _authorRepository.Insert(author);
 
             RefrashTable();
@@ -58,6 +61,15 @@ namespace LibraryBooks.Forms
 
             foreach (var author in authors)
             {
+                // TODO проверка при удалении автора
+                // Здесь же без привязки к юзеру?
+                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Author.Id == author.Id).ToList();
+                if (!books.IsNullOrEmpty())
+                {
+                    Notification.ShowWarning("Автор используется!");
+                    return;
+                }
+
                 _authorRepository.Delete(author);
             }
 

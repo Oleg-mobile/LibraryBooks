@@ -27,6 +27,7 @@ namespace LibraryBooks.Dto
 
         [DgvColumn(DisplayName = "Путь к книге", IsVisible = false)]
         public string PathToBook { get; set; }
+
         [DgvColumn(DisplayName = "Путь к обложке", IsVisible = false)]
         public string PathToCover { get; set; }
 

@@ -1,6 +1,8 @@
-﻿using LibraryBooks.Core.Models;
+﻿using Castle.Core.Internal;
+using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
+using LibraryBooks.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace LibraryBooks.Forms
     public partial class FormGenres : FormLibrarryBooks
     {
         private readonly IRepository<Genre, int> _genreRepository;
+        private readonly IRepository<Book, int> _bookRepository;
         private BindingList<GenreDto> bindingList;
 
         public FormGenres()
@@ -20,6 +23,7 @@ namespace LibraryBooks.Forms
             InitializeComponent();
 
             _genreRepository = Resolve<IRepository<Genre, int>>();
+            _bookRepository = Resolve<IRepository<Book, int>>();
 
             RefrashTable();
             InitDataGridViewColumns<GenreDto>(dataGridViewGenres);
@@ -48,6 +52,14 @@ namespace LibraryBooks.Forms
 
             foreach (var genre in genres)
             {
+                // TODO Проверка при удалении жанра
+                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Genre.Id == genre.Id).ToList();
+                if (!books.IsNullOrEmpty())
+                {
+                    Notification.ShowWarning("Жанр испорльзуется!");
+                    return;
+                }
+
                 _genreRepository.Delete(genre);
             }
 
