@@ -204,7 +204,6 @@
             this.textBoxMark.Name = "textBoxMark";
             this.textBoxMark.Size = new System.Drawing.Size(180, 23);
             this.textBoxMark.TabIndex = 20;
-            this.textBoxMark.Text = "Не задана";
             this.textBoxMark.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntegerMask_KeyPress);
             // 
             // textBoxPathToBook
