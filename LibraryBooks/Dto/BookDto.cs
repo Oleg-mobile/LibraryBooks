@@ -17,13 +17,13 @@ namespace LibraryBooks.Dto
         public string Publication { get; set; }
 
         [DgvColumn(DisplayName = "Год выпуска", IsVisible = false)]
-        public int Year { get; set; }
+        public int? Year { get; set; }
 
         [DgvColumn(DisplayName = "Закладка")]
         public int Mark { get; set; }
 
         [DgvColumn(DisplayName = "Количество страниц")]
-        public int PageCount { get; set; }
+        public int? PageCount { get; set; }
 
         [DgvColumn(DisplayName = "Путь к книге", IsVisible = false)]
         public string PathToBook { get; set; }

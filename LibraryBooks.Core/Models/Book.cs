@@ -29,9 +29,9 @@ namespace LibraryBooks.Core.Models
 
         public string Name { get; set; }
         public string Publication { get; set; }
-        public int Year { get; set; }
+        public int? Year { get; set; }
         public int Mark { get; set; }
-        public int PageCount { get; set; }
+        public int? PageCount { get; set; }
         public string PathToBook { get; set; }
         public string PathToCover { get; set; }
         public bool IsLiked { get; set; }

@@ -30,12 +30,12 @@ namespace LibraryBooks.Forms
             {
                 _changePasswordValidator.ValidateAndThrow(this);  // immediately throw an exception
 
-                // TODO удалил проверку пароля, т.к. валидация уже пройдена
                 var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login);
 
                 var salt = EncryptionUtils.GenerateSalt();
                 user.Password = EncryptionUtils.EncodePasword(textBoxNewPassword.Text, salt);
                 user.Salt = salt;
+
                 _userRepository.Update(user);
 
                 Notification.ShowSuccess("Пароль изменён!");
