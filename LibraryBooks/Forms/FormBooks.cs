@@ -148,7 +148,7 @@ namespace LibraryBooks.Forms
             book.Publication = bookForm.textBoxPublication.Text;
             book.Year = bookForm.textBoxYear.Text.ToInt();
             book.PageCount = bookForm.textBoxPageCount.Text.ToInt();
-            book.Mark = bookForm.textBoxMark.Text.ToInt();  // TODO тоже среагировать на Null?
+            book.Mark = bookForm.textBoxMark.Text?.ToInt() ?? 1;  // TODO тоже среагировать на Null?
             book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
             book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;

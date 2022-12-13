@@ -8,6 +8,7 @@ namespace LibraryBooks.Validation
     {
         public FormBookValidator()
         {
+            // TODO убрать проверку на null
             Transform(from: r => r.textBoxYear.Text, to: v => int.TryParse(v, out int year) ? (int?)year : null)  // !int.TryParse()
                 .NotNull()
                 .WithMessage("Не верный формат года");

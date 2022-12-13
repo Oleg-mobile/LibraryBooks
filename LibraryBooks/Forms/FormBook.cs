@@ -74,7 +74,7 @@ namespace LibraryBooks.Forms
         private void textBoxIntegerMask_KeyPress(object sender, KeyPressEventArgs e)
         {
             char input = e.KeyChar;
-            if (!char.IsDigit(input))
+            if ((!char.IsDigit(input)) && (!char.IsControl(input)))
             {
                 e.Handled = true;
             }
@@ -126,7 +126,7 @@ namespace LibraryBooks.Forms
         private void pictureBoxPathToBook_Click(object sender, EventArgs e)
         {
             ofd.Title = "Выберите путь до книги";
-            ofd.Filter = "Книги|*.doc;*.docx;*.pdf";
+            ofd.Filter = "Книги|*.doc;*.docx;*.pdf;*.txt";
 
             if (ofd.ShowDialog() != DialogResult.OK) return;
             textBoxPathToBook.Text = ofd.FileName;
