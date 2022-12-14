@@ -52,7 +52,6 @@ namespace LibraryBooks.Forms
 
             foreach (var genre in genres)
             {
-                // TODO Проверка при удалении жанра
                 var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Genre.Id == genre.Id).ToList();
                 if (!books.IsNullOrEmpty())
                 {

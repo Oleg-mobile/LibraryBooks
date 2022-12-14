@@ -61,8 +61,6 @@ namespace LibraryBooks.Forms
 
             foreach (var author in authors)
             {
-                // TODO проверка при удалении автора
-                // Здесь же без привязки к юзеру?
                 var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Author.Id == author.Id).ToList();
                 if (!books.IsNullOrEmpty())
                 {

@@ -15,13 +15,7 @@ namespace LibraryBooks.Forms
             labelGenre.Text += bookDto.GenreName;
             labelPublication.Text += bookDto.Publication;
             labelYaer.Text += bookDto.Year;
-
-            // TODO если закладка = 0. И ссылка?
-            if (bookDto.Mark > 0)
-            {
-                labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
-            }
-
+            labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
             labelPageCount.Text += bookDto.PageCount;
             labelPath.Text += bookDto.PathToBook;
 
