@@ -3,7 +3,6 @@ using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
 using LibraryBooks.Utils;
 using System;
-using System.Linq;
 
 namespace LibraryBooks.Forms
 {
@@ -25,40 +24,31 @@ namespace LibraryBooks.Forms
             _formAuthorization = formAuthorization;
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        protected virtual void buttonAdd_Click(object sender, EventArgs e)
         {
-            try
+            _validator.ValidateAndThrow(this);
+
+            string login = textBoxName.Text;
+            if (_userRepository.IsExist(login))
             {
-                _validator.ValidateAndThrow(this);
-
-                string login = textBoxName.Text;
-                if (_userRepository.IsExist(login))
-                {
-                    Notification.ShowWarning("Существующий пользователь");
-                    return;
-                }
-
-                var salt = EncryptionUtils.GenerateSalt();
-                var password = textBoxPassword.Text;
-
-                _userRepository.Insert(new User
-                {
-                    Login = login,
-                    Password = EncryptionUtils.EncodePasword(password, salt),
-                    Salt = salt
-                });
-
-                Notification.ShowSuccess("Пользователь добавлен");
-                _formAuthorization.textBoxLogin.Text = login;
-
-                Close();
+                Notification.ShowWarning("Существующий пользователь");
+                return;
             }
-            catch (ValidationException ex)
+
+            var salt = EncryptionUtils.GenerateSalt();
+            var password = textBoxPassword.Text;
+
+            _userRepository.Insert(new User
             {
-                // TODO код повторяется (inetceptor???)
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+                Login = login,
+                Password = EncryptionUtils.EncodePasword(password, salt),
+                Salt = salt
+            });
+
+            Notification.ShowSuccess("Пользователь добавлен");
+            _formAuthorization.textBoxLogin.Text = login;
+
+            Close();
         }
 
         private void pictureBoxPassVis_Click(object sender, EventArgs e)
