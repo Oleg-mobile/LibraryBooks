@@ -1,7 +1,4 @@
 ﻿using Castle.DynamicProxy;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace LibraryBooks.Interceptors
 {

@@ -77,6 +77,7 @@ namespace LibraryBooks.Forms
 
         protected void CallWithAllInterceptors(Action callback, string methodName)
         {
+            // Singleton
             if (interceptorCallerWithAll == null)
             {
                 interceptorCallerWithAll = ProxyGeneratorFactory.CreateWithAll<InterceptorCaller>();
@@ -87,6 +88,7 @@ namespace LibraryBooks.Forms
 
         protected void CallWithLoggerInterceptor(Action callback, string methodName)
         {
+            // Singleton
             if (interceptorCallerWithLogger == null)
             {
                 interceptorCallerWithLogger = ProxyGeneratorFactory.Create<InterceptorCaller>(new LoggerInterceptor());
