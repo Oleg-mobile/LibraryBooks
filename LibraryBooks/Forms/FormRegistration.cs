@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
-using LibraryBooks.Interceptors;
 using LibraryBooks.Utils;
 using System;
 
