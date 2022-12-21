@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories.Users;
+using LibraryBooks.Interceptors;
 using LibraryBooks.Utils;
 using System;
 
@@ -26,34 +27,37 @@ namespace LibraryBooks.Forms
 
         protected virtual void buttonAdd_Click(object sender, EventArgs e)
         {
-            _validator.ValidateAndThrow(this);
-
-            string login = textBoxName.Text;
-            if (_userRepository.IsExist(login))
+            CallWithAllInterceptors(() =>
             {
-                Notification.ShowWarning("Существующий пользователь");
-                return;
-            }
+                _validator.ValidateAndThrow(this);
 
-            var salt = EncryptionUtils.GenerateSalt();
-            var password = textBoxPassword.Text;
+                string login = textBoxName.Text;
+                if (_userRepository.IsExist(login))
+                {
+                    Notification.ShowWarning("Существующий пользователь");
+                    return;
+                }
 
-            _userRepository.Insert(new User
-            {
-                Login = login,
-                Password = EncryptionUtils.EncodePasword(password, salt),
-                Salt = salt
-            });
+                var salt = EncryptionUtils.GenerateSalt();
+                var password = textBoxPassword.Text;
 
-            Notification.ShowSuccess("Пользователь добавлен");
-            _formAuthorization.textBoxLogin.Text = login;
+                _userRepository.Insert(new User
+                {
+                    Login = login,
+                    Password = EncryptionUtils.EncodePasword(password, salt),
+                    Salt = salt
+                });
 
-            Close();
+                Notification.ShowSuccess("Пользователь добавлен");
+                _formAuthorization.textBoxLogin.Text = login;
+
+                Close();
+            }, nameof(buttonAdd_Click));
         }
 
         private void pictureBoxPassVis_Click(object sender, EventArgs e)
         {
-            FormAuthorization.ToggleVisiblePassword(pictureBoxPassVis, textBoxPassword, textBoxPasswordRepeat);
+            CallWithLoggerInterceptor(() => FormAuthorization.ToggleVisiblePassword(pictureBoxPassVis, textBoxPassword, textBoxPasswordRepeat), nameof(pictureBoxPassVis_Click));
         }
     }
 }

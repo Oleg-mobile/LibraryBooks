@@ -7,7 +7,9 @@ using LibraryBooks.Core;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Core.Repositories.EntityFrameworkCore;
 using LibraryBooks.Core.Repositories.Users;
+using LibraryBooks.Interceptors;
 using LibraryBooks.Utils;
+using System;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -30,6 +32,9 @@ namespace LibraryBooks.Forms
                 return _iocContainer;
             }
         }
+
+        private static InterceptorCaller interceptorCallerWithAll;
+        private static InterceptorCaller interceptorCallerWithLogger;
 
         protected IMapper Mapper { get; }
 
@@ -68,6 +73,26 @@ namespace LibraryBooks.Forms
                 table.Columns[column.Key].HeaderText = column.Value.DisplayName;
                 table.Columns[column.Key].Visible = column.Value.IsVisible;
             }
+        }
+
+        protected void CallWithAllInterceptors(Action callback, string methodName)
+        {
+            if (interceptorCallerWithAll == null)
+            {
+                interceptorCallerWithAll = ProxyGeneratorFactory.CreateWithAll<InterceptorCaller>();
+            }
+
+            interceptorCallerWithAll.CallCallback(callback, methodName);
+        }
+
+        protected void CallWithLoggerInterceptor(Action callback, string methodName)
+        {
+            if (interceptorCallerWithLogger == null)
+            {
+                interceptorCallerWithLogger = ProxyGeneratorFactory.Create<InterceptorCaller>(new LoggerInterceptor());
+            }
+
+            interceptorCallerWithLogger.CallCallback(callback, methodName);
         }
     }
 }
