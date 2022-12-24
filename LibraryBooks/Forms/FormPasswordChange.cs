@@ -26,7 +26,7 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            CallWithAllInterceptors(() => 
+            CallWithAllInterceptors(() =>
             {
                 _changePasswordValidator.ValidateAndThrow(this);  // immediately throw an exception
 
@@ -45,7 +45,7 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxVis_Click(object sender, EventArgs e)
         {
-            CallWithLoggerInterceptor(() => 
+            CallWithLoggerInterceptor(() =>
                 FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat), nameof(pictureBoxVis_Click));
         }
     }

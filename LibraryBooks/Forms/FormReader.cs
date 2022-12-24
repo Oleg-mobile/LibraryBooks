@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using LibraryBooks.Dto;
-using LibraryBooks.Utils;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -36,23 +34,21 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            CallWithAllInterceptors(() =>
             {
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+            }, nameof(buttonSave_Click));
         }
 
         private void pictureBoxPathToReader_Click(object sender, EventArgs e)
         {
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-            textBoxPathToReader.Text = ofd.FileName;
+            CallWithLoggerInterceptor(() =>
+            {
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                textBoxPathToReader.Text = ofd.FileName;
+            }, nameof(pictureBoxPathToReader_Click));
         }
     }
 }
