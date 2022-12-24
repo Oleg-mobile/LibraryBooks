@@ -27,7 +27,7 @@ namespace LibraryBooks.Forms
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            try
+            CallWithAllInterceptors(() =>
             {
                 _validator.ValidateAndThrow(this);
 
@@ -35,20 +35,14 @@ namespace LibraryBooks.Forms
                 Session.CurrentUser = Mapper.Map<UserDto>(user);
                 new FormMain().Show();  // stack variable is not needed
                 Hide();
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+            }, nameof(buttonLogin_Click));
         }
 
-        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
-
-        private void buttonRegistration_Click(object sender, EventArgs e) => new FormRegistration(this).ShowDialog();  // this - the one from whom this form is opened
-                                                                                                                       //to access an element of this form from another through the constructor
-        private void pictureBoxClose_Click(object sender, EventArgs e) => ToggleVisiblePassword(pictureBoxClose, textBoxPassword);
-
+        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => CallWithLoggerInterceptor(() => Application.Exit(), nameof(AuthorizationForm_FormClosed));
+        // this - the one from whom this form is opened
+        //to access an element of this form from another through the constructor
+        private void buttonRegistration_Click(object sender, EventArgs e) => CallWithLoggerInterceptor(() => new FormRegistration(this).ShowDialog(), nameof(buttonRegistration_Click));
+        private void pictureBoxClose_Click(object sender, EventArgs e) => CallWithLoggerInterceptor(() => ToggleVisiblePassword(pictureBoxClose, textBoxPassword), nameof(pictureBoxClose_Click));
         public static void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)
         {
             bool isVisiblePass = textBoxPasswords[0].UseSystemPasswordChar;

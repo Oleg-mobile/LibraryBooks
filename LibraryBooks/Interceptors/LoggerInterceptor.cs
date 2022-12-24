@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using LibraryBooks.Utils;
 
 namespace LibraryBooks.Interceptors
 {
@@ -6,7 +7,7 @@ namespace LibraryBooks.Interceptors
     {
         public void Intercept(IInvocation invocation)
         {
-            //MessageBox.Show(invocation.Arguments[1].ToString());
+            //Notification.ShowWarning(invocation.Arguments[1].ToString());
             invocation.Proceed();
         }
     }
