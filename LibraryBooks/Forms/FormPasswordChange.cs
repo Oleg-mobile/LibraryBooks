@@ -26,7 +26,7 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            CallWithAllInterceptors(() => 
             {
                 _changePasswordValidator.ValidateAndThrow(this);  // immediately throw an exception
 
@@ -40,17 +40,13 @@ namespace LibraryBooks.Forms
 
                 Notification.ShowSuccess("Пароль изменён!");
                 Close();
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;  // ? - defence from NullReferenceException
-                Notification.ShowWarning(message);                            // if ex.Errors not null, method First() will be called
-            }                                                                 // ?? - if left is not null, use left
-        }                                                                     // otherwise, use ex.Message
+            }, nameof(buttonSave_Click));
+        }
 
         private void pictureBoxVis_Click(object sender, EventArgs e)
         {
-            FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat);
+            CallWithLoggerInterceptor(() => 
+                FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat), nameof(pictureBoxVis_Click));
         }
     }
 }
