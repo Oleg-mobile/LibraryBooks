@@ -2,7 +2,6 @@
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
-using LibraryBooks.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -56,19 +55,14 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            CallWithAllInterceptors(() =>
             {
                 // TODO защита от null в закладке, чтобы пройти валидацию?
 
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+            }, nameof(buttonSave_Click));
         }
 
         private void textBoxIntegerMask_KeyPress(object sender, KeyPressEventArgs e)
