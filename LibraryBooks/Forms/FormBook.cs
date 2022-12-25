@@ -57,8 +57,6 @@ namespace LibraryBooks.Forms
         {
             CallWithAllInterceptors(() =>
             {
-                // TODO защита от null в закладке, чтобы пройти валидацию?
-
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;

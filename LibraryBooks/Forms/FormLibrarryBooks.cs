@@ -61,6 +61,8 @@ namespace LibraryBooks.Forms
             //  Transient - the object lives only while the method is running (within class)
             //  Singleton - one object for the lifetime of the program
             //  Scoped - object lives within a single request (sites)
+
+            _iocContainer.Register(Component.For(typeof(ILogger)).ImplementedBy(typeof(Logger)).LifestyleTransient());
         }
 
         protected TService Resolve<TService>() => IocContainer.Resolve<TService>();

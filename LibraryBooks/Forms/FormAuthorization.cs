@@ -35,14 +35,17 @@ namespace LibraryBooks.Forms
                 Session.CurrentUser = Mapper.Map<UserDto>(user);
                 new FormMain().Show();  // stack variable is not needed
                 Hide();
-            }, nameof(buttonLogin_Click));
+            }, nameof(FormAuthorization) + " " + nameof(buttonLogin_Click));
         }
 
-        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => CallWithLoggerInterceptor(() => Application.Exit(), nameof(AuthorizationForm_FormClosed));
+        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e) => 
+            CallWithLoggerInterceptor(() => Application.Exit(), nameof(FormAuthorization) + " " + nameof(AuthorizationForm_FormClosed));
         // this - the one from whom this form is opened
         //to access an element of this form from another through the constructor
-        private void buttonRegistration_Click(object sender, EventArgs e) => CallWithLoggerInterceptor(() => new FormRegistration(this).ShowDialog(), nameof(buttonRegistration_Click));
-        private void pictureBoxClose_Click(object sender, EventArgs e) => CallWithLoggerInterceptor(() => ToggleVisiblePassword(pictureBoxClose, textBoxPassword), nameof(pictureBoxClose_Click));
+        private void buttonRegistration_Click(object sender, EventArgs e) => 
+            CallWithLoggerInterceptor(() => new FormRegistration(this).ShowDialog(), nameof(FormAuthorization) + " " + nameof(buttonRegistration_Click));
+        private void pictureBoxClose_Click(object sender, EventArgs e) => 
+            CallWithLoggerInterceptor(() => ToggleVisiblePassword(pictureBoxClose, textBoxPassword), nameof(FormAuthorization) + " " + nameof(pictureBoxClose_Click));
         public static void ToggleVisiblePassword(PictureBox pictureBox, params TextBox[] textBoxPasswords)
         {
             bool isVisiblePass = textBoxPasswords[0].UseSystemPasswordChar;

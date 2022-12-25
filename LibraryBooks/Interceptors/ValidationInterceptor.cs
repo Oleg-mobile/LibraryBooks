@@ -17,6 +17,7 @@ namespace LibraryBooks.Interceptors
             {
                 var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
                 Notification.ShowWarning(message);
+                throw ex;
             }
         }
     }

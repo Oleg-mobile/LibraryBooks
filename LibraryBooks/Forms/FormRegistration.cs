@@ -24,8 +24,7 @@ namespace LibraryBooks.Forms
             _formAuthorization = formAuthorization;
         }
 
-        // TODO нужен ли virtual, если он есть в InterceptorCaller?
-        protected virtual void buttonAdd_Click(object sender, EventArgs e)
+        protected void buttonAdd_Click(object sender, EventArgs e)
         {
             CallWithAllInterceptors(() =>
             {

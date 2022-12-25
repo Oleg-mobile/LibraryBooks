@@ -61,12 +61,4 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
         {
         }
     }
-
-    //TODO сделать для Irepository TEntity
-    //public class EfCoreRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<LibraryBooksContext, TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
-    //{
-    //    public EfCoreRepositoryBase(LibraryBooksContext context) : base(context)
-    //    {
-    //    }
-    //}
 }

@@ -18,7 +18,7 @@ namespace LibraryBooks.Validation
                 .WithMessage("Не верный формат количества страниц");
 
             Transform(from: r => r.textBoxMark.Text, to: v => int.TryParse(v, out int mark) ? (int?)mark : null)
-                .NotNull()
+                .Must(r => true)
                 .WithMessage("Не верный формат закладки");
 
             RuleFor(r => r.comboBoxGenre.SelectedItem).NotNull().WithMessage("Жанр не выбран");

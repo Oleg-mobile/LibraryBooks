@@ -9,8 +9,8 @@ namespace LibraryBooks.Interceptors
         // Array with interceptors
         private static IInterceptor[] _interceptors =
         {
-            new ValidationInterceptor(),
-            new LoggerInterceptor()
+            new LoggerInterceptor(),
+            new ValidationInterceptor()
         };
 
         // Creates a proxy class with all interceptors

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -77,6 +78,8 @@ namespace LibraryBooks.Forms
 
         private Book GetBook(FormBook bookForm)
         {
+            string mark = bookForm.textBoxMark.Text;
+
             return new Book
             {
                 Name = bookForm.textBoxName.Text,
@@ -86,7 +89,7 @@ namespace LibraryBooks.Forms
                 // INFO: Проверка на null:
                 // ?. - если объект не равен null, то обращаемся к компоненту объекта после ".", иначе - не обращаемся
                 // ?? - если операнд слева не равен null, то возвращает операнд слева, иначе - справа
-                Mark = bookForm.textBoxMark.Text?.ToInt() ?? 1,
+                Mark = mark != "" ? mark.ToInt() : 1,
                 GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
                 UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
                 AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
