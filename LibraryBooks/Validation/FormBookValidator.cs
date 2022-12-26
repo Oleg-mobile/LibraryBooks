@@ -23,7 +23,6 @@ namespace LibraryBooks.Validation
 
             RuleFor(r => r.comboBoxGenre.SelectedItem).NotNull().WithMessage("Жанр не выбран");
             RuleFor(r => r.comboBoxAuthor.SelectedItem).NotNull().WithMessage("Автор не выбран");
-            //RuleFor(r => r.comboBoxReader.SelectedItem).NotNull().WithMessage("Читалка не выбрана");
 
             var regex = new Regex(@"(^"")|(\w*"")|(^')|(\w*')");  // regular expression
                                                                   // ^ - begin with ..., * - any sequence, \w - any character

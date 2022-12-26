@@ -10,10 +10,12 @@ namespace LibraryBooks.Utils
 
         public Logger()
         {
+            // Path to the project folder
             _pathToFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Log.txt");
 
             if (!File.Exists(_pathToFile))
             {
+                // INFO: Создание файла: Create() - требует Dispose(), а WriteAllText() его уже содержет
                 File.WriteAllText(_pathToFile, "");
             }
         }
@@ -34,7 +36,7 @@ namespace LibraryBooks.Utils
         }
     }
 
-    public interface ILogger
+    public interface ILogger  // For dependency injection
     {
         void Info(string message);
         void Warn(string message);
