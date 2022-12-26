@@ -2,9 +2,9 @@
 
 namespace LibraryBooks.Interceptors
 {
-    // Calls methods through an interceptor
+    // Вызывает методы через перехватчик
     public class InterceptorCaller
     {
-        public virtual void CallCallback(Action callback, string methodName) => callback();  // Action - delegate
+        public virtual void CallCallback(Action callback, string methodName) => callback();  // Action - делегат
     }
 }

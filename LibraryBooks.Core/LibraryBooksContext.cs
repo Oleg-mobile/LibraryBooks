@@ -6,9 +6,9 @@ namespace LibraryBooks.Core
     /// <summary>
     /// Database model
     /// </summary>
-    public class LibraryBooksContext : DbContext  // a class symbolizing the database
+    public class LibraryBooksContext : DbContext  // Класс, символизирующий базу данных
     {
-        // tables
+        // Таблицы
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -16,7 +16,7 @@ namespace LibraryBooks.Core
         public DbSet<Reader> Readers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // database connection string
+            // Строка подключения к базе данных
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=LibraryBooks;Trusted_Connection=True;");
         }
     }

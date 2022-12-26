@@ -16,6 +16,7 @@ namespace LibraryBooks.Forms
     {
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Book, int> _bookRepository;
+        private readonly string _formName;
         private BindingList<GenreDto> bindingList;
 
         public FormGenres()
@@ -24,6 +25,7 @@ namespace LibraryBooks.Forms
 
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _bookRepository = Resolve<IRepository<Book, int>>();
+            _formName = nameof(FormGenres) + " ";
 
             RefrashTable();
             InitDataGridViewColumns<GenreDto>(dataGridViewGenres);
@@ -31,38 +33,46 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var genreForm = new FormGenre();
-            DialogResult result = genreForm.ShowDialog();
-
-            if (result == DialogResult.Cancel)
+            CallWithLoggerInterceptor(() =>
             {
-                return;
-            }
+                var genreForm = new FormGenre();
+                DialogResult result = genreForm.ShowDialog();
 
-            var genre = new Genre(genreForm.textBoxName.Text);
-            _genreRepository.Insert(genre);
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
 
-            RefrashTable();
+                var genre = new Genre(genreForm.textBoxName.Text);
+                _genreRepository.Insert(genre);
+
+                RefrashTable();
+
+            }, _formName + nameof(buttonAdd_Click));
         }
 
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            var genres = SelectedRowsMapToGenres();
-
-            foreach (var genre in genres)
+            CallWithLoggerInterceptor(() =>
             {
-                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Genre.Id == genre.Id).ToList();
-                if (!books.IsNullOrEmpty())
+                var genres = SelectedRowsMapToGenres();
+
+                foreach (var genre in genres)
                 {
-                    Notification.ShowWarning("Жанр испорльзуется!");
-                    return;
+                    var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Genre.Id == genre.Id).ToList();
+                    if (!books.IsNullOrEmpty())
+                    {
+                        Notification.ShowWarning("Жанр испорльзуется!");
+                        return;
+                    }
+
+                    _genreRepository.Delete(genre);
                 }
 
-                _genreRepository.Delete(genre);
-            }
+                RefrashTable();
 
-            RefrashTable();
+            }, _formName + nameof(buttonDel_Click));
         }
 
         private IEnumerable<Genre> SelectedRowsMapToGenres()
@@ -80,23 +90,26 @@ namespace LibraryBooks.Forms
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (dataGridViewGenres.SelectedRows.Count > 0)
+            CallWithLoggerInterceptor(() =>
             {
-                var genreDto = (GenreDto)dataGridViewGenres.SelectedRows[0].DataBoundItem;
-                var genre = Mapper.Map<Genre>(genreDto);
-                var genreForm = new FormGenre(genre);
-                DialogResult dialogResult = genreForm.ShowDialog();
-
-                if (dialogResult == DialogResult.Cancel)
+                if (dataGridViewGenres.SelectedRows.Count > 0)
                 {
-                    return;
+                    var genreDto = (GenreDto)dataGridViewGenres.SelectedRows[0].DataBoundItem;
+                    var genre = Mapper.Map<Genre>(genreDto);
+                    var genreForm = new FormGenre(genre);
+                    DialogResult dialogResult = genreForm.ShowDialog();
+
+                    if (dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+
+                    genre.Name = genreForm.textBoxName.Text;
+                    _genreRepository.Update(genre);
+
+                    RefrashTable();
                 }
-
-                genre.Name = genreForm.textBoxName.Text;
-                _genreRepository.Update(genre);
-
-                RefrashTable();
-            }
+            }, _formName + nameof(buttonEdit_Click));
         }
 
         private void RefrashTable()

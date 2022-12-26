@@ -4,7 +4,7 @@ namespace LibraryBooks.Core.Repositories
 {
     public interface IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
-        // methods for working with data
+        // Методы работы с данными
         IQueryable<TEntity> GetAll();
         TEntity Get(TPrimaryKey id);
         TEntity FirstOrDefault(TPrimaryKey id);
@@ -14,7 +14,7 @@ namespace LibraryBooks.Core.Repositories
         void Delete(TEntity entity);
     }
 
-    // simplified wrapper IRepository (our case)
+    // Упрощенная оболочка IRepository (наш случай)
     public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : Entity<int>
     {
 

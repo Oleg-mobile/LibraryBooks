@@ -21,8 +21,11 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Close();
-            DialogResult = DialogResult.OK;
+            CallWithLoggerInterceptor(() =>
+            {
+                Close();
+                DialogResult = DialogResult.OK;
+            }, nameof(FormGenre) + " " + nameof(buttonSave_Click));
         }
     }
 }

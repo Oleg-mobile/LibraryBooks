@@ -4,7 +4,7 @@ using LibraryBooks.Core.Models;
 
 namespace LibraryBooks.Dto
 {
-    [AutoMap(typeof(Author), ReverseMap = true)]  // compare Author with AuthorDto
+    [AutoMap(typeof(Author), ReverseMap = true)]  // Сравнить Author с AuthorDto
     public class AuthorDto : EntityDto
     {
         [DgvColumn(DisplayName = "Имя автора")]

@@ -10,6 +10,7 @@ namespace LibraryBooks.Forms
     {
         private readonly IUserRepository _userRepository;
         private readonly IValidator<FormPasswordChange> _changePasswordValidator;
+        private readonly string _formName;
 
         public FormPasswordChange()
         {
@@ -20,6 +21,7 @@ namespace LibraryBooks.Forms
 
             _userRepository = Resolve<IUserRepository>();
             _changePasswordValidator = Resolve<IValidator<FormPasswordChange>>();
+            _formName = nameof(FormPasswordChange) + " ";
 
             Text = "Библиотека  / Изменить пароль: " + Session.CurrentUser.Login;
         }
@@ -28,7 +30,7 @@ namespace LibraryBooks.Forms
         {
             CallWithAllInterceptors(() =>
             {
-                _changePasswordValidator.ValidateAndThrow(this);  // immediately throw an exception
+                _changePasswordValidator.ValidateAndThrow(this);  // Немедленно выбросить исключение
 
                 var user = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login);
 
@@ -40,13 +42,17 @@ namespace LibraryBooks.Forms
 
                 Notification.ShowSuccess("Пароль изменён!");
                 Close();
-            }, nameof(buttonSave_Click));
+
+            }, _formName + nameof(buttonSave_Click));
         }
 
         private void pictureBoxVis_Click(object sender, EventArgs e)
         {
             CallWithLoggerInterceptor(() =>
-                FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat), nameof(pictureBoxVis_Click));
+            {
+                FormAuthorization.ToggleVisiblePassword(pictureBoxVis, textBoxOldPassword, textBoxNewPassword, textBoxNewPasswordRepeat);
+
+            }, _formName + nameof(pictureBoxVis_Click));
         }
     }
 }

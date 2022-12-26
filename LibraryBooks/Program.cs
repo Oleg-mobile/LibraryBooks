@@ -6,7 +6,7 @@ namespace LibraryBooks
 {
     internal static class Program
     {
-        // to save form data
+        // Сохранить данные формы
         public static FormAuthorization AuthForm = new FormAuthorization();
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace LibraryBooks
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // The form that runs when the application starts
+            // Форма, которая запускается при запуске приложения
             Application.Run(AuthForm);
         }
     }

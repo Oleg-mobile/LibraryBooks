@@ -13,7 +13,7 @@ namespace LibraryBooks.Core.Models
         public string PathToReader { get; set; }
         public string OpeningFormat { get; set; }
 
-        public Reader()  //  for use in generics
+        public Reader()
         {
         }
 

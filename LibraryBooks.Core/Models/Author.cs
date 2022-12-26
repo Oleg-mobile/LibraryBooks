@@ -7,7 +7,7 @@
     {
         public string Name { get; set; }
 
-        public Author()  //  for use in generics
+        public Author()  // Для использования в дженериках
         {
         }
 

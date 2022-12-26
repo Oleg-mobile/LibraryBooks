@@ -23,8 +23,8 @@ namespace LibraryBooks.Validation
             RuleFor(r => r.comboBoxGenre.SelectedItem).NotNull().WithMessage("Жанр не выбран");
             RuleFor(r => r.comboBoxAuthor.SelectedItem).NotNull().WithMessage("Автор не выбран");
 
-            var regex = new Regex(@"(^"")|(\w*"")|(^')|(\w*')");  // regular expression
-                                                                  // ^ - begin with ..., * - any sequence, \w - any character
+            var regex = new Regex(@"(^"")|(\w*"")|(^')|(\w*')");  // регулярное выражение
+                                                                  // ^ - начинается с ..., * - любая последовательность, \w - любой символ
             RuleFor(r => r.textBoxPathToBook.Text).Must(r => !regex.IsMatch(r)).WithMessage("Путь к книге не должен \n содержать ковычки!");
         }
     }

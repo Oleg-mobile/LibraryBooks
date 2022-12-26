@@ -2,8 +2,8 @@
 
 namespace LibraryBooks.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property)]  // limitation (only characteristics)
-    public class DgvColumnAttribute : Attribute  // to rename table columns
+    [AttributeUsage(AttributeTargets.Property)]  // Ограничение (только характеристики)
+    public class DgvColumnAttribute : Attribute  // Переименовать столбцы таблицы
     {
         public string DisplayName { get; set; }
         public bool IsVisible { get; set; } = true;

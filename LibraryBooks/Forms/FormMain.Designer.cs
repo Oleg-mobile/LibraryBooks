@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonGenres = new System.Windows.Forms.Button();
             this.buttonAuthors = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.buttonSettings);
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonGenres);
             this.panel1.Controls.Add(this.buttonAuthors);
@@ -60,23 +60,23 @@
             this.panel1.Size = new System.Drawing.Size(260, 611);
             this.panel1.TabIndex = 0;
             // 
-            // button1
+            // buttonSettings
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 541);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(260, 70);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Настройки";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSettings.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.buttonSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonSettings.FlatAppearance.BorderSize = 0;
+            this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettings.Image = ((System.Drawing.Image)(resources.GetObject("buttonSettings.Image")));
+            this.buttonSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSettings.Location = new System.Drawing.Point(0, 541);
+            this.buttonSettings.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
+            this.buttonSettings.Size = new System.Drawing.Size(260, 70);
+            this.buttonSettings.TabIndex = 5;
+            this.buttonSettings.Text = "Настройки";
+            this.buttonSettings.UseVisualStyleBackColor = false;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // buttonExit
             // 
@@ -224,6 +224,6 @@
         private System.Windows.Forms.Button buttonAuthors;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSettings;
     }
 }

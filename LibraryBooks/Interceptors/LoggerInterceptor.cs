@@ -5,7 +5,7 @@ using System;
 
 namespace LibraryBooks.Interceptors
 {
-    // Logs the execution of methods and exceptions
+    // Регистрирует запуск методов и исключений
     public class LoggerInterceptor : IInterceptor
     {
         private readonly ILogger _logger;

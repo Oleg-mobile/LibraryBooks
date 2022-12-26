@@ -10,7 +10,7 @@ namespace LibraryBooks.Utils
 
         public Logger()
         {
-            // Path to the project folder
+            // Путь к папке проекта
             _pathToFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Log.txt");
 
             if (!File.Exists(_pathToFile))
@@ -36,7 +36,7 @@ namespace LibraryBooks.Utils
         }
     }
 
-    public interface ILogger  // For dependency injection
+    public interface ILogger  // Для внедрения зависимостей
     {
         void Info(string message);
         void Warn(string message);

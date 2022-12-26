@@ -8,6 +8,7 @@ namespace LibraryBooks.Forms
     public partial class FormReader : FormLibrarryBooks
     {
         private readonly IValidator<FormReader> _validator;
+        private readonly string _formName;
         private OpenFileDialog ofd = new OpenFileDialog();
 
         public FormReader()
@@ -23,6 +24,7 @@ namespace LibraryBooks.Forms
             textBoxOpeningFormat.Text = "/A page={page} \"{path}\"";
 
             _validator = Resolve<IValidator<FormReader>>();
+            _formName = nameof(FormReader) + " ";
         }
 
         public FormReader(ReaderDto reader) : this()
@@ -39,7 +41,8 @@ namespace LibraryBooks.Forms
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;
-            }, nameof(buttonSave_Click));
+
+            }, _formName + nameof(buttonSave_Click));
         }
 
         private void pictureBoxPathToReader_Click(object sender, EventArgs e)
@@ -48,7 +51,8 @@ namespace LibraryBooks.Forms
             {
                 if (ofd.ShowDialog() != DialogResult.OK) return;
                 textBoxPathToReader.Text = ofd.FileName;
-            }, nameof(pictureBoxPathToReader_Click));
+
+            }, _formName + nameof(pictureBoxPathToReader_Click));
         }
     }
 }

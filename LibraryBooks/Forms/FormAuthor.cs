@@ -14,16 +14,18 @@ namespace LibraryBooks.Forms
             AcceptButton = buttonSave;
         }
 
-        // to fill in all the input fields on the form
-        public FormAuthor(Author author) : this()  // :this() - calling the default constructor
+        public FormAuthor(Author author) : this()  // :this() - вызов конструктора по умолчанию
         {
             textBoxName.Text = author.Name;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Close();
-            DialogResult = DialogResult.OK;
+            CallWithLoggerInterceptor(() =>
+            {
+                Close();
+                DialogResult = DialogResult.OK;
+            }, nameof(FormAuthor) + " " + nameof(buttonSave_Click));
         }
     }
 }

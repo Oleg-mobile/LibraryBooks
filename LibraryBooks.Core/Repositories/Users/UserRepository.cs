@@ -6,7 +6,7 @@ namespace LibraryBooks.Core.Repositories.Users
 {
     public class UserRepository : EfCoreRepositoryBase<User, int>, IUserRepository
     {
-        // base constructor
+        // Базовый конструктор
         public UserRepository(LibraryBooksContext context) : base(context)
         {
         }
@@ -18,7 +18,7 @@ namespace LibraryBooks.Core.Repositories.Users
                 .WhereIf(!string.IsNullOrWhiteSpace(password), u => u.Password == password)
                 .FirstOrDefault();
 
-            return user != null;  // true or false
+            return user != null;  // true или false
         }
     }
 }

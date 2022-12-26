@@ -10,22 +10,22 @@ namespace LibraryBooks.Core.Models
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }     // navigation property for JOIN
+        public User User { get; set; }  // Свойство навигации для JOIN
 
         public int AuthorId { get; set; }
 
         [ForeignKey("AuthorId")]
-        public Author Author { get; set; }  // navigation property for JOIN
+        public Author Author { get; set; }
 
         public int GenreId { get; set; }
 
         [ForeignKey("GenreId")]
-        public Genre Genre { get; set; }  // navigation property for JOIN
+        public Genre Genre { get; set; }
 
-        public int? ReaderId { get; set; }  // allow value null
+        public int? ReaderId { get; set; }  // Разрешить значение null
 
         [ForeignKey("ReaderId")]
-        public Reader Reader { get; set; }  // navigation property for JOIN
+        public Reader Reader { get; set; }
 
         public string Name { get; set; }
         public string Publication { get; set; }
