@@ -95,9 +95,9 @@
             this.labelYaer.AutoSize = true;
             this.labelYaer.Location = new System.Drawing.Point(234, 184);
             this.labelYaer.Name = "labelYaer";
-            this.labelYaer.Size = new System.Drawing.Size(81, 15);
+            this.labelYaer.Size = new System.Drawing.Size(127, 15);
             this.labelYaer.TabIndex = 5;
-            this.labelYaer.Text = "Год выпуска: ";
+            this.labelYaer.Text = "Год выпуска: не задан";
             // 
             // labelMark
             // 

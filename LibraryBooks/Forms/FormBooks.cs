@@ -78,12 +78,13 @@ namespace LibraryBooks.Forms
         private Book GetBook(FormBook bookForm)
         {
             string mark = bookForm.textBoxMark.Text;
+            string yaer = bookForm.textBoxYear.Text;
 
             return new Book
             {
                 Name = bookForm.textBoxName.Text,
                 Publication = bookForm.textBoxPublication.Text,
-                Year = bookForm.textBoxYear.Text.ToInt(),  // int checked during validation, on line 72, so we parse without checks
+                Year = yaer != "" ? yaer.ToInt() : null,
                 PageCount = bookForm.textBoxPageCount.Text.ToInt(),
                 // INFO: Проверка на null:
                 // ?. - если объект не равен null, то обращаемся к компоненту объекта после ".", иначе - не обращаемся
@@ -149,11 +150,14 @@ namespace LibraryBooks.Forms
 
         private void EditBook(Book book, FormBook bookForm)
         {
+            string mark = bookForm.textBoxMark.Text;
+            string yaer = bookForm.textBoxYear.Text;
+
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
-            book.Year = bookForm.textBoxYear.Text.ToInt();
+            book.Year = yaer != "" ? yaer.ToInt() : null;
             book.PageCount = bookForm.textBoxPageCount.Text.ToInt();
-            book.Mark = bookForm.textBoxMark.Text?.ToInt() ?? 1;
+            book.Mark = mark != "" ? mark.ToInt() : 1;
             book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
             book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;

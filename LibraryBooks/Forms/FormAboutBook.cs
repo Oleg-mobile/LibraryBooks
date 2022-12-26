@@ -14,7 +14,12 @@ namespace LibraryBooks.Forms
             labelAuthor.Text += bookDto.AuthorName;
             labelGenre.Text += bookDto.GenreName;
             labelPublication.Text += bookDto.Publication;
-            labelYaer.Text += bookDto.Year;
+
+            if (bookDto.Year is not null)
+            {
+                labelYaer.Text = "Год выпуска: " + bookDto.Year;
+            }
+
             labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
             labelPageCount.Text += bookDto.PageCount;
             labelPath.Text += bookDto.PathToBook;

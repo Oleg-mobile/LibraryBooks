@@ -8,17 +8,16 @@ namespace LibraryBooks.Validation
     {
         public FormBookValidator()
         {
-            // TODO убрать проверку на null
             Transform(from: r => r.textBoxYear.Text, to: v => int.TryParse(v, out int year) ? (int?)year : null)  // !int.TryParse()
-                .NotNull()
+                .Must(r => true)
                 .WithMessage("Не верный формат года");
 
             Transform(from: r => r.textBoxPageCount.Text, to: v => int.TryParse(v, out int pageCount) ? (int?)pageCount : null)
                 .NotNull()
                 .WithMessage("Не верный формат количества страниц");
 
-            Transform(from: r => r.textBoxMark.Text, to: v => int.TryParse(v, out int mark) ? (int?)mark : null)
-                .Must(r => true)
+            Transform(from: r => r.textBoxMark.Text, to: v => int.TryParse(v, out int mark) ? (int?)mark : 1)
+                .NotNull()
                 .WithMessage("Не верный формат закладки");
 
             RuleFor(r => r.comboBoxGenre.SelectedItem).NotNull().WithMessage("Жанр не выбран");
