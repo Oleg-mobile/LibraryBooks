@@ -177,7 +177,7 @@ namespace LibraryBooks.Forms
             book.PathToCover = bookForm.textBoxPathToCover.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
-            book.ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null;  // TODO ошибка при удалении читалки с формы книги
+            book.ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null;
         }
 
         private void buttonRead_Click(object sender, EventArgs e)
