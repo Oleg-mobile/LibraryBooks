@@ -85,6 +85,7 @@ namespace LibraryBooks.Forms
         {
             string mark = bookForm.textBoxMark.Text;
             string yaer = bookForm.textBoxYear.Text;
+            string reader = bookForm.comboBoxReader.Text;
 
             return new Book
             {
@@ -92,9 +93,6 @@ namespace LibraryBooks.Forms
                 Publication = bookForm.textBoxPublication.Text,
                 Year = yaer != "" ? yaer.ToInt() : null,
                 PageCount = bookForm.textBoxPageCount.Text.ToInt(),
-                // INFO: Проверка на null:
-                // ?. - если объект не равен null, то обращаемся к компоненту объекта после ".", иначе - не обращаемся
-                // ?? - если операнд слева не равен null, то возвращает операнд слева, иначе - справа
                 Mark = mark != "" ? mark.ToInt() : 1,
                 GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
                 UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
@@ -103,7 +101,7 @@ namespace LibraryBooks.Forms
                 PathToCover = bookForm.textBoxPathToCover.Text,
                 IsLiked = bookForm.checkBoxIsLiked.Checked,
                 IsFinished = bookForm.checkBoxIsFinished.Checked,
-                ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id
+                ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null
             };
         }
 
@@ -165,6 +163,7 @@ namespace LibraryBooks.Forms
         {
             string mark = bookForm.textBoxMark.Text;
             string yaer = bookForm.textBoxYear.Text;
+            string reader = bookForm.comboBoxReader.Text;
 
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
@@ -178,7 +177,7 @@ namespace LibraryBooks.Forms
             book.PathToCover = bookForm.textBoxPathToCover.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
-            book.ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id;  // TODO ошибка при удалении читалки с формы книги
+            book.ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null;  // TODO ошибка при удалении читалки с формы книги
         }
 
         private void buttonRead_Click(object sender, EventArgs e)
@@ -195,7 +194,7 @@ namespace LibraryBooks.Forms
                         return;
                     }
 
-                    if (book.ReaderName is null)
+                    if (book.ReaderName == "")
                     {
                         Notification.ShowWarning("Читалка не задана!");
                         return;

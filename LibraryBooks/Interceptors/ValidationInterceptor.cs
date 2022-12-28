@@ -15,6 +15,9 @@ namespace LibraryBooks.Interceptors
             }
             catch (ValidationException ex)
             {
+                // INFO: Проверка на null:
+                // ?. - если объект не равен null, то обращаемся к компоненту объекта после ".", иначе - не обращаемся
+                // ?? - если операнд слева не равен null, то возвращает операнд слева, иначе - справа
                 var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
                 Notification.ShowWarning(message);
                 throw ex;
