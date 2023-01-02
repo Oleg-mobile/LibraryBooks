@@ -73,7 +73,7 @@ namespace LibraryBooks.Forms
                     return;
                 }
 
-                Book book = GetBook(bookForm);
+                Book book = bookForm.GetBook();
                 _bookRepository.Insert(book);
 
                 RefrashTable();
@@ -81,29 +81,6 @@ namespace LibraryBooks.Forms
             }, _formName + nameof(buttonAdd_Click));
         }
 
-        private Book GetBook(FormBook bookForm)
-        {
-            string mark = bookForm.textBoxMark.Text;
-            string yaer = bookForm.textBoxYear.Text;
-            string reader = bookForm.comboBoxReader.Text;
-
-            return new Book
-            {
-                Name = bookForm.textBoxName.Text,
-                Publication = bookForm.textBoxPublication.Text,
-                Year = yaer != "" ? yaer.ToInt() : null,
-                PageCount = bookForm.textBoxPageCount.Text.ToInt(),
-                Mark = mark != "" ? mark.ToInt() : 1,
-                GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
-                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
-                AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
-                PathToBook = bookForm.textBoxPathToBook.Text,
-                PathToCover = bookForm.textBoxPathToCover.Text,
-                IsLiked = bookForm.checkBoxIsLiked.Checked,
-                IsFinished = bookForm.checkBoxIsFinished.Checked,
-                ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null
-            };
-        }
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
@@ -150,8 +127,7 @@ namespace LibraryBooks.Forms
                         return;
                     }
 
-                    var book = Mapper.Map<Book>(bookDto);
-                    EditBook(book, bookForm);
+                    var book = bookForm.GetBook();
                     _bookRepository.Update(book);
 
                     RefrashTable();

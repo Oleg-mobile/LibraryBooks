@@ -2,6 +2,8 @@
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
+using LibraryBooks.Extentions;
+using LibraryBooks.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,8 +15,10 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly IRepository<User, int> _userRepository;
         private readonly IValidator<FormBook> _validator;
         private readonly string _formName;
+        private int bookId;
         private OpenFileDialog ofd = new();
 
         public FormBook()
@@ -24,6 +28,7 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _userRepository = Resolve<IRepository<User, int>>();
             _validator = Resolve<IValidator<FormBook>>();
             _formName = nameof(FormBook) + " ";
 
@@ -41,6 +46,7 @@ namespace LibraryBooks.Forms
 
         public FormBook(BookDto book) : this()
         {
+            bookId = book.Id;
             textBoxName.Text = book.Name;
             comboBoxAuthor.Text = book.AuthorName;
             textBoxPublication.Text = book.Publication;
@@ -53,6 +59,31 @@ namespace LibraryBooks.Forms
             checkBoxIsLiked.Checked = book.IsLiked;
             checkBoxIsFinished.Checked = book.IsFinished;
             comboBoxReader.Text = book.ReaderName;
+        }
+
+        public Book GetBook()
+        {
+            string mark = textBoxMark.Text;
+            string yaer = textBoxYear.Text;
+            string reader = comboBoxReader.Text;
+
+            return new Book
+            {
+                Id = bookId,
+                Name = textBoxName.Text,
+                Publication = textBoxPublication.Text,
+                Year = yaer != "" ? yaer.ToInt() : null,
+                PageCount = textBoxPageCount.Text.ToInt(),
+                Mark = mark != "" ? mark.ToInt() : 1,
+                GenreId = _genreRepository.GetAll().First(g => g.Name == comboBoxGenre.Text).Id,
+                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
+                AuthorId = _authorRepository.GetAll().First(a => a.Name == comboBoxAuthor.Text).Id,
+                PathToBook = textBoxPathToBook.Text,
+                PathToCover = textBoxPathToCover.Text,
+                IsLiked = checkBoxIsLiked.Checked,
+                IsFinished = checkBoxIsFinished.Checked,
+                ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null
+            };
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
