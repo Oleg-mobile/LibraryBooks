@@ -4,12 +4,12 @@ using LibraryBooks.Dto;
 
 namespace LibraryBooks.Mapping
 {
-    //  mapping profile
+    // Профиль маппинга
     public class EntityToDtoProfile : Profile
     {
         public EntityToDtoProfile()
         {
-            CreateMap<Book, BookDto>().ForMember(m => m.ReaderName, m => m.MapFrom(n => n.Reader == null ? "Читалка не задана!" : n.Reader.Name));  // reaction to null in the table
+            CreateMap<Book, BookDto>().ForMember(m => m.ReaderName, m => m.MapFrom(n => n.Reader == null ? "" : n.Reader.Name));  // реакция на null в таблице
             CreateMap<BookDto, Book>()
                 .ForMember(m => m.Author, n => n.Ignore())
                 .ForMember(m => m.Genre,  n => n.Ignore())

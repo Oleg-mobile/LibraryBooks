@@ -10,14 +10,18 @@ namespace LibraryBooks.Forms
         {
             InitializeComponent();
 
-            labelName.Text += bookDto.Name;
-            labelAuthor.Text += bookDto.AuthorName;
-            labelGenre.Text += bookDto.GenreName;
+            labelName.Text        += bookDto.Name;
+            labelAuthor.Text      += bookDto.AuthorName;
+            labelGenre.Text       += bookDto.GenreName;
             labelPublication.Text += bookDto.Publication;
-            labelYaer.Text += bookDto.Year;
-            labelMark.Text = "Закладка на странице: " + bookDto.Mark.ToString();
-            labelPageCount.Text += bookDto.PageCount;
-            labelPath.Text += bookDto.PathToBook;
+            labelMark.Text        += bookDto.Mark.ToString();
+            labelPageCount.Text   += bookDto.PageCount;
+            labelPath.Text        += bookDto.PathToBook;
+
+            if (bookDto.Year is not null)
+            {
+                labelYaer.Text = "Год выпуска: " + bookDto.Year;
+            }
 
             if (File.Exists(bookDto.PathToCover))
             {
@@ -40,19 +44,22 @@ namespace LibraryBooks.Forms
 
         private void SetState(BookDto bookDto)
         {
-            if (bookDto.IsFinished)
+            CallWithLoggerInterceptor(() => 
             {
-                labelIsFinished.Text += "Прочитана";
-                return;
-            }
+                if (bookDto.IsFinished)
+                {
+                    labelIsFinished.Text += "Прочитана";
+                    return;
+                }
 
-            if (bookDto.Mark > 0)
-            {
-                labelIsFinished.Text += $"Читаю на {bookDto.Mark} странице";
-                return;
-            }
+                if (bookDto.Mark > 0)
+                {
+                    labelIsFinished.Text += $"Читаю на {bookDto.Mark} странице";
+                    return;
+                }
 
-            labelIsFinished.Text += "Не читали";
+                labelIsFinished.Text += "Не читали";
+            }, nameof(FormAboutBook) + " " + nameof(SetState));
         }
     }
 }

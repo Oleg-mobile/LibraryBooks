@@ -95,18 +95,18 @@
             this.labelYaer.AutoSize = true;
             this.labelYaer.Location = new System.Drawing.Point(234, 184);
             this.labelYaer.Name = "labelYaer";
-            this.labelYaer.Size = new System.Drawing.Size(81, 15);
+            this.labelYaer.Size = new System.Drawing.Size(127, 15);
             this.labelYaer.TabIndex = 5;
-            this.labelYaer.Text = "Год выпуска: ";
+            this.labelYaer.Text = "Год выпуска: не задан";
             // 
             // labelMark
             // 
             this.labelMark.AutoSize = true;
             this.labelMark.Location = new System.Drawing.Point(12, 251);
             this.labelMark.Name = "labelMark";
-            this.labelMark.Size = new System.Drawing.Size(112, 15);
+            this.labelMark.Size = new System.Drawing.Size(60, 15);
             this.labelMark.TabIndex = 6;
-            this.labelMark.Text = "Закладка не задана";
+            this.labelMark.Text = "Закладка:";
             // 
             // labelPageCount
             // 

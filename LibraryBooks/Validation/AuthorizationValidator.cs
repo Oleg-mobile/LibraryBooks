@@ -14,7 +14,7 @@ namespace LibraryBooks.Validation
             RuleFor(r => r.textBoxLogin.Text).NotNull().NotEmpty().WithMessage("Введите логин!");
             RuleFor(r => r.textBoxPassword.Text).NotNull().NotEmpty().WithMessage("Введите пароль!");
             RuleFor(r => r)
-                .Must(u => CheckExistingUser(u.textBoxLogin.Text, u.textBoxPassword.Text))  // 2 characteristics
+                .Must(u => CheckExistingUser(u.textBoxLogin.Text, u.textBoxPassword.Text))  // 2 характеристики
                 .WithMessage("Не верный логин или пароль!");
         }
 

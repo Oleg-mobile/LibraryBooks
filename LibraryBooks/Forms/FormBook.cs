@@ -2,6 +2,7 @@
 using LibraryBooks.Core.Models;
 using LibraryBooks.Core.Repositories;
 using LibraryBooks.Dto;
+using LibraryBooks.Extentions;
 using LibraryBooks.Utils;
 using System;
 using System.Linq;
@@ -14,8 +15,11 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Genre, int> _genreRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly IRepository<User, int> _userRepository;
         private readonly IValidator<FormBook> _validator;
-        private OpenFileDialog ofd = new OpenFileDialog();
+        private readonly string _formName;
+        private int bookId;
+        private OpenFileDialog ofd = new();
 
         public FormBook()
         {
@@ -24,7 +28,9 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
             _genreRepository = Resolve<IRepository<Genre, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _userRepository = Resolve<IRepository<User, int>>();
             _validator = Resolve<IValidator<FormBook>>();
+            _formName = nameof(FormBook) + " ";
 
             AcceptButton = buttonSave;
 
@@ -40,6 +46,7 @@ namespace LibraryBooks.Forms
 
         public FormBook(BookDto book) : this()
         {
+            bookId = book.Id;
             textBoxName.Text = book.Name;
             comboBoxAuthor.Text = book.AuthorName;
             textBoxPublication.Text = book.Publication;
@@ -54,21 +61,39 @@ namespace LibraryBooks.Forms
             comboBoxReader.Text = book.ReaderName;
         }
 
+        public Book GetBook()
+        {
+            string mark = textBoxMark.Text;
+            string yaer = textBoxYear.Text;
+            string reader = comboBoxReader.Text;
+
+            return new Book
+            {
+                Id = bookId,
+                Name = textBoxName.Text,
+                Publication = textBoxPublication.Text,
+                Year = yaer != "" ? yaer.ToInt() : null,
+                PageCount = textBoxPageCount.Text.ToInt(),
+                Mark = mark != "" ? mark.ToInt() : 1,
+                GenreId = _genreRepository.GetAll().First(g => g.Name == comboBoxGenre.Text).Id,
+                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
+                AuthorId = _authorRepository.GetAll().First(a => a.Name == comboBoxAuthor.Text).Id,
+                PathToBook = textBoxPathToBook.Text,
+                PathToCover = textBoxPathToCover.Text,
+                IsLiked = checkBoxIsLiked.Checked,
+                IsFinished = checkBoxIsFinished.Checked,
+                ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null
+            };
+        }
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            CallWithAllInterceptors(() =>
             {
-                // TODO защита от null в закладке, чтобы пройти валидацию?
-
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+            }, _formName + nameof(buttonSave_Click));
         }
 
         private void textBoxIntegerMask_KeyPress(object sender, KeyPressEventArgs e)
@@ -82,31 +107,37 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxAuthor_Click(object sender, EventArgs e)
         {
-            pictureBox_Click<FormAuthor, Author>
-            (
-                f => f.textBoxName.Text,
-                _authorRepository,
-                name => new Author(name),  // Generics cannot be manipulated by a constructor => need an empty (default) constructor and it can be called
-                comboBoxAuthor
-            );
+            CallWithLoggerInterceptor(() =>
+            {
+                pictureBox_Click<FormAuthor, Author>
+                (
+                    f => f.textBoxName.Text,
+                    _authorRepository,
+                    name => new Author(name),  // Generics не может управляться конструктором => нужен пустой (по умолчанию) конструктор, и его можно вызвать
+                    comboBoxAuthor
+                );
+            }, _formName + nameof(pictureBoxAuthor_Click));
         }
 
         private void pictureBoxGenre_Click(object sender, EventArgs e)
         {
-            pictureBox_Click<FormGenre, Genre>
-            (
-                f => f.textBoxName.Text,
-                _genreRepository,
-                name => new Genre(name),
-                comboBoxGenre
-            );
+            CallWithLoggerInterceptor(() =>
+            {
+                pictureBox_Click<FormGenre, Genre>
+                (
+                    f => f.textBoxName.Text,
+                    _genreRepository,
+                    name => new Genre(name),
+                    comboBoxGenre
+                );
+            }, _formName + nameof(pictureBoxGenre_Click));
         }
 
         private void pictureBox_Click<TForm, TEntity>(Func<TForm, string> getName, IRepository<TEntity, int> repository, Func<string, TEntity> getEntity, ComboBox comboBox)
-            where TForm : FormLibrarryBooks, new()  // new() - there is an empty (default) constructor
-            where TEntity : Entity<int>, new()      // new() - there is an empty (default) constructor
+            where TForm : FormLibrarryBooks, new()  // new() - есть пустой (по умолчанию) конструктор
+            where TEntity : Entity<int>, new()
         {
-            var form = new TForm();  // generics cannot use a constructor with parameters
+            var form = new TForm();  // Generics не могут иметь конструктор с параметрами
             DialogResult result = form.ShowDialog();
 
             if (result == DialogResult.Cancel)
@@ -125,20 +156,26 @@ namespace LibraryBooks.Forms
 
         private void pictureBoxPathToBook_Click(object sender, EventArgs e)
         {
-            ofd.Title = "Выберите путь до книги";
-            ofd.Filter = "Книги|*.doc;*.docx;*.pdf;*.txt";
+            CallWithLoggerInterceptor(() =>
+            {
+                ofd.Title = "Выберите путь до книги";
+                ofd.Filter = "Книги|*.doc;*.docx;*.pdf;*.txt";
 
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-            textBoxPathToBook.Text = ofd.FileName;
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                textBoxPathToBook.Text = ofd.FileName;
+            }, _formName + nameof(pictureBoxPathToBook_Click));
         }
 
         private void pictureBoxPathToCover_Click(object sender, EventArgs e)
         {
-            ofd.Title = "Выберите путь до обложки";
-            ofd.Filter = "Картинки|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
+            CallWithLoggerInterceptor(() =>
+            {
+                ofd.Title = "Выберите путь до обложки";
+                ofd.Filter = "Картинки|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
 
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-            textBoxPathToCover.Text = ofd.FileName;
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                textBoxPathToCover.Text = ofd.FileName;
+            }, _formName + nameof(pictureBoxPathToCover_Click));
         }
     }
 }

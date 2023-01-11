@@ -7,7 +7,7 @@ namespace LibraryBooks.Utils
     {
         public static DialogResult ShowError(string textMessage)
         {
-            return new FormNotification(@"Images\error.png", "Ошибка!", textMessage).ShowDialog();  // ShowDialog() - opens modally
+            return new FormNotification(@"Images\error.png", "Ошибка!", textMessage).ShowDialog();  // ShowDialog() - открыть модально
         }
 
         public static DialogResult ShowWarning(string textMessage)

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
 {
-    // repository implementation for entity framework (basic CRUD operations)
+    // Реализация репозитория для инфраструктуры сущностей (основные операции CRUD)
     public class EfCoreRepositoryBase<TDbContext, TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey> where TDbContext : DbContext
     {
         /// <summary>
@@ -11,17 +11,17 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
         /// </summary>
         protected TDbContext Context { get; }
 
-        protected DbSet<TEntity> Table => Context.Set<TEntity>();  // universal way to access a database table
+        protected DbSet<TEntity> Table => Context.Set<TEntity>();  // Универсальный способ доступа к таблице базы данных
 
         public EfCoreRepositoryBase(TDbContext context)
         {
-            // set; implementation
+            // set; реализация
             Context = context;
         }
 
         public override void Delete(TPrimaryKey id)
         {
-            var entity = Get(id);  // returns null if there is no such entity
+            var entity = Get(id);  // Возвращает null, если такой сущности нет
             Delete(entity);
         }
 
@@ -50,7 +50,7 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
         public void SaveChanges()
         {
             Context.SaveChanges();
-            Context.ChangeTracker.Clear();  // reset all tracked entities
+            Context.ChangeTracker.Clear();  // Сбросить все отслеживаемые объекты
         }
 
     }
@@ -61,12 +61,4 @@ namespace LibraryBooks.Core.Repositories.EntityFrameworkCore
         {
         }
     }
-
-    //TODO сделать для Irepository TEntity
-    //public class EfCoreRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<LibraryBooksContext, TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
-    //{
-    //    public EfCoreRepositoryBase(LibraryBooksContext context) : base(context)
-    //    {
-    //    }
-    //}
 }

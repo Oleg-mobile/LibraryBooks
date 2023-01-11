@@ -14,12 +14,12 @@ using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
 {
-    public class FormLibrarryBooks : Form   // not abstract
+    public class FormLibrarryBooks : Form
     {
-        // container for dependency registration (reference to an object instance)
-        private static IWindsorContainer _iocContainer;  // static - for the entire program, without reference to an object
+        // Контейнер для регистрации зависимостей (ссылка на экземпляр объекта)
+        private static IWindsorContainer _iocContainer;  // Static - для всей программы, без ссылки на объект
         // Singleton
-        protected static IWindsorContainer IocContainer  // protected - only for heirs
+        protected static IWindsorContainer IocContainer  // Protected - только для наследников
         {
             get
             {
@@ -43,24 +43,26 @@ namespace LibraryBooks.Forms
             Mapper = Resolve<IMapper>();
         }
 
-        // dependency registration
+        // Регистрация зависимостей
         private static void RegisterServices()
         {
-            // container creation (registration)
+            // Создание контейнера (регистрация)
             _iocContainer.Register(Component.For<LibraryBooksContext, LibraryBooksContext>().LifestyleTransient());
-            // if you want a IRepository<,>, you will get its implementation like this - EfCoreRepositoryBase<,>
+            // Если нужен IRepository<,>, то получим его реализацию EfCoreRepositoryBase<,>
             _iocContainer.Register(Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EfCoreRepositoryBase<,>)).LifestyleTransient());
             _iocContainer.Register(Component.For(typeof(IUserRepository)).ImplementedBy(typeof(UserRepository)).LifestyleTransient());
-            // will add everything related to the mapping from the assembly with the file Program
-            var config = new MapperConfiguration(c => { c.AddMaps(typeof(Program)); });  // profiles - describe how to map
+            // Добавить все что связано с маппингом из сборки с файлом Program
+            var config = new MapperConfiguration(c => { c.AddMaps(typeof(Program)); });  // profiles - описание как маппить
             _iocContainer.Register(Component.For(typeof(IMapper)).LifestyleSingleton().Instance(config.CreateMapper()));
-            // find all classes of assembly 1 that implement interface 2 and register them under this interface
-            // implementation of interfaces in the class, which in <>
+            // Найти все классы сборки Program, реализующие интерфейс IValidator, и зарегистрировать их под этим интерфейсом
+            // Реализация интерфейсов в классе, который в <>
             _iocContainer.Register(Classes.FromAssembly(typeof(Program).Assembly).BasedOn(typeof(IValidator<>)).WithService.Base());
 
-            //  Transient - the object lives only while the method is running (within class)
-            //  Singleton - one object for the lifetime of the program
-            //  Scoped - object lives within a single request (sites)
+            //  Transient - объект живет только во время работы метода (внутри класса)
+            //  Singleton - один объект на время жизни программы
+            //  Scoped    - объект живет внутри одного запроса (сайтов)
+
+            _iocContainer.Register(Component.For(typeof(ILogger)).ImplementedBy(typeof(Logger)).LifestyleTransient());
         }
 
         protected TService Resolve<TService>() => IocContainer.Resolve<TService>();
@@ -75,9 +77,9 @@ namespace LibraryBooks.Forms
             }
         }
 
-        protected void CallWithAllInterceptors(Action callback, string methodName)
+        // Singleton
+        protected void CallWithAllInterceptors(Action callback, string methodName)  // Вызов всех перехватчиков из ProxyGenerator
         {
-            // Singleton
             if (interceptorCallerWithAll == null)
             {
                 interceptorCallerWithAll = ProxyGeneratorFactory.CreateWithAll<InterceptorCaller>();
@@ -86,9 +88,9 @@ namespace LibraryBooks.Forms
             interceptorCallerWithAll.CallCallback(callback, methodName);
         }
 
+        // Singleton
         protected void CallWithLoggerInterceptor(Action callback, string methodName)
         {
-            // Singleton
             if (interceptorCallerWithLogger == null)
             {
                 interceptorCallerWithLogger = ProxyGeneratorFactory.Create<InterceptorCaller>(new LoggerInterceptor());

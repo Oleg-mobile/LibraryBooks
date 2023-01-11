@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using LibraryBooks.Dto;
-using LibraryBooks.Utils;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LibraryBooks.Forms
@@ -10,6 +8,7 @@ namespace LibraryBooks.Forms
     public partial class FormReader : FormLibrarryBooks
     {
         private readonly IValidator<FormReader> _validator;
+        private readonly string _formName;
         private OpenFileDialog ofd = new OpenFileDialog();
 
         public FormReader()
@@ -25,6 +24,7 @@ namespace LibraryBooks.Forms
             textBoxOpeningFormat.Text = "/A page={page} \"{path}\"";
 
             _validator = Resolve<IValidator<FormReader>>();
+            _formName = nameof(FormReader) + " ";
         }
 
         public FormReader(ReaderDto reader) : this()
@@ -36,23 +36,23 @@ namespace LibraryBooks.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            CallWithAllInterceptors(() =>
             {
                 _validator.ValidateAndThrow(this);
                 Close();
                 DialogResult = DialogResult.OK;
-            }
-            catch (ValidationException ex)
-            {
-                var message = ex.Errors?.First().ErrorMessage ?? ex.Message;
-                Notification.ShowWarning(message);
-            }
+
+            }, _formName + nameof(buttonSave_Click));
         }
 
         private void pictureBoxPathToReader_Click(object sender, EventArgs e)
         {
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-            textBoxPathToReader.Text = ofd.FileName;
+            CallWithLoggerInterceptor(() =>
+            {
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                textBoxPathToReader.Text = ofd.FileName;
+
+            }, _formName + nameof(pictureBoxPathToReader_Click));
         }
     }
 }

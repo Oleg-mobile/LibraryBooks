@@ -14,7 +14,7 @@ namespace LibraryBooks.Core.Migrations
                 type: "int",
                 nullable: true,
                 defaultValue: null);
-            // INFO:  При добавлении нового стобца в таблицу БД, значение по умолчанию null, чтобы было понятно, какое значение подставить существующим записям.
+            // INFO: При добавлении нового стобца в таблицу БД, значение по умолчанию null, чтобы было понятно, какое значение подставить существующим записям.
             // В модели поле nullable. Также отключить каскадное удаление: onDelete: ReferentialAction.NoAction
 
             migrationBuilder.CreateIndex(

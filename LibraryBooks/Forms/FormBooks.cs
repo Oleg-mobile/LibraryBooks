@@ -23,6 +23,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
+        private readonly string _formName;
         private BindingList<BookDto> bindingList;
 
         public FormBooks()
@@ -34,80 +35,67 @@ namespace LibraryBooks.Forms
             _authorRepository = Resolve<IRepository<Author, int>>();
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
+            _formName = nameof(FormBooks) + " ";
 
             RefrashTable();
             InitDataGridViewColumns<BookDto>(dataGridViewBooks);
         }
 
-        private void RefrashTable(BookFilterDto input = null)  // = null - not a prerequisite
+        private void RefrashTable(BookFilterDto input = null)  // = null - не обязательный
         {
-            // only what needs to be displayed in the table
+            // Выгружаем только то, что хотим отобразить в таблице
             var books = _bookRepository
             .GetAll()
-            .Include(b => b.Genre)   //  Join
-            .Include(b => b.Author)  //  Join
-            .Include(b => b.Reader)  //  Join
-            .Where(b => b.UserId == Session.CurrentUser.Id)  //  Where - weed out something. Binding to user
+            .Include(b => b.Genre)   // Include - Join
+            .Include(b => b.Author)
+            .Include(b => b.Reader)
+            .Where(b => b.UserId == Session.CurrentUser.Id)  // Привязка к пользователю
             .WhereIf(!string.IsNullOrEmpty(input?.Keyword), b => b.Name.Contains(input.Keyword) || b.Genre.Name.Contains(input.Keyword) || b.Author.Name.Contains(input.Keyword))
             .WhereIf(input?.IsFinished != null, b => b.IsFinished == input.IsFinished)
             .WhereIf(input?.IsLiked != null, b => b.IsLiked == input.IsLiked)
             .AsNoTracking()
             .ToList();
 
-            bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));  // mapping to DTO
+            bindingList = new BindingList<BookDto>(Mapper.Map<IList<BookDto>>(books));  // Mapping в DTO
             // INFO: Преобразование значения в таблице делается в DTO или в профиле маппера (в нашем случае)
-            dataGridViewBooks.DataSource = bindingList;  // table filling
+            dataGridViewBooks.DataSource = bindingList;  // Заполнение таблицы
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var bookForm = new FormBook();
-            DialogResult result = bookForm.ShowDialog();
-
-            if (result == DialogResult.Cancel)
+            CallWithLoggerInterceptor(() =>
             {
-                return;
-            }
+                var bookForm = new FormBook();
+                DialogResult result = bookForm.ShowDialog();
 
-            Book book = GetBook(bookForm);
-            _bookRepository.Insert(book);
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
 
-            RefrashTable();
+                Book book = bookForm.GetBook();
+                _bookRepository.Insert(book);
+
+                RefrashTable();
+
+            }, _formName + nameof(buttonAdd_Click));
         }
 
-        private Book GetBook(FormBook bookForm)
-        {
-            return new Book
-            {
-                Name = bookForm.textBoxName.Text,
-                Publication = bookForm.textBoxPublication.Text,
-                Year = bookForm.textBoxYear.Text.ToInt(),  // int checked during validation, on line 72, so we parse without checks
-                PageCount = bookForm.textBoxPageCount.Text.ToInt(),
-                // INFO: Проверка на null:
-                // ?. - если объект не равен null, то обращаемся к компоненту объекта после ".", иначе - не обращаемся
-                // ?? - если операнд слева не равен null, то возвращает операнд слева, иначе - справа
-                Mark = bookForm.textBoxMark.Text?.ToInt() ?? 1,
-                GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id,
-                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
-                AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id,
-                PathToBook = bookForm.textBoxPathToBook.Text,
-                PathToCover = bookForm.textBoxPathToCover.Text,
-                IsLiked = bookForm.checkBoxIsLiked.Checked,
-                IsFinished = bookForm.checkBoxIsFinished.Checked,
-                ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id
-            };
-        }
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            var books = SelectedRowsMapToBooks();
-
-            foreach (var book in books)
+            CallWithLoggerInterceptor(() =>
             {
-                _bookRepository.Delete(book);
-            }
+                var books = SelectedRowsMapToBooks();
 
-            RefrashTable();
+                foreach (var book in books)
+                {
+                    _bookRepository.Delete(book);
+                }
+
+                RefrashTable();
+
+            }, _formName + nameof(buttonDel_Click));
         }
 
         private IEnumerable<Book> SelectedRowsMapToBooks()
@@ -125,33 +113,39 @@ namespace LibraryBooks.Forms
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (dataGridViewBooks.SelectedRows.Count > 0)
+            CallWithLoggerInterceptor(() =>
             {
-                var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
-                var bookForm = new FormBook(bookDto);
-
-                DialogResult result = bookForm.ShowDialog();
-
-                if (result == DialogResult.Cancel)
+                if (dataGridViewBooks.SelectedRows.Count > 0)
                 {
-                    return;
+                    var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+                    var bookForm = new FormBook(bookDto);
+
+                    DialogResult result = bookForm.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+
+                    var book = bookForm.GetBook();
+                    _bookRepository.Update(book);
+
+                    RefrashTable();
                 }
-
-                var book = Mapper.Map<Book>(bookDto);
-                EditBook(book, bookForm);
-                _bookRepository.Update(book);
-
-                RefrashTable();
-            }
+            }, _formName + nameof(buttonEdit_Click));
         }
 
         private void EditBook(Book book, FormBook bookForm)
         {
+            string mark = bookForm.textBoxMark.Text;
+            string yaer = bookForm.textBoxYear.Text;
+            string reader = bookForm.comboBoxReader.Text;
+
             book.Name = bookForm.textBoxName.Text;
             book.Publication = bookForm.textBoxPublication.Text;
-            book.Year = bookForm.textBoxYear.Text.ToInt();
+            book.Year = yaer != "" ? yaer.ToInt() : null;
             book.PageCount = bookForm.textBoxPageCount.Text.ToInt();
-            book.Mark = bookForm.textBoxMark.Text?.ToInt() ?? 1;
+            book.Mark = mark != "" ? mark.ToInt() : 1;
             book.GenreId = _genreRepository.GetAll().First(g => g.Name == bookForm.comboBoxGenre.Text).Id;
             book.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
             book.AuthorId = _authorRepository.GetAll().First(a => a.Name == bookForm.comboBoxAuthor.Text).Id;
@@ -159,52 +153,61 @@ namespace LibraryBooks.Forms
             book.PathToCover = bookForm.textBoxPathToCover.Text;
             book.IsLiked = bookForm.checkBoxIsLiked.Checked;
             book.IsFinished = bookForm.checkBoxIsFinished.Checked;
-            book.ReaderId = _readerRepository.GetAll().First(r => r.Name == bookForm.comboBoxReader.Text).Id;  // TODO ошибка при удалении читалки с формы книги
+            book.ReaderId = reader != "" ? _readerRepository.GetAll().First(r => r.Name == reader).Id : null;
         }
 
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            if (dataGridViewBooks.SelectedRows.Count > 0)
+            CallWithLoggerInterceptor(() =>
             {
-                var book = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
-
-                if (!File.Exists(book.PathToBook))
+                if (dataGridViewBooks.SelectedRows.Count > 0)
                 {
-                    Notification.ShowWarning("Файл отсутствует!");
-                    return;
+                    var book = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+
+                    if (!File.Exists(book.PathToBook))
+                    {
+                        Notification.ShowWarning("Файл отсутствует!");
+                        return;
+                    }
+
+                    if (book.ReaderName == "")
+                    {
+                        Notification.ShowWarning("Читалка не задана!");
+                        return;
+                    }
+
+                    var reader = _readerRepository.GetAll().First(r => r.Name == book.ReaderName);
+
+                    string format = reader.OpeningFormat.Replace("{page}", book.Mark.ToString()).Replace("{path}", book.PathToBook);
+                    var openBookProcess = new ProcessStartInfo(reader.PathToReader, format);
+                    openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // открыть на полное окно
+                    Process.Start(openBookProcess);
                 }
-
-                if (book.ReaderName is null)
-                {
-                    Notification.ShowWarning("Читалка не задана!");
-                    return;
-                }
-
-                var reader = _readerRepository.GetAll().First(r => r.Name == book.ReaderName);
-
-                string format = reader.OpeningFormat.Replace("{page}", book.Mark.ToString()).Replace("{path}", book.PathToBook);
-                var openBookProcess = new ProcessStartInfo(reader.PathToReader, format);
-                openBookProcess.WindowStyle = ProcessWindowStyle.Maximized;  // open full window
-                Process.Start(openBookProcess);
-            }
+            }, _formName + nameof(buttonRead_Click));
         }
 
         private void buttonBookInfo_Click(object sender, EventArgs e)
         {
-            if (dataGridViewBooks.SelectedRows.Count > 0)
+            CallWithLoggerInterceptor(() =>
             {
-                var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
-                new FormAboutBook(bookDto).ShowDialog();
-            }
+                if (dataGridViewBooks.SelectedRows.Count > 0)
+                {
+                    var bookDto = (BookDto)dataGridViewBooks.SelectedRows[0].DataBoundItem;
+                    new FormAboutBook(bookDto).ShowDialog();
+                }
+            }, _formName + nameof(buttonBookInfo_Click));
         }
 
         private void pictureBoxSearch_Click(object sender, EventArgs e)
         {
-            var keyword = textBoxKeyword.Text.Trim();
-            RefrashTable(new BookFilterDto
+            CallWithLoggerInterceptor(() =>
             {
-                Keyword = keyword
-            });
+                var keyword = textBoxKeyword.Text.Trim();
+                RefrashTable(new BookFilterDto
+                {
+                    Keyword = keyword
+                });
+            }, _formName + nameof(pictureBoxSearch_Click));
         }
 
         private void textBoxKeyword_KeyDown(object sender, KeyEventArgs e)
@@ -217,27 +220,37 @@ namespace LibraryBooks.Forms
 
         private void radioButtonClearFilter_Click(object sender, EventArgs e)
         {
-            radioButtonIsFinished.Checked = false;
-            radioButtonIsLiked.Checked = false;
-            textBoxKeyword.Clear();
+            CallWithLoggerInterceptor(() =>
+            {
+                radioButtonIsFinished.Checked = false;
+                radioButtonIsLiked.Checked = false;
+                textBoxKeyword.Clear();
 
-            RefrashTable();
+                RefrashTable();
+
+            }, _formName + nameof(radioButtonClearFilter_Click));
         }
 
         private void radioButtonIsFinished_Click(object sender, EventArgs e)
         {
-            RefrashTable(new BookFilterDto
+            CallWithLoggerInterceptor(() =>
             {
-                IsFinished = radioButtonIsFinished.Checked
-            });
+                RefrashTable(new BookFilterDto
+                {
+                    IsFinished = radioButtonIsFinished.Checked
+                });
+            }, _formName + nameof(radioButtonIsFinished_Click));
         }
 
         private void radioButtonIsLiked_Click(object sender, EventArgs e)
         {
-            RefrashTable(new BookFilterDto
+            CallWithLoggerInterceptor(() =>
             {
-                IsLiked = radioButtonIsLiked.Checked
-            });
+                RefrashTable(new BookFilterDto
+                {
+                    IsLiked = radioButtonIsLiked.Checked
+                });
+            }, _formName + nameof(radioButtonIsLiked_Click));
         }
     }
 }

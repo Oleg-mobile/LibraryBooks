@@ -2,13 +2,13 @@
 
 namespace LibraryBooks.Dto
 {
-    //  will be used to edit the names and visibility of the table columns
+    // Для редактирования имен и видимости столбцов таблицы
 
     /// <summary>
     /// Abstract entity with generic ID
     /// </summary>
     /// <typeparam name="TPrimaryKey"></typeparam>
-    public abstract class EntityDto<TPrimaryKey> // abstracting from the data type of the primary key
+    public abstract class EntityDto<TPrimaryKey>  // Абстрагирование от типа данных первичного ключа
     {
         [DgvColumn(DisplayName = "", IsVisible = false)]
         public TPrimaryKey Id { get; set; }
@@ -17,7 +17,7 @@ namespace LibraryBooks.Dto
     /// <summary>
     /// Abstract entity with int ID
     /// </summary>
-    public abstract class EntityDto : EntityDto<int> // most often the type ID is int and not to write <int>
+    public abstract class EntityDto : EntityDto<int>  // Чаще всего ID типа int, чтобы не писать <int>
     {
     }
 }

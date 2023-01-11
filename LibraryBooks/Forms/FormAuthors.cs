@@ -14,19 +14,18 @@ namespace LibraryBooks.Forms
 {
     public partial class FormAuthors : FormLibrarryBooks
     {
-        // LibraryBooksContext - database model
-        // DataSource - data source binding (takes columns only of the entity to which it is attached)
-
-        private readonly IRepository<Author, int> _authorRepository;  // Private - only in this class. Readonly - immutable database connection.
+        private readonly IRepository<Author, int> _authorRepository;
         private readonly IRepository<Book, int> _bookRepository;
+        private readonly string _formName;
         private BindingList<AuthorDto> bindingList;
 
         public FormAuthors()
         {
-            InitializeComponent(); // initializing all components
+            InitializeComponent();
 
             _authorRepository = Resolve<IRepository<Author, int>>();
             _bookRepository = Resolve<IRepository<Book, int>>();
+            _formName = nameof(FormAuthors) + " ";
 
             RefrashTable();
             InitDataGridViewColumns<AuthorDto>(dataGridViewAuthors);
@@ -36,47 +35,55 @@ namespace LibraryBooks.Forms
         {
             var authors = _authorRepository.GetAll().AsNoTracking().ToList();
             bindingList = new BindingList<AuthorDto>(Mapper.Map<IList<AuthorDto>>(authors));
-            dataGridViewAuthors.DataSource = bindingList;
+            dataGridViewAuthors.DataSource = bindingList;  // DataSource - привязка источника данных (принимает столбцы только той сущности, к которой она прикреплена)
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var authForm = new FormAuthor();  // var - use when it is clear exactly what type of data
-            DialogResult result = authForm.ShowDialog();
-
-            if (result == DialogResult.Cancel)
+            CallWithLoggerInterceptor(() =>
             {
-                return;
-            }
+                var authForm = new FormAuthor();
+                DialogResult result = authForm.ShowDialog();
 
-            var author = new Author(authForm.textBoxName.Text);
-            _authorRepository.Insert(author);
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
 
-            RefrashTable();
+                var author = new Author(authForm.textBoxName.Text);
+                _authorRepository.Insert(author);
+
+                RefrashTable();
+
+            }, _formName + nameof(buttonAdd_Click));
         }
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            var authors = SelectedRowsMapToAuthors();
-
-            foreach (var author in authors)
+            CallWithLoggerInterceptor(() =>
             {
-                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Author.Id == author.Id).ToList();
-                if (!books.IsNullOrEmpty())
+                var authors = SelectedRowsMapToAuthors();
+
+                foreach (var author in authors)
                 {
-                    Notification.ShowWarning("Автор используется!");
-                    return;
+                    var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Author.Id == author.Id).ToList();
+                    if (!books.IsNullOrEmpty())
+                    {
+                        Notification.ShowWarning("Автор используется!");
+                        return;
+                    }
+
+                    _authorRepository.Delete(author);
                 }
 
-                _authorRepository.Delete(author);
-            }
+                RefrashTable();
 
-            RefrashTable();
+            }, _formName + nameof(buttonDel_Click));
         }
 
         private IEnumerable<Author> SelectedRowsMapToAuthors()
         {
-            var authors = new List<AuthorDto>();  // to save references to objects (protection from the garbage collector)
+            var authors = new List<AuthorDto>();  // Сохранить ссылки на объекты (защита от сборщика мусора)
 
             for (int i = 0; i < dataGridViewAuthors.SelectedRows.Count; i++)
             {
@@ -89,23 +96,26 @@ namespace LibraryBooks.Forms
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (dataGridViewAuthors.SelectedRows.Count > 0)
+            CallWithLoggerInterceptor(() =>
             {
-                var authorDto = (AuthorDto)dataGridViewAuthors.SelectedRows[0].DataBoundItem;
-                var author = Mapper.Map<Author>(authorDto);  // <type - what>(object - Of what)
-                var authorForm = new FormAuthor(author);
-                DialogResult dialogResult = authorForm.ShowDialog();
-
-                if (dialogResult == DialogResult.Cancel)
+                if (dataGridViewAuthors.SelectedRows.Count > 0)
                 {
-                    return;
+                    var authorDto = (AuthorDto)dataGridViewAuthors.SelectedRows[0].DataBoundItem;
+                    var author = Mapper.Map<Author>(authorDto);  // <type - во что>(object - кого)
+                    var authorForm = new FormAuthor(author);
+                    DialogResult dialogResult = authorForm.ShowDialog();
+
+                    if (dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+
+                    author.Name = authorForm.textBoxName.Text;
+                    _authorRepository.Update(author);
+
+                    RefrashTable();
                 }
-
-                author.Name = authorForm.textBoxName.Text;
-                _authorRepository.Update(author);
-
-                RefrashTable();
-            }
+            }, _formName + nameof(buttonEdit_Click));
         }
     }
 }

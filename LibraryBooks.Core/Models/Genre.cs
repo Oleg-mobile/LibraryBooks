@@ -7,7 +7,7 @@
     {
         public string Name { get; set; }
 
-        public Genre()  //  for use in generics
+        public Genre()
         {
         }
 

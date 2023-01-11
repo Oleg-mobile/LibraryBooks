@@ -16,6 +16,7 @@ namespace LibraryBooks.Forms
         private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Reader, int> _readerRepository;
         private readonly IRepository<Book, int> _bookRepository;
+        private readonly string _formName;
         private BindingList<ReaderDto> bindingList;
 
         public FormSettings()
@@ -25,6 +26,7 @@ namespace LibraryBooks.Forms
             _userRepository = Resolve<IRepository<User, int>>();
             _readerRepository = Resolve<IRepository<Reader, int>>();
             _bookRepository = Resolve<IRepository<Book, int>>();
+            _formName = nameof(FormSettings) + " ";
 
             // INFO: заполнение dataGridView при открытии формы
             RefrashTable();
@@ -33,71 +35,82 @@ namespace LibraryBooks.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var readerForm = new FormReader();
-            DialogResult result = readerForm.ShowDialog();
-
-            if (result == DialogResult.Cancel)
+            CallWithLoggerInterceptor(() =>
             {
-                return;
-            }
+                var readerForm = new FormReader();
+                DialogResult result = readerForm.ShowDialog();
 
-            Reader reader = new Reader
-            {
-                UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
-                Name = readerForm.textBoxName.Text,
-                PathToReader = readerForm.textBoxPathToReader.Text,
-                OpeningFormat = readerForm.textBoxOpeningFormat.Text
-            };
-
-            _readerRepository.Insert(reader);
-
-            RefrashTable();
-        }
-
-        private void buttonDell_Click(object sender, EventArgs e)
-        {
-            var readers = SelectedRowsMapToReaders();
-
-            foreach (var reader in readers)
-            {
-                // INFO: При удалении читалки в соответствующее поле таблицы книг подставлять null
-                var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Reader.Id == reader.Id).ToList();
-                foreach (var book in books)
-                {
-                    book.ReaderId = null;
-                    _bookRepository.Update(book);
-                }
-
-                _readerRepository.Delete(reader);
-            }
-
-            RefrashTable();
-        }
-
-        private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewReaders.SelectedRows.Count > 0)
-            {
-                var readerDto = (ReaderDto)dataGridViewReaders.SelectedRows[0].DataBoundItem;
-                var readerForm = new FormReader(readerDto);
-
-                DialogResult dialogResult = readerForm.ShowDialog();
-
-                if (dialogResult == DialogResult.Cancel)
+                if (result == DialogResult.Cancel)
                 {
                     return;
                 }
 
-                var reader = Mapper.Map<Reader>(readerDto);
-                reader.Name = readerForm.textBoxName.Text;
-                reader.PathToReader = readerForm.textBoxPathToReader.Text;
-                reader.OpeningFormat = readerForm.textBoxOpeningFormat.Text;
-                reader.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
+                Reader reader = new Reader
+                {
+                    UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id,
+                    Name = readerForm.textBoxName.Text,
+                    PathToReader = readerForm.textBoxPathToReader.Text,
+                    OpeningFormat = readerForm.textBoxOpeningFormat.Text
+                };
 
-                _readerRepository.Update(reader);
+                _readerRepository.Insert(reader);
 
                 RefrashTable();
-            }
+
+            }, _formName + nameof(buttonAdd_Click));
+        }
+
+        private void buttonDell_Click(object sender, EventArgs e)
+        {
+            CallWithLoggerInterceptor(() =>
+            {
+                var readers = SelectedRowsMapToReaders();
+
+                foreach (var reader in readers)
+                {
+                    // INFO: При удалении читалки в соответствующее поле таблицы книг подставлять null
+                    var books = _bookRepository.GetAll().AsNoTracking().Where(b => b.Reader.Id == reader.Id).ToList();
+                    foreach (var book in books)
+                    {
+                        book.ReaderId = null;
+                        _bookRepository.Update(book);
+                    }
+
+                    _readerRepository.Delete(reader);
+                }
+
+                RefrashTable();
+
+            }, _formName + nameof(buttonDell_Click));
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            CallWithLoggerInterceptor(() =>
+            {
+                if (dataGridViewReaders.SelectedRows.Count > 0)
+                {
+                    var readerDto = (ReaderDto)dataGridViewReaders.SelectedRows[0].DataBoundItem;
+                    var readerForm = new FormReader(readerDto);
+
+                    DialogResult dialogResult = readerForm.ShowDialog();
+
+                    if (dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+
+                    var reader = Mapper.Map<Reader>(readerDto);
+                    reader.Name = readerForm.textBoxName.Text;
+                    reader.PathToReader = readerForm.textBoxPathToReader.Text;
+                    reader.OpeningFormat = readerForm.textBoxOpeningFormat.Text;
+                    reader.UserId = _userRepository.GetAll().First(u => u.Login == Session.CurrentUser.Login).Id;
+
+                    _readerRepository.Update(reader);
+
+                    RefrashTable();
+                }
+            }, _formName + nameof(buttonEdit_Click));
         }
 
         private IEnumerable<Reader> SelectedRowsMapToReaders()
@@ -127,7 +140,7 @@ namespace LibraryBooks.Forms
 
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
-            new FormPasswordChange().ShowDialog();
+            CallWithLoggerInterceptor(() => new FormPasswordChange().ShowDialog(), _formName + nameof(buttonChangePassword_Click));
         }
     }
 }

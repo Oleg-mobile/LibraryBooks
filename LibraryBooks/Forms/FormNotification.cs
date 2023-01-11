@@ -19,7 +19,10 @@ namespace LibraryBooks.Forms
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            Close();
+            CallWithLoggerInterceptor(() =>
+            {
+                Close();
+            }, nameof(FormNotification) + " " + nameof(buttonOk_Click));
         }
     }
 }
